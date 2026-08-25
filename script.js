@@ -341,7 +341,6 @@ window.requestAnimationFrame(() => {
 
 const newTabDestinations = new Set([
     "https://github.com/raneree/PageRivet/releases",
-    "https://github.com/raneree/PageRivet/releases/download/v2.2.1/PageRivet-2.2.1-Portable.zip",
     "https://discord.gg/CFx4Emrxgf"
 ]);
 
