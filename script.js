@@ -246,6 +246,7 @@ function applyTheme(theme, persist) {
     const nextTheme = theme === "dark" ? "dark" : "light";
     document.documentElement.dataset.theme = nextTheme;
     document.documentElement.style.colorScheme = nextTheme;
+    document.documentElement.style.backgroundColor = nextTheme === "dark" ? "#080b12" : "#fbfcff";
     const button = document.querySelector("[data-theme-toggle]");
     if (button) {
         const isDark = nextTheme === "dark";
@@ -313,6 +314,11 @@ function applyLanguage(language, persist) {
     backToTopButton.setAttribute("aria-label", activeLanguage === "en" ? "Back to top" : "페이지 최상단으로 이동");
     backToTopButton.title = activeLanguage === "en" ? "Back to top" : "맨 위로";
     applyTheme(document.documentElement.dataset.theme || "light", false);
+    document.documentElement.classList.remove("i18n-pending");
+    if (window.__pagerivetRevealTimer) {
+        window.clearTimeout(window.__pagerivetRevealTimer);
+        window.__pagerivetRevealTimer = 0;
+    }
     if (persist) savePreference("pagerivet-language", activeLanguage);
 }
 document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
@@ -325,6 +331,11 @@ const savedTheme = readPreference("pagerivet-theme");
 const initialTheme = savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 applyTheme(initialTheme, false);
 applyLanguage(readPreference("pagerivet-language") || "ko", false);
+window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+        document.documentElement.classList.remove("theme-preload");
+    });
+});
 
 const newTabDestinations = new Set([
     "https://github.com/raneree/PageRivet/releases",
