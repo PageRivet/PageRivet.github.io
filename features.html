@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PageRivet 기능</title>
+    <meta name="color-scheme" content="light dark">
+<style>
+html{background-color:#fbfcff}
+html[data-theme="dark"]{background-color:#080b12}
+html.theme-preload *,html.theme-preload *::before,html.theme-preload *::after{transition:none!important}
+html.i18n-pending body{visibility:hidden}
+</style>
+<script>
+(() => {
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    let initialTheme = systemTheme;
+    let initialLanguage = "ko";
+    try {
+        initialTheme = localStorage.getItem("pagerivet-theme") || systemTheme;
+        initialLanguage = localStorage.getItem("pagerivet-language") === "en" ? "en" : "ko";
+    } catch (_) {}
+    root.classList.add("theme-preload");
+    if (initialLanguage === "en") {
+        root.classList.add("i18n-pending");
+    }
+    root.lang = initialLanguage;
+    root.dataset.theme = initialTheme;
+    root.style.colorScheme = initialTheme;
+    root.style.backgroundColor = initialTheme === "dark" ? "#080b12" : "#fbfcff";
+    window.__pagerivetRevealTimer = window.setTimeout(() => {
+        root.classList.remove("theme-preload", "i18n-pending");
+    }, 2500);
+})();
+</script>
+<link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="features-theme">
+<header>
+    <div class="wrap">
+        <nav>
+      <button class="mobile-menu-toggle" type="button" data-mobile-menu-toggle aria-expanded="false" aria-controls="site-navigation" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+      <a class="brand" href="index.html" aria-label="PageRivet 홈"><span class="mark"></span><span>PageRivet</span></a>
+      <div class="mobile-menu-panel" id="site-navigation" data-mobile-menu-panel>
+        <div class="links"><a href="about.html">소개</a><a href="features.html" aria-current="page">기능</a><a href="mcp.html">MCP &amp; AI 협업</a><a href="guide.html">가이드</a><a href="update.html">업데이트</a><a href="https://github.com/raneree/PageRivet/releases/download/v2.2.1/PageRivet-2.2.1-Windows-x64-Portable.zip">다운로드</a><a href="https://discord.gg/CFx4Emrxgf">커뮤니티</a></div>
+        <div class="tools"><button class="chip theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환" aria-pressed="false">◐</button><button class="chip on" type="button" data-language="ko" aria-pressed="true">한국어</button><button class="chip" type="button" data-language="en" aria-pressed="false">ENG</button></div>
+      </div>
+    </nav>
+    </div>
+</header>
+<main class="content-page">
+    <section class="page-hero">
+        <div class="wrap about-narrow">
+            <div class="eyebrow">Features</div>
+            <h1>PageRivet으로 할 수 있는 일</h1>
+            <p class="page-lead">정적 웹 프로젝트를 만들고 편집하는 순간부터 미리보기, 검증, 기록과 복구, 내보내기까지 하나의 작업 환경에서 관리합니다.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="wrap">
+            <div class="content-heading">
+                <div class="section-kicker">Project &amp; Editing</div>
+                <h2>프로젝트와 코드를 한곳에서 관리합니다</h2>
+                <p>하나의 파일만 편집하는 도구가 아니라 여러 HTML, CSS, JavaScript 파일로 구성된 정적 웹 프로젝트 전체를 다룹니다.</p>
+            </div>
+            <div class="feature-block-grid">
+                <article class="feature-block">
+                    <div class="feature-symbol">▣</div><h3>프로젝트 생성과 관리</h3>
+                    <p>새 프로젝트를 시작하거나 기존 프로젝트를 열고 파일 단위 작업부터 전체 프로젝트 저장까지 이어서 처리합니다.</p>
+                    <ul class="feature-list"><li>새 프로젝트 생성 및 기존 프로젝트 열기</li><li>저장 및 다른 이름으로 저장</li><li>다중 HTML, CSS, JavaScript 파일 관리</li><li>파일 생성, 이름 변경, 삭제</li></ul>
+                </article>
+                <article class="feature-block">
+                    <div class="feature-symbol">&lt;/&gt;</div><h3>HTML, CSS, JavaScript 편집</h3>
+                    <p>코드를 직접 편집하고 현재 작성 중인 내용과 프로젝트에 적용된 정상 상태를 구분해 관리합니다.</p>
+                    <ul class="feature-list"><li>구문 강조와 줄 번호</li><li>검색과 줄 이동</li><li>저장되지 않은 변경 표시</li><li>적용 전 검증을 거치는 안전한 반영</li></ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section content-soft">
+        <div class="wrap">
+            <div class="content-heading"><div class="section-kicker">Preview, Validate, Recover</div><h2>결과를 확인하고 안전하게 되돌립니다</h2></div>
+            <div class="feature-trio">
+                <article class="content-card"><span>01</span><h3>웹 페이지 미리보기</h3><p>WebView2 기반 미리보기에서 HTML 페이지를 선택하고 CSS와 JavaScript 적용 결과를 바로 확인합니다.</p><ul class="feature-list"><li>코드 적용 후 자동 갱신</li><li>미리보기 페이지 선택</li><li>미리보기 최대화 및 복원</li></ul></article>
+                <article class="content-card"><span>02</span><h3>코드 검증과 오류 확인</h3><p>프로젝트에 변경을 적용하기 전에 HTML, CSS, JavaScript의 문제를 확인합니다.</p><ul class="feature-list"><li>파일·줄·열 기준 오류 표시</li><li>실행 예외 및 콘솔 메시지 확인</li><li>여러 파일을 하나의 변경 단위로 처리</li></ul></article>
+                <article class="content-card"><span>03</span><h3>히스토리와 복구</h3><p>변경 기록을 확인하고 원하는 시점을 선택해 복원합니다. 복원 역시 새로운 기록으로 남습니다.</p><ul class="feature-list"><li>Undo 및 Redo</li><li>변경 히스토리 조회</li><li>과거 상태 선택 및 복원</li><li>최대 Undo 횟수 설정</li></ul></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="wrap feature-band-grid">
+            <article class="feature-band"><div class="section-kicker">External Changes</div><h2>외부 변경도 같은 흐름으로</h2><p>다른 편집기나 도구에서 파일이 변경되면 이를 감지하고 다시 검증합니다. 정상적인 변경만 프로젝트 상태에 반영하고 히스토리에 기록합니다.</p></article>
+            <article class="feature-band feature-band-dark"><div class="section-kicker">Export</div><h2>일반적인 웹 프로젝트로 내보내기</h2><p>작업 결과는 PageRivet에 종속되지 않습니다. 프로젝트 폴더, ZIP 또는 코드 복사 방식으로 내보내 계속 사용할 수 있습니다.</p></article>
+        </div>
+    </section>
+
+    <section class="content-section content-soft">
+        <div class="wrap">
+            <div class="content-heading"><div class="section-kicker">Convenience</div><h2>작업을 돕는 편의 기능</h2></div>
+            <div class="feature-tags"><span>한국어 / 영어 UI</span><span>라이트 / 다크 모드</span><span>시작 가이드</span><span>MCP 명령어 안내</span><span>포터블 실행</span></div>
+            <div class="content-cta"><div><strong>AI와 함께 작업하는 방법이 궁금하신가요?</strong><p>PageRivet의 MCP 연결과 안전한 변경 흐름을 확인해보세요.</p></div><a class="btn primary" href="mcp.html">MCP &amp; AI 협업 보기</a></div>
+        </div>
+    </section>
+</main>
+<footer>
+    <div class="wrap">
+        <div class="footer-grid">
+            <div><a class="brand" href="index.html"><span class="mark"></span><span>PageRivet</span></a><p>정적 웹 프로젝트의 개발과 AI 협업을 하나로.</p></div>
+            <div><h4>링크</h4><div><a href="about.html">소개</a></div><div><a href="features.html">기능</a></div><div><a href="mcp.html">MCP &amp; AI 협업</a></div><div><a href="guide.html">가이드</a></div><div><a href="update.html">업데이트</a></div></div>
+            <div><h4>지원</h4><div><a href="https://github.com/raneree/PageRivet">GitHub</a></div><div><a href="https://discord.gg/CFx4Emrxgf">Discord</a></div><div><a href="mailto:pagerivet.support@gmail.com">문의하기</a></div></div>
+            <div><h4>고마운 플랫폼</h4><div><a href="https://cozit.app/">Cozit</a></div><div><a href="https://disquiet.io/">Disquiet</a></div></div>
+        </div>
+        <div class="copy">© 2026 PageRivet</div>
+    </div>
+</footer>
+</body>
+</html>
