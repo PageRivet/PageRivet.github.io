@@ -245,7 +245,7 @@ const demoFilesEn = {
 
 const translations = new Map([
 ["소개","About"],["기능","Features"],["MCP & AI 협업","MCP & AI Collaboration"],["가이드","Guide"],["다운로드","Download"],["커뮤니티","Community"],["링크","Links"],["지원","Support"],["문의하기","Contact"],["고마운 플랫폼","With Thanks"],
-["정적 웹 프로젝트의 개발과 AI 협업을 하나로.","Static web development and AI collaboration, in one place."],["HTML, CSS, JavaScript 편집부터 실시간 미리보기, 검증, 히스토리 관리, MCP 기반 AI 협업까지 하나의 작업 공간으로 연결합니다.","Connect HTML, CSS, and JavaScript editing, live preview, validation, history, and MCP-based AI collaboration in one workspace."],["정적 웹 프로젝트의","Static web projects,"],["개발과 AI 협업을 하나로","development and AI collaboration in one place"],["지금 다운로드","Download Now"],["시작 가이드 보기","View Getting Started Guide"],["주요 기능","Core Features"],["웹 프로젝트 제작과 안전한 AI 협업을 위한 핵심 기능","Core features for web project creation and safe AI collaboration"],
+["정적 웹 프로젝트의 개발과 AI 협업을 하나로.","Static web development and AI collaboration, in one place."],["HTML, CSS, JavaScript 편집부터 실시간 미리보기, 검증, 히스토리 관리, MCP 기반 AI 협업까지 하나의 작업 공간으로 연결합니다.","Connect HTML, CSS, and JavaScript editing, live preview, validation, history, and MCP-based AI collaboration in one workspace."],["정적 웹 프로젝트의","Static web projects,"],["개발과 AI 협업을 하나로","development and AI collaboration in one place"],["지금 다운로드","Download Now"],["시작 가이드 보기","View Getting Started Guide"],["지원 환경","Supported platform"],["현재 PageRivet은 Windows x64 전용으로 제공됩니다. macOS와 Linux는 지원하지 않습니다.","PageRivet is currently available for Windows x64 only. macOS and Linux are not supported."],["주요 기능","Core Features"],["웹 프로젝트 제작과 안전한 AI 협업을 위한 핵심 기능","Core features for web project creation and safe AI collaboration"],
 ["직관적인 코드 편집","Intuitive Code Editing"],["HTML, CSS, JavaScript를 파일 단위로 편집하고 빠르게 적용합니다.","Edit HTML, CSS, and JavaScript by file and apply changes quickly."],["실시간 미리보기","Live Preview"],["WebView2 기반 미리보기로 결과를 즉시 확인합니다.","See results immediately with the WebView2-based preview."],["히스토리 & 복구","History & Recovery"],["변경 기록을 저장하고 원하는 시점으로 복원합니다.","Keep a change history and restore any saved point."],["검증 & 안전한 저장","Validation & Safe Saving"],["코드 검증과 트랜잭션 기반 저장으로 변경 안정성을 높입니다.","Improve reliability with code validation and transactional saving."],["MCP 기반 AI 협업","MCP-based AI Collaboration"],["외부 AI 클라이언트가 프로젝트를 읽고 수정할 수 있도록 연결합니다.","Connect external AI clients so they can read and modify the project."],["다중 파일 지원","Multiple File Support"],["여러 HTML, CSS, JavaScript 파일을 하나의 프로젝트에서 관리합니다.","Manage multiple HTML, CSS, and JavaScript files in one project."],
 ["AI와 함께 더 나은 결과를","Better Results with AI"],["PageRivet은 특정 AI를 강제하지 않습니다. MCP를 통해 사용자가 사용하는 AI 클라이언트와 프로젝트를 연결하고, 검증과 히스토리 흐름 안에서 변경을 관리합니다.","PageRivet does not lock you into a specific AI. MCP connects your chosen AI client to the project while validation and history keep changes controlled."],["프로젝트 읽기 및 분석","Read and analyze the project"],["코드 수정 제안 및 적용","Propose and apply code changes"],["히스토리 기반 변경 추적","Track changes through history"],["사용자 승인 기반 안전한 변경","Safe, user-approved changes"],["프로젝트 읽기","Read project"],["수정 제안","Propose changes"],["변경 적용","Apply changes"],["히스토리 관리","Manage history"],
 ["빠르게 시작하기","Quick Start"],["프로젝트 열기","Open a Project"],["새 프로젝트를 만들거나 기존 프로젝트를 불러옵니다.","Create a new project or open an existing one."],["코드 편집","Edit Code"],["코드를 수정하고 미리보기로 결과를 확인합니다.","Edit the code and check the result in preview."],["AI와 협업","Collaborate with AI"],["MCP 클라이언트를 연결하고 자연어로 작업을 요청합니다.","Connect an MCP client and request work in natural language."],["공식 GitHub Releases에서 최신 버전을 다운로드합니다.","Download the latest version from the official GitHub Releases page."],["PageRivet을 다운로드하고 시작해보세요.","Download PageRivet and get started."],
@@ -405,6 +405,112 @@ document.querySelectorAll("a[href]").forEach((link) => {
         link.target = "_blank";
         link.rel = "noopener noreferrer";
     }
+});
+
+const protectedDownloadPath = "/raneree/PageRivet/releases/download/v2.2.1/PageRivet-2.2.1-Windows-x64-Portable.zip";
+const downloadGuardModal = document.createElement("div");
+downloadGuardModal.className = "download-guard-modal";
+downloadGuardModal.hidden = true;
+downloadGuardModal.innerHTML = [
+    '<div class="download-guard-backdrop" data-close-download-guard></div>',
+    '<section class="download-guard-panel" role="dialog" aria-modal="true" aria-labelledby="download-guard-title" aria-describedby="download-guard-message" tabindex="-1">',
+    '  <div class="download-guard-heading">',
+    '    <div><span class="download-guard-badge">Windows x64</span><h2 id="download-guard-title"></h2></div>',
+    '    <button class="download-guard-x" type="button" data-close-download-guard aria-label="닫기">×</button>',
+    '  </div>',
+    '  <p id="download-guard-message"></p>',
+    '  <div class="download-guard-actions">',
+    '    <button class="download-guard-cancel" type="button" data-close-download-guard></button>',
+    '    <button class="download-guard-continue" type="button"></button>',
+    '  </div>',
+    '</section>'
+].join("");
+document.body.append(downloadGuardModal);
+
+const downloadGuardTitle = downloadGuardModal.querySelector("#download-guard-title");
+const downloadGuardMessage = downloadGuardModal.querySelector("#download-guard-message");
+const downloadGuardCancel = downloadGuardModal.querySelector(".download-guard-cancel");
+const downloadGuardContinue = downloadGuardModal.querySelector(".download-guard-continue");
+const downloadGuardCloseButtons = downloadGuardModal.querySelectorAll("[data-close-download-guard]");
+let guardedDownloadUrl = "";
+let downloadGuardPreviousFocus = null;
+let activeDownloadGuardMode = "";
+
+function detectDownloadEnvironment() {
+    const userAgent = navigator.userAgent || "";
+    const platform = navigator.userAgentData?.platform || navigator.platform || "";
+    const reportsMobile = navigator.userAgentData?.mobile === true;
+    const touchIpad = /MacIntel/i.test(navigator.platform || "") && navigator.maxTouchPoints > 1;
+    const isMobile = reportsMobile || touchIpad || /Android|iPhone|iPad|iPod|Windows Phone|IEMobile|Opera Mini|Mobile/i.test(userAgent);
+    const isWindows = /Windows/i.test(platform) || /Windows NT/i.test(userAgent);
+    return {isMobile, isWindows};
+}
+
+function isProtectedDownloadLink(link) {
+    try {
+        const url = new URL(link.href, window.location.href);
+        return url.hostname === "github.com" && url.pathname === protectedDownloadPath;
+    } catch (_) {
+        return false;
+    }
+}
+
+function renderDownloadGuard() {
+    const isEnglish = activeLanguage === "en";
+    const isMobile = activeDownloadGuardMode === "mobile";
+    downloadGuardTitle.textContent = isMobile
+        ? (isEnglish ? "Mobile download unavailable" : "모바일 다운로드 제한")
+        : (isEnglish ? "Windows x64 only" : "Windows x64 전용");
+    downloadGuardMessage.textContent = isMobile
+        ? (isEnglish ? "PageRivet cannot be downloaded or used on mobile devices. Please visit again from a Windows x64 PC." : "PageRivet은 모바일 환경에서 다운로드하거나 사용할 수 없습니다. Windows x64 PC에서 다시 접속해주세요.")
+        : (isEnglish ? "PageRivet currently supports Windows x64 only. This file cannot be used on macOS or Linux." : "PageRivet은 현재 Windows x64 환경만 지원합니다. 이 파일은 macOS 또는 Linux에서 사용할 수 없습니다.");
+    downloadGuardCancel.textContent = isMobile
+        ? (isEnglish ? "OK" : "확인")
+        : (isEnglish ? "Cancel" : "취소");
+    downloadGuardContinue.textContent = isEnglish ? "Download anyway" : "그래도 다운로드";
+    downloadGuardContinue.hidden = isMobile;
+    downloadGuardModal.querySelector(".download-guard-x").setAttribute("aria-label", isEnglish ? "Close" : "닫기");
+}
+
+function openDownloadGuard(link, mode) {
+    guardedDownloadUrl = link.href;
+    activeDownloadGuardMode = mode;
+    downloadGuardPreviousFocus = document.activeElement;
+    renderDownloadGuard();
+    downloadGuardModal.hidden = false;
+    document.body.classList.add("modal-open");
+    downloadGuardModal.querySelector(".download-guard-panel").focus();
+}
+
+function closeDownloadGuard() {
+    if (downloadGuardModal.hidden) return;
+    downloadGuardModal.hidden = true;
+    document.body.classList.remove("modal-open");
+    guardedDownloadUrl = "";
+    activeDownloadGuardMode = "";
+    downloadGuardPreviousFocus?.focus();
+}
+
+downloadGuardCloseButtons.forEach((button) => button.addEventListener("click", closeDownloadGuard));
+downloadGuardContinue.addEventListener("click", () => {
+    const destination = guardedDownloadUrl;
+    closeDownloadGuard();
+    if (destination) window.location.assign(destination);
+});
+document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const link = event.target.closest("a[href]");
+    if (!link || !isProtectedDownloadLink(link)) return;
+    const environment = detectDownloadEnvironment();
+    if (environment.isWindows && !environment.isMobile) return;
+    event.preventDefault();
+    openDownloadGuard(link, environment.isMobile ? "mobile" : "unsupported-desktop");
+});
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeDownloadGuard();
+});
+document.addEventListener("pagerivet:languagechange", () => {
+    if (!downloadGuardModal.hidden) renderDownloadGuard();
 });
 
 const updateVersionList = document.querySelector("[data-update-version-list]");
