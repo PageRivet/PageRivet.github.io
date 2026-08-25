@@ -41,10 +41,13 @@ html.i18n-pending body{visibility:hidden}
 <header>
     <div class="wrap">
         <nav>
-            <a class="brand" href="index.html" aria-label="PageRivet 홈"><span class="mark"></span><span>PageRivet</span></a>
-            <div class="links"><a href="about.html">소개</a><a href="features.html">기능</a><a href="mcp.html" aria-current="page">MCP &amp; AI 협업</a><a href="guide.html">가이드</a><a href="https://github.com/raneree/PageRivet/releases">다운로드</a><a href="https://discord.gg/CFx4Emrxgf">커뮤니티</a></div>
-            <div class="tools"><button class="chip theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환" aria-pressed="false">◐</button><button class="chip on" type="button" data-language="ko" aria-pressed="true">한국어</button><button class="chip" type="button" data-language="en" aria-pressed="false">ENG</button></div>
-        </nav>
+      <button class="mobile-menu-toggle" type="button" data-mobile-menu-toggle aria-expanded="false" aria-controls="site-navigation" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+      <a class="brand" href="index.html" aria-label="PageRivet 홈"><span class="mark"></span><span>PageRivet</span></a>
+      <div class="mobile-menu-panel" id="site-navigation" data-mobile-menu-panel>
+        <div class="links"><a href="about.html">소개</a><a href="features.html">기능</a><a href="mcp.html" aria-current="page">MCP &amp; AI 협업</a><a href="guide.html">가이드</a><a href="update.html">업데이트</a><a href="https://github.com/raneree/PageRivet/releases/download/v2.2.1/PageRivet-2.2.1-Portable.zip">다운로드</a><a href="https://discord.gg/CFx4Emrxgf">커뮤니티</a></div>
+        <div class="tools"><button class="chip theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환" aria-pressed="false">◐</button><button class="chip on" type="button" data-language="ko" aria-pressed="true">한국어</button><button class="chip" type="button" data-language="en" aria-pressed="false">ENG</button></div>
+      </div>
+    </nav>
     </div>
 </header>
 <main class="content-page mcp-page">
@@ -110,7 +113,7 @@ html.i18n-pending body{visibility:hidden}
         <div class="wrap">
             <div class="content-heading"><div class="section-kicker">AI Clients</div><h2>다양한 MCP 클라이언트와 연결</h2><p>자동 연결 또는 연결 설정을 지원하는 클라이언트입니다. 실제 동작 여부와 지원 범위는 각 클라이언트의 MCP 지원 방식과 버전에 따라 달라질 수 있습니다.</p></div>
             <div class="client-list"><span>Codex</span><span>Claude Code</span><span>Cursor</span><span>VS Code / GitHub Copilot</span><span>Windsurf</span><span>Cline</span><span>GitHub Copilot CLI</span><span>Gemini CLI</span><span>Antigravity</span><span>OpenClaw</span><span>Generic MCP Client</span></div>
-            <div class="content-cta"><div><strong>사용 중인 AI와 PageRivet을 연결해보세요.</strong><p>직접 코드 편집과 AI 협업을 하나의 프로젝트 안에서 이어갈 수 있습니다.</p></div><div class="cta-links"><a class="btn secondary" href="guide.html">시작 가이드</a><a class="btn primary" href="https://github.com/raneree/PageRivet/releases/download/v1.1.1/PageRivet-1.1.1-Portable.zip">PageRivet 다운로드</a></div></div>
+            <div class="content-cta"><div><strong>사용 중인 AI와 PageRivet을 연결해보세요.</strong><p>직접 코드 편집과 AI 협업을 하나의 프로젝트 안에서 이어갈 수 있습니다.</p></div><div class="cta-links"><a class="btn secondary" href="guide.html">시작 가이드</a><a class="btn primary" href="https://github.com/raneree/PageRivet/releases/download/v2.2.1/PageRivet-2.2.1-Portable.zip">PageRivet 다운로드</a></div></div>
         </div>
     </section>
 </main>
@@ -118,7 +121,7 @@ html.i18n-pending body{visibility:hidden}
     <div class="wrap">
         <div class="footer-grid">
             <div><a class="brand" href="index.html"><span class="mark"></span><span>PageRivet</span></a><p>정적 웹 프로젝트의 개발과 AI 협업을 하나로.</p></div>
-            <div><h4>링크</h4><div><a href="about.html">소개</a></div><div><a href="features.html">기능</a></div><div><a href="mcp.html">MCP &amp; AI 협업</a></div><div><a href="guide.html">가이드</a></div></div>
+            <div><h4>링크</h4><div><a href="about.html">소개</a></div><div><a href="features.html">기능</a></div><div><a href="mcp.html">MCP &amp; AI 협업</a></div><div><a href="guide.html">가이드</a></div><div><a href="update.html">업데이트</a></div></div>
             <div><h4>지원</h4><div><a href="https://github.com/raneree/PageRivet">GitHub</a></div><div><a href="https://discord.gg/CFx4Emrxgf">Discord</a></div><div><a href="mailto:pagerivet.support@gmail.com">문의하기</a></div></div>
             <div><h4>고마운 플랫폼</h4><div><a href="https://cozit.app/">Cozit</a></div><div><a href="https://disquiet.io/">Disquiet</a></div></div>
         </div>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PageRivet 2.2.1 업데이트</title>
+<meta name="color-scheme" content="light dark">
+<style>
+html{background-color:#fbfcff}
+html[data-theme="dark"]{background-color:#080b12}
+html.theme-preload *,html.theme-preload *::before,html.theme-preload *::after{transition:none!important}
+html.i18n-pending body{visibility:hidden}
+</style>
+<script>
+(() => {
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    let initialTheme = systemTheme;
+    let initialLanguage = "ko";
+    try {
+        initialTheme = localStorage.getItem("pagerivet-theme") || systemTheme;
+        initialLanguage = localStorage.getItem("pagerivet-language") === "en" ? "en" : "ko";
+    } catch (_) {}
+    root.classList.add("theme-preload");
+    if (initialLanguage === "en") {
+        root.classList.add("i18n-pending");
+    }
+    root.lang = initialLanguage;
+    root.dataset.theme = initialTheme;
+    root.style.colorScheme = initialTheme;
+    root.style.backgroundColor = initialTheme === "dark" ? "#080b12" : "#fbfcff";
+    window.__pagerivetRevealTimer = window.setTimeout(() => {
+        root.classList.remove("theme-preload", "i18n-pending");
+    }, 2500);
+})();
+</script>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body class="update-theme">
+<header>
+  <div class="wrap">
+    <nav>
+      <button class="mobile-menu-toggle" type="button" data-mobile-menu-toggle aria-expanded="false" aria-controls="site-navigation" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+      <a class="brand" href="index.html" aria-label="PageRivet 홈"><span class="mark"></span><span>PageRivet</span></a>
+      <div class="mobile-menu-panel" id="site-navigation" data-mobile-menu-panel>
+        <div class="links"><a href="about.html">소개</a><a href="features.html">기능</a><a href="mcp.html">MCP &amp; AI 협업</a><a href="guide.html">가이드</a><a href="update.html" aria-current="page">업데이트</a><a href="https://github.com/raneree/PageRivet/releases/download/v2.2.1/PageRivet-2.2.1-Portable.zip">다운로드</a><a href="https://discord.gg/CFx4Emrxgf">커뮤니티</a></div>
+        <div class="tools"><button class="chip theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환" aria-pressed="false">◐</button><button class="chip on" type="button" data-language="ko" aria-pressed="true">한국어</button><button class="chip" type="button" data-language="en" aria-pressed="false">ENG</button></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="update-page">
+  <section class="page-hero update-hero">
+    <div class="wrap about-narrow">
+      <div class="eyebrow">Release Notes</div>
+      <h1>PageRivet 업데이트</h1>
+      <p class="page-lead">PageRivet의 버전별 업데이트 변경점을 확인하세요.</p>
+      <div class="guide-hero-actions"><a class="btn primary" href="https://github.com/raneree/PageRivet/releases/download/v2.2.1/PageRivet-2.2.1-Portable.zip">최신버전 다운로드</a><a class="btn secondary" href="guide.html">사용 가이드</a></div>
+    </div>
+  </section>
+
+  <section class="update-content">
+    <div class="wrap update-shell">
+      <div class="update-version-list" aria-label="버전별 업데이트">
+        <strong>버전별 업데이트</strong>
+        <button class="update-version-button" type="button" data-open-update-log aria-haspopup="dialog" aria-controls="update-log-2-2-1">PageRivet 2.2.1 Update</button>
+      </div>
+
+      <div class="update-log-modal" id="update-log-2-2-1" data-update-log-modal hidden>
+        <div class="update-log-backdrop" data-close-update-log></div>
+        <section class="update-log-panel" role="dialog" aria-modal="true" aria-labelledby="update-log-title-2-2-1">
+          <div class="update-log-header">
+            <div>
+              <span class="update-badge">Latest Release</span>
+              <h2 id="update-log-title-2-2-1">PageRivet 2.2.1 Update</h2>
+              <div class="update-log-meta"><span>2026.08.25</span><span>Windows x64</span><span>Portable</span></div>
+            </div>
+            <button class="update-log-close" type="button" data-close-update-log aria-label="업데이트 로그 닫기">×</button>
+          </div>
+          <div class="update-log-content">
+<div class="update-release-overview">
+            <span class="update-badge">Latest Release</span>
+            <p>리소스 관리, 다중 인스턴스 복구와 MCP 연결, 39개 MCP 명령어, 새로운 워크벤치 디자인을 하나의 공개 버전으로 제공합니다.</p>
+          </div>
+<div class="update-highlights" aria-label="업데이트 핵심 요약">
+          <div><strong>39</strong><span>MCP 명령어</span></div>
+          <div><strong>8</strong><span>리소스 분류</span></div>
+          <div><strong>Multi</strong><span>인스턴스 연결</span></div>
+        </div>
+
+        <div class="update-groups">
+          <details class="update-group" open>
+            <summary><span><b>추가</b>새롭게 사용할 수 있는 기능</span><i aria-hidden="true">+</i></summary>
+            <div class="update-group-body"><ul>
+              <li>프로그램 시작 화면을 PageRivet 공식 홈페이지와 연결했습니다.</li>
+              <li>공식 홈페이지를 불러오지 못할 때 내장 오프라인 안내 화면을 표시합니다.</li>
+              <li>추가 HTML·CSS·JavaScript 파일을 안전한 프로젝트 하위 디렉터리에서 관리할 수 있습니다.</li>
+              <li>프로젝트 리소스 탭에서 이미지, 폰트, 동영상, 오디오, 문서, 데이터, 웹 자산과 3D 모델을 가져오고 이름을 변경하거나 삭제할 수 있습니다.</li>
+              <li>리소스를 assets/images, assets/fonts, assets/videos, assets/audio, assets/documents, assets/data, assets/web, assets/models로 자동 분류합니다.</li>
+              <li>프로젝트 저장, 다른 이름으로 저장, 미리보기, Web Folder와 ZIP 내보내기에 하위 소스와 관리 리소스를 포함합니다.</li>
+              <li>MCP 리소스 조회 명령어 get_project_resources를 추가했습니다.</li>
+              <li>MCP 리소스 쓰기 명령어 import_project_resource, rename_project_resource, delete_project_resource를 추가했습니다.</li>
+              <li>내장 MCP 명령어를 총 39개로 확장했습니다.</li>
+              <li>PageRivet을 여러 개 실행할 때 각 인스턴스가 순차 MCP 포트와 고유 연결 이름을 사용합니다.</li>
+              <li>Codex, Claude Code와 JSON 설정 기반 MCP 클라이언트에서 여러 PageRivet 인스턴스 연결을 함께 등록할 수 있습니다.</li>
+              <li>프로세스별 복구 세션 저장소를 추가했습니다.</li>
+            </ul></div>
+          </details>
+
+          <details class="update-group">
+            <summary><span><b>변경</b>기존 흐름과 사용성 개선</span><i aria-hidden="true">+</i></summary>
+            <div class="update-group-body"><ul>
+              <li>프로젝트 파일 경로를 루트 파일명 대신 안전한 프로젝트 상대 경로로 처리하도록 확장했습니다.</li>
+              <li>필수 index.html, style.css, script.js는 호환성을 위해 프로젝트 루트에 유지합니다.</li>
+              <li>리소스 가져오기는 원본 외부 경로와 대상 경로를 표시하고 항상 명시적 사용자 승인을 받습니다.</li>
+              <li>MCP 연결 창에 현재 전송 방식과 인스턴스별 연결 이름을 표시합니다.</li>
+              <li>한국어·영어 UI와 내장 가이드를 리소스 관리 및 39개 MCP 명령어 기준으로 갱신했습니다.</li>
+              <li>메인 화면과 대화상자를 어두운 워크벤치 디자인으로 개편하고 미리보기, 코드, 진단 영역을 명확한 색상 톤으로 구분했습니다.</li>
+              <li>코드 편집기의 글꼴, 배경, 줄 번호와 HTML·CSS·JavaScript 구문 색상을 어두운 작업 환경에 맞게 조정했습니다.</li>
+              <li>리소스 관리 버튼을 동일한 크기의 2×2 배열로 정리하고 빈 리소스 안내와 미리보기 영역의 가독성을 개선했습니다.</li>
+              <li>제품, 어셈블리와 파일 버전을 2.2.1로 통일했습니다.</li>
+            </ul></div>
+          </details>
+
+          <details class="update-group">
+            <summary><span><b>수정</b>안정성과 화면 표시 문제 해결</span><i aria-hidden="true">+</i></summary>
+            <div class="update-group-body"><ul>
+              <li>PageRivet을 두 개 이상 실행할 때 두 번째 프로세스에서 복구 기능을 시작하지 못하던 문제를 수정했습니다.</li>
+              <li>MCP 기본 포트가 이미 사용 중이면 두 번째 프로세스부터 MCP 서버를 시작하지 못하던 문제를 수정했습니다.</li>
+              <li>하위 디렉터리 소스의 미리보기 URL, 링크 해석, 외부 변경 감지와 내보내기 누락 문제를 방지했습니다.</li>
+              <li>MCP 리소스 작업 후 에디터의 리소스 목록과 미리보기가 즉시 갱신되도록 했습니다.</li>
+              <li>코드 및 진단 탭을 더블 버퍼링 방식으로 그려 탭 전환과 코드 입력 중 발생하던 흰색 깜빡임을 줄였습니다.</li>
+              <li>기록과 MCP 로그의 열 뒤에 남던 흰색 네이티브 헤더 영역을 제거했습니다.</li>
+              <li>WinForms 테두리와 불완전한 라운드 클리핑을 제거하고 색상 톤만으로 작업 영역을 구분하도록 수정했습니다.</li>
+            </ul></div>
+          </details>
+
+          <details class="update-group">
+            <summary><span><b>보안</b>프로젝트와 사용자 정보 보호</span><i aria-hidden="true">+</i></summary>
+            <div class="update-group-body"><ul>
+              <li>프로젝트 상대 경로가 프로젝트 루트 밖으로 벗어나지 못하도록 경로 정규화와 Windows 예약 이름 검사를 적용했습니다.</li>
+              <li>관리 리소스 디렉터리의 심볼릭 링크와 재분석 지점 사용을 차단했습니다.</li>
+              <li>MCP 리소스 요청 적용 전에 프로젝트 Revision, 현재 리소스 목록과 가져오기 원본 상태를 다시 확인합니다.</li>
+              <li>외부 리소스 원본 경로와 MCP 인증 정보를 도구 응답 및 포터블 배포본에 포함하지 않습니다.</li>
+            </ul></div>
+          </details>
+        </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div><a class="brand" href="index.html"><span class="mark"></span><span>PageRivet</span></a><p>정적 웹 프로젝트의 개발과 AI 협업을 하나로.</p></div>
+      <div><h4>링크</h4><div><a href="about.html">소개</a></div><div><a href="features.html">기능</a></div><div><a href="mcp.html">MCP &amp; AI 협업</a></div><div><a href="guide.html">가이드</a></div><div><a href="update.html">업데이트</a></div></div>
+      <div><h4>지원</h4><div><a href="https://github.com/raneree/PageRivet">GitHub</a></div><div><a href="https://discord.gg/CFx4Emrxgf">Discord</a></div><div><a href="mailto:pagerivet.support@gmail.com">문의하기</a></div></div>
+      <div><h4>고마운 플랫폼</h4><div><a href="https://cozit.app/">Cozit</a></div><div><a href="https://disquiet.io/">Disquiet</a></div></div>
+    </div>
+    <div class="copy">© 2026 PageRivet</div>
+  </div>
+</footer>
+</body>
+</html>
