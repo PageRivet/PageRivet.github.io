@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PageRivet 사용 가이드</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="guide-theme">
+<header>
+    <div class="wrap">
+        <nav>
+            <a class="brand" href="index.html" aria-label="PageRivet 홈"><span class="mark"></span><span>PageRivet</span></a>
+            <div class="links"><a href="about.html">소개</a><a href="features.html">기능</a><a href="mcp.html">MCP &amp; AI 협업</a><a href="guide.html" aria-current="page">가이드</a><a href="https://github.com/raneree/PageRivet/releases">다운로드</a><a href="https://discord.gg/CFx4Emrxgf">커뮤니티</a></div>
+            <div class="tools"><button class="chip theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환" aria-pressed="false">◐</button><button class="chip on" type="button" data-language="ko" aria-pressed="true">한국어</button><button class="chip" type="button" data-language="en" aria-pressed="false">ENG</button></div>
+        </nav>
+    </div>
+</header>
+
+<main class="guide-page">
+    <section class="page-hero">
+        <div class="wrap about-narrow">
+            <div class="eyebrow">PageRivet User Guide</div>
+            <h1>PageRivet 사용 가이드</h1>
+            <p class="page-lead">프로젝트를 시작하고 코드를 편집하는 방법부터 미리보기, 검증, 복구, 내보내기와 MCP 기반 AI 협업까지 작업 순서에 따라 안내합니다.</p>
+            <div class="guide-hero-actions"><a class="btn primary" href="#getting-started">처음 시작하기</a><a class="btn secondary" href="#mcp-guide">MCP 연결 보기</a></div>
+        </div>
+    </section>
+
+    <div class="wrap guide-shell">
+        <aside class="guide-toc" aria-label="가이드 목차">
+            <strong>가이드 목차</strong>
+            <a href="#getting-started">다운로드 및 실행</a>
+            <a href="#project">프로젝트 시작</a>
+            <a href="#editor">코드 편집과 적용</a>
+            <a href="#preview-guide">미리보기</a>
+            <a href="#validation">검증과 오류 확인</a>
+            <a href="#history">히스토리와 복구</a>
+            <a href="#external">외부 파일 변경</a>
+            <a href="#export">프로젝트 내보내기</a>
+            <a href="#mcp-guide">MCP와 AI 연결</a>
+            <a href="#troubleshooting">문제 해결</a>
+            <a href="#support">지원 및 문의</a>
+        </aside>
+
+        <div class="guide-doc">
+            <section class="guide-section" id="getting-started">
+                <div class="section-kicker">01 · Getting Started</div>
+                <h2>다운로드 및 실행</h2>
+                <p class="guide-intro">PageRivet은 Windows에서 실행되는 포터블 데스크톱 애플리케이션입니다. 설치 과정 없이 다운로드한 패키지를 준비해 실행할 수 있습니다.</p>
+                <div class="guide-steps">
+                    <article class="guide-step"><span>1</span><h3>다운로드</h3><p>공식 GitHub Releases에서 최신 PageRivet 패키지를 다운로드합니다.</p></article>
+                    <article class="guide-step"><span>2</span><h3>파일 준비</h3><p>다운로드한 압축 파일을 작업하기 편한 위치에 풀어둡니다.</p></article>
+                    <article class="guide-step"><span>3</span><h3>실행</h3><p>PageRivet 실행 파일을 열고 시작 화면이 표시되는지 확인합니다.</p></article>
+                </div>
+                <div class="guide-note"><strong>다운로드 위치</strong><a href="https://github.com/raneree/PageRivet/releases">GitHub Releases에서 PageRivet 다운로드</a></div>
+            </section>
+
+            <section class="guide-section" id="project">
+                <div class="section-kicker">02 · Project</div>
+                <h2>프로젝트 시작</h2>
+                <p class="guide-intro">새 정적 웹 프로젝트를 만들거나 기존 HTML, CSS, JavaScript 프로젝트를 열어 작업할 수 있습니다.</p>
+                <div class="guide-columns">
+                    <article>
+                        <h3>새 프로젝트</h3>
+                        <ol>
+                            <li>새 프로젝트 만들기를 선택합니다.</li>
+                            <li>프로젝트 이름과 저장할 위치를 지정합니다.</li>
+                            <li>생성된 기본 파일을 확인하고 작업을 시작합니다.</li>
+                        </ol>
+                    </article>
+                    <article>
+                        <h3>기존 프로젝트</h3>
+                        <ol>
+                            <li>기존 프로젝트 열기를 선택합니다.</li>
+                            <li>HTML, CSS, JavaScript 파일이 있는 프로젝트를 선택합니다.</li>
+                            <li>파일 목록과 미리보기 페이지를 확인합니다.</li>
+                        </ol>
+                    </article>
+                </div>
+                <div class="guide-note"><strong>파일 관리</strong><span>여러 HTML, CSS, JavaScript 파일을 생성하고 이름을 변경하거나 삭제할 수 있습니다. 작업 전 현재 선택한 파일을 확인하세요.</span></div>
+            </section>
+
+            <section class="guide-section" id="editor">
+                <div class="section-kicker">03 · Editor</div>
+                <h2>코드 편집과 적용</h2>
+                <p class="guide-intro">PageRivet은 편집 중인 코드와 프로젝트에 적용된 상태를 구분합니다. 코드를 입력하는 즉시 적용하지 않고 검증을 거쳐 정상 상태를 반영합니다.</p>
+                <ol class="guide-flow-list">
+                    <li><b>파일 선택</b><span>프로젝트 목록에서 편집할 HTML, CSS 또는 JavaScript 파일을 선택합니다.</span></li>
+                    <li><b>코드 편집</b><span>구문 강조, 줄 번호, 검색과 줄 이동 기능을 이용해 코드를 수정합니다.</span></li>
+                    <li><b>변경 상태 확인</b><span>저장되지 않았거나 아직 적용되지 않은 변경이 있는지 확인합니다.</span></li>
+                    <li><b>적용 및 검증</b><span>변경을 적용하면 PageRivet이 코드를 검증하고 정상적인 변경을 프로젝트에 반영합니다.</span></li>
+                    <li><b>결과 확인</b><span>미리보기와 오류·콘솔 영역에서 적용 결과를 확인합니다.</span></li>
+                </ol>
+                <div class="guide-warning"><strong>적용되지 않은 편집 내용</strong><p>에디터에 입력한 내용과 실제 프로젝트 상태가 다를 수 있습니다. 파일을 전환하거나 AI 작업을 시작하기 전에 미적용 변경 여부를 확인하세요.</p></div>
+            </section>
+
+            <section class="guide-section" id="preview-guide">
+                <div class="section-kicker">04 · Preview</div>
+                <h2>웹 페이지 미리보기</h2>
+                <p class="guide-intro">WebView2 기반 미리보기에서 적용된 프로젝트 결과를 확인합니다.</p>
+                <ul class="guide-checklist">
+                    <li>미리볼 HTML 페이지를 선택합니다.</li>
+                    <li>코드를 적용한 뒤 미리보기가 갱신되는지 확인합니다.</li>
+                    <li>CSS 디자인과 JavaScript 동작을 확인합니다.</li>
+                    <li>더 넓게 확인하려면 미리보기를 최대화하고 필요할 때 복원합니다.</li>
+                </ul>
+                <div class="guide-note"><strong>기준 상태</strong><span>미리보기는 에디터에 입력만 한 내용이 아니라 프로젝트에 적용된 코드를 기준으로 표시됩니다.</span></div>
+            </section>
+
+            <section class="guide-section" id="validation">
+                <div class="section-kicker">05 · Validation</div>
+                <h2>검증과 오류 확인</h2>
+                <p class="guide-intro">변경사항을 적용하기 전에 HTML, CSS, JavaScript의 구문 문제를 확인하고, 실행 중 발생한 문제는 오류와 콘솔 정보에서 확인합니다.</p>
+                <div class="guide-columns">
+                    <article><h3>코드 검증</h3><ul><li>HTML 구조 확인</li><li>CSS 구문 오류 확인</li><li>JavaScript 구문 오류 확인</li><li>파일·줄·열 기준 문제 위치 확인</li></ul></article>
+                    <article><h3>실행 진단</h3><ul><li>JavaScript 실행 예외 확인</li><li>브라우저 콘솔 메시지 확인</li><li>관련 파일을 수정한 뒤 다시 적용</li><li>미리보기에서 결과 재확인</li></ul></article>
+                </div>
+                <div class="guide-note"><strong>여러 파일 변경</strong><span>관련된 여러 파일은 하나의 변경 단위로 적용됩니다. 일부 파일만 변경된 불완전한 상태가 남지 않도록 검증 결과를 확인하세요.</span></div>
+            </section>
+
+            <section class="guide-section" id="history">
+                <div class="section-kicker">06 · History</div>
+                <h2>히스토리와 복구</h2>
+                <p class="guide-intro">변경 기록을 확인하고 이전 상태로 돌아갈 수 있습니다. 복원해도 기존 기록은 삭제되지 않으며, 복원 결과 역시 새로운 변경으로 기록됩니다.</p>
+                <ul class="guide-checklist">
+                    <li>Undo와 Redo로 최근 편집 흐름을 이동합니다.</li>
+                    <li>히스토리에서 저장된 변경 시점을 확인합니다.</li>
+                    <li>필요한 과거 상태를 선택해 현재 프로젝트에 복원합니다.</li>
+                    <li>복원 후 미리보기와 검증 결과를 다시 확인합니다.</li>
+                </ul>
+                <div class="guide-warning"><strong>복원 전 확인</strong><p>현재 에디터에 아직 적용되지 않은 변경이 있다면 먼저 내용을 확인하세요. 복원 대상과 현재 상태를 비교한 뒤 진행하는 것이 안전합니다.</p></div>
+            </section>
+
+            <section class="guide-section" id="external">
+                <div class="section-kicker">07 · External Changes</div>
+                <h2>외부 파일 변경 처리</h2>
+                <p class="guide-intro">PageRivet 외부의 편집기나 AI 도구가 프로젝트 파일을 변경한 경우에도 변경을 감지하고 검증 흐름 안에서 관리할 수 있습니다.</p>
+                <ol class="guide-flow-list compact">
+                    <li><b>변경 감지</b><span>프로젝트 파일이 외부에서 수정되었는지 확인합니다.</span></li>
+                    <li><b>재검증</b><span>변경된 HTML, CSS, JavaScript를 다시 검증합니다.</span></li>
+                    <li><b>상태 반영</b><span>정상적인 변경을 프로젝트 상태에 반영합니다.</span></li>
+                    <li><b>기록 확인</b><span>반영된 외부 변경이 히스토리에 기록됐는지 확인합니다.</span></li>
+                </ol>
+            </section>
+
+            <section class="guide-section" id="export">
+                <div class="section-kicker">08 · Export</div>
+                <h2>프로젝트 내보내기</h2>
+                <p class="guide-intro">PageRivet 프로젝트는 일반적인 HTML, CSS, JavaScript 파일로 유지됩니다. 목적에 맞는 방식으로 내보내 다른 도구나 배포 환경에서도 사용할 수 있습니다.</p>
+                <div class="guide-steps">
+                    <article class="guide-step"><span>1</span><h3>프로젝트 폴더</h3><p>정적 웹 프로젝트의 파일 구조를 폴더 형태로 내보냅니다.</p></article>
+                    <article class="guide-step"><span>2</span><h3>ZIP</h3><p>프로젝트 전체를 하나의 압축 파일로 내보냅니다.</p></article>
+                    <article class="guide-step"><span>3</span><h3>코드 복사</h3><p>필요한 코드를 복사해 다른 편집기나 서비스에서 사용합니다.</p></article>
+                </div>
+            </section>
+
+            <section class="guide-section" id="mcp-guide">
+                <div class="section-kicker">09 · MCP &amp; AI</div>
+                <h2>MCP와 AI 클라이언트 연결</h2>
+                <p class="guide-intro">PageRivet의 로컬 MCP 서버를 사용하면 지원되는 AI 클라이언트가 활성 프로젝트를 읽고 분석하며, 검증과 승인 과정을 거쳐 변경을 적용할 수 있습니다.</p>
+                <ol class="guide-flow-list">
+                    <li><b>프로젝트 준비</b><span>AI와 작업할 프로젝트를 PageRivet에서 열고 활성 상태를 확인합니다.</span></li>
+                    <li><b>MCP 서버 실행</b><span>PageRivet에서 로컬 MCP 서버를 실행합니다.</span></li>
+                    <li><b>AI 클라이언트 연결</b><span>사용 중인 MCP 지원 AI 클라이언트에 PageRivet 연결을 설정합니다.</span></li>
+                    <li><b>자연어로 요청</b><span>원하는 작업과 대상 페이지를 구체적으로 설명합니다.</span></li>
+                    <li><b>변경 검토</b><span>AI가 제안한 변경 범위, 검증 결과와 승인 요청을 확인합니다.</span></li>
+                </ol>
+                <div class="guide-prompt"><small>요청 예시</small><p>“현재 페이지의 모바일 메뉴가 깨지는 원인을 확인하고, 기존 디자인을 유지하면서 수정해줘.”</p></div>
+                <div class="guide-note"><strong>자세한 협업 방식</strong><a href="mcp.html">MCP &amp; AI 협업 페이지에서 확인</a></div>
+                <button class="guide-command-card" type="button" data-open-mcp-commands aria-haspopup="dialog">
+                    <span class="section-kicker">MCP Command Reference</span>
+                    <strong>사용 가능한 MCP 명령어 보기</strong>
+                    <p>명령어 이름을 직접 외울 필요는 없습니다. 원하는 작업을 자연어로 요청하면 AI 클라이언트가 필요한 PageRivet MCP 명령어를 선택합니다.</p>
+                    <span class="guide-command-action">명령어 목록 열기 →</span>
+                </button>
+            </section>
+
+            <section class="guide-section" id="troubleshooting">
+                <div class="section-kicker">10 · Troubleshooting</div>
+                <h2>자주 확인할 문제</h2>
+                <div class="trouble-grid">
+                    <article><h3>미리보기가 바뀌지 않아요</h3><p>편집 내용이 프로젝트에 적용됐는지 확인하고 검증 오류가 없는지 살펴보세요.</p></article>
+                    <article><h3>코드 적용이 실패해요</h3><p>오류 목록에서 파일과 줄 위치를 확인하고 관련 코드를 수정한 뒤 다시 적용하세요.</p></article>
+                    <article><h3>외부 변경이 보이지 않아요</h3><p>외부 변경 감지 상태와 현재 에디터의 미적용 변경 여부를 함께 확인하세요.</p></article>
+                    <article><h3>AI가 프로젝트를 읽지 못해요</h3><p>활성 프로젝트, MCP 서버 실행 상태와 AI 클라이언트의 연결 설정을 확인하세요.</p></article>
+                    <article><h3>이전 상태로 돌아가고 싶어요</h3><p>히스토리에서 원하는 시점을 선택하고 현재 상태와 비교한 뒤 복원하세요.</p></article>
+                    <article><h3>JavaScript가 동작하지 않아요</h3><p>구문 검증뿐 아니라 실행 오류와 브라우저 콘솔 메시지도 함께 확인하세요.</p></article>
+                </div>
+            </section>
+
+            <section class="guide-section guide-support" id="support">
+                <div class="section-kicker">11 · Support</div>
+                <h2>지원 및 문의</h2>
+                <p class="guide-intro">가이드로 해결되지 않는 문제는 아래 채널에서 프로젝트 정보와 재현 절차를 함께 알려주세요.</p>
+                <div class="support-links"><a href="https://github.com/raneree/PageRivet">GitHub 저장소</a><a href="https://discord.gg/CFx4Emrxgf">Discord 커뮤니티</a><a href="mailto:pagerivet.support@gmail.com">이메일 문의</a></div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<div class="mcp-command-modal" data-mcp-command-modal hidden>
+    <div class="mcp-command-backdrop" data-close-mcp-commands></div>
+    <section class="mcp-command-panel" role="dialog" aria-modal="true" aria-labelledby="mcp-command-title">
+        <div class="mcp-command-header">
+            <div>
+                <div class="section-kicker">PageRivet MCP</div>
+                <h2 id="mcp-command-title">사용 가능한 MCP 명령어</h2>
+            </div>
+            <button type="button" class="mcp-command-close" data-close-mcp-commands aria-label="명령어 목록 닫기">×</button>
+        </div>
+        <p class="mcp-command-intro">아래 명령어는 AI 클라이언트가 PageRivet 프로젝트를 확인하고 작업할 때 사용합니다. 사용자가 직접 입력하거나 기억할 필요는 없습니다.</p>
+        <div class="mcp-command-groups">
+            <article>
+                <h3>애플리케이션 및 프로젝트</h3>
+                <code>get_application_info</code><code>get_project_info</code><code>get_project_files</code>
+            </article>
+            <article>
+                <h3>소스 파일 읽기</h3>
+                <code>read_html</code><code>read_html_page</code><code>read_css</code><code>read_css_file</code><code>read_javascript</code><code>read_javascript_file</code>
+            </article>
+            <article>
+                <h3>코드 변경</h3>
+                <code>apply_html_patch</code><code>apply_html_page_patch</code><code>apply_css_patch</code><code>apply_css_file_patch</code><code>apply_javascript_patch</code><code>apply_javascript_file_patch</code><code>apply_project_patch</code>
+            </article>
+            <article>
+                <h3>파일 생성·이름 변경·삭제</h3>
+                <code>create_html_page</code><code>create_css_file</code><code>create_javascript_file</code><code>rename_html_page</code><code>rename_css_file</code><code>rename_javascript_file</code><code>delete_html_page</code><code>delete_css_file</code><code>delete_javascript_file</code>
+            </article>
+            <article>
+                <h3>검증 및 진단</h3>
+                <code>validate_project</code><code>get_errors</code><code>get_console_log</code><code>get_debug_context</code><code>get_export_preset</code><code>validate_export</code>
+            </article>
+            <article>
+                <h3>변경 기록과 복원</h3>
+                <code>get_history</code><code>get_history_diff</code><code>get_recent_changes</code><code>restore_history</code>
+            </article>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="wrap">
+        <div class="footer-grid">
+            <div><a class="brand" href="index.html"><span class="mark"></span><span>PageRivet</span></a><p>정적 웹 프로젝트의 개발과 AI 협업을 하나로.</p></div>
+            <div><h4>링크</h4><div><a href="about.html">소개</a></div><div><a href="features.html">기능</a></div><div><a href="mcp.html">MCP &amp; AI 협업</a></div><div><a href="guide.html">가이드</a></div></div>
+            <div><h4>지원</h4><div><a href="https://github.com/raneree/PageRivet">GitHub</a></div><div><a href="https://discord.gg/CFx4Emrxgf">Discord</a></div><div><a href="mailto:pagerivet.support@gmail.com">문의하기</a></div></div>
+            <div><h4>고마운 플랫폼</h4><div><a href="https://cozit.app/">Cozit</a></div><div><a href="https://disquiet.io/">Disquiet</a></div></div>
+        </div>
+        <div class="copy">© 2026 PageRivet</div>
+    </div>
+</footer>
+</body>
+</html>
