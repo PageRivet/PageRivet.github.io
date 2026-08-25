@@ -83,11 +83,10 @@ html.i18n-pending body{visibility:hidden}
                 <h2>다운로드 및 실행</h2>
                 <p class="guide-intro">PageRivet은 Windows에서 실행되는 포터블 데스크톱 애플리케이션입니다. 설치 과정 없이 다운로드한 패키지를 준비해 실행할 수 있습니다.</p>
                 <div class="guide-steps">
-                    <article class="guide-step"><span>1</span><h3>다운로드</h3><p>공식 GitHub Releases에서 최신 PageRivet 패키지를 다운로드합니다.</p></article>
+                    <a class="guide-step guide-step-link" href="https://github.com/raneree/PageRivet/releases/download/v2.2.1/PageRivet-2.2.1-Portable.zip" aria-label="최신 PageRivet 다운로드"><span>1</span><h3>다운로드</h3><p>GitHub Releases에서 내려받거나, 이 다운로드 버튼을 눌러 최신 PageRivet 패키지를 다운로드합니다.</p></a>
                     <article class="guide-step"><span>2</span><h3>파일 준비</h3><p>다운로드한 압축 파일을 작업하기 편한 위치에 풀어둡니다.</p></article>
                     <article class="guide-step"><span>3</span><h3>실행</h3><p>PageRivet 실행 파일을 열고 시작 화면이 표시되는지 확인합니다.</p></article>
                 </div>
-                <div class="guide-note"><strong>다운로드 위치</strong><a href="https://github.com/raneree/PageRivet/releases/download/v2.2.1/PageRivet-2.2.1-Portable.zip">PageRivet 2.2.1 직접 다운로드</a></div>
             </section>
 
             <section class="guide-section" id="project">
@@ -244,31 +243,8 @@ html.i18n-pending body{visibility:hidden}
             <button type="button" class="mcp-command-close" data-close-mcp-commands aria-label="명령어 목록 닫기">×</button>
         </div>
         <p class="mcp-command-intro">아래 명령어는 AI 클라이언트가 PageRivet 프로젝트를 확인하고 작업할 때 사용합니다. 사용자가 직접 입력하거나 기억할 필요는 없습니다.</p>
-        <div class="mcp-command-groups">
-            <article>
-                <h3>애플리케이션 및 프로젝트</h3>
-                <code>get_application_info</code><code>get_project_info</code><code>get_project_files</code>
-            </article>
-            <article>
-                <h3>소스 파일 읽기</h3>
-                <code>read_html</code><code>read_html_page</code><code>read_css</code><code>read_css_file</code><code>read_javascript</code><code>read_javascript_file</code>
-            </article>
-            <article>
-                <h3>코드 변경</h3>
-                <code>apply_html_patch</code><code>apply_html_page_patch</code><code>apply_css_patch</code><code>apply_css_file_patch</code><code>apply_javascript_patch</code><code>apply_javascript_file_patch</code><code>apply_project_patch</code>
-            </article>
-            <article>
-                <h3>파일 생성·이름 변경·삭제</h3>
-                <code>create_html_page</code><code>create_css_file</code><code>create_javascript_file</code><code>rename_html_page</code><code>rename_css_file</code><code>rename_javascript_file</code><code>delete_html_page</code><code>delete_css_file</code><code>delete_javascript_file</code>
-            </article>
-            <article>
-                <h3>검증 및 진단</h3>
-                <code>validate_project</code><code>get_errors</code><code>get_console_log</code><code>get_debug_context</code><code>get_export_preset</code><code>validate_export</code>
-            </article>
-            <article>
-                <h3>변경 기록과 복원</h3>
-                <code>get_history</code><code>get_history_diff</code><code>get_recent_changes</code><code>restore_history</code>
-            </article>
+        <div class="mcp-command-groups" data-mcp-command-groups aria-live="polite">
+            <p class="data-load-status">MCP 명령어 목록을 불러오는 중입니다.</p>
         </div>
     </section>
 </div>

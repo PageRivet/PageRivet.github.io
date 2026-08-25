@@ -147,26 +147,81 @@ if (guideTocLinks.length) {
 }
 
 const commandModal = document.querySelector("[data-mcp-command-modal]");
+const commandGroups = document.querySelector("[data-mcp-command-groups]");
 const openCommandButton = document.querySelector("[data-open-mcp-commands]");
 const closeCommandButtons = document.querySelectorAll("[data-close-mcp-commands]");
 let commandModalPreviousFocus = null;
+let mcpCommandData = null;
+let mcpCommandLoadPromise = null;
 
-function openCommandModal() {
-    if (!commandModal) {
+function setMcpCommandStatus(message) {
+    if (!commandGroups) return;
+    commandGroups.replaceChildren(createLoadStatus(message));
+}
+
+function renderMcpCommands() {
+    if (!commandGroups || !mcpCommandData) return;
+    const fragment = document.createDocumentFragment();
+    mcpCommandData.groups.forEach((group) => {
+        const article = document.createElement("article");
+        const title = document.createElement("h3");
+        title.textContent = localizedValue(group.title);
+        article.append(title);
+        (Array.isArray(group.commands) ? group.commands : []).forEach((command) => {
+            const code = document.createElement("code");
+            code.textContent = command;
+            article.append(code);
+        });
+        fragment.append(article);
+    });
+    commandGroups.replaceChildren(fragment);
+}
+
+async function ensureMcpCommandsLoaded() {
+    if (mcpCommandData) {
+        renderMcpCommands();
         return;
     }
+    if (!mcpCommandLoadPromise) {
+        mcpCommandLoadPromise = fetchProjectJson("assets/data/mcp-commands.json")
+            .then((data) => {
+                if (!data || data.total !== 39 || !Array.isArray(data.groups)) {
+                    throw new Error("Invalid MCP command data");
+                }
+                const commandCount = data.groups.reduce(
+                    (total, group) => total + (Array.isArray(group.commands) ? group.commands.length : 0),
+                    0
+                );
+                if (commandCount !== data.total) throw new Error("MCP command count mismatch");
+                mcpCommandData = data;
+                renderMcpCommands();
+            })
+            .catch(() => {
+                mcpCommandLoadPromise = null;
+                setMcpCommandStatus(
+                    activeLanguage === "en"
+                        ? "The MCP command list could not be loaded. Please close this window and try again."
+                        : "MCP 명령어 목록을 불러오지 못했습니다. 창을 닫고 다시 시도해 주세요."
+                );
+            });
+    }
+    await mcpCommandLoadPromise;
+}
 
+function openCommandModal() {
+    if (!commandModal) return;
     commandModalPreviousFocus = document.activeElement;
     commandModal.hidden = false;
     document.body.classList.add("modal-open");
+    if (!mcpCommandData) {
+        setMcpCommandStatus(activeLanguage === "en" ? "Loading MCP commands…" : "MCP 명령어 목록을 불러오는 중입니다.");
+    }
     commandModal.querySelector(".mcp-command-close")?.focus();
+    ensureMcpCommandsLoaded();
 }
 
 function closeCommandModal() {
-    if (!commandModal || commandModal.hidden) {
-        return;
-    }
-
+    if (!commandModal || commandModal.hidden) return;
     commandModal.hidden = true;
     document.body.classList.remove("modal-open");
     commandModalPreviousFocus?.focus();
@@ -174,11 +229,11 @@ function closeCommandModal() {
 
 openCommandButton?.addEventListener("click", openCommandModal);
 closeCommandButtons.forEach((button) => button.addEventListener("click", closeCommandModal));
-
 document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-        closeCommandModal();
-    }
+    if (event.key === "Escape") closeCommandModal();
+});
+document.addEventListener("pagerivet:languagechange", () => {
+    if (mcpCommandData) renderMcpCommands();
 });
 
 const demoFilesEn = {
@@ -219,7 +274,7 @@ const translations = new Map([
 ["로컬에서 연결되는 협업 구조","A Locally Connected Collaboration Model"],["PageRivet MCP 서버는 사용자의 PC에서 실행되며 AI 클라이언트와 활성 프로젝트 사이를 연결합니다.","The PageRivet MCP server runs on your PC and connects the AI client with the active project."],["사용자 · 자연어 요청","User · Natural-language request"],["다양한 MCP 클라이언트와 연결","Connect with a Range of MCP Clients"],["자동 연결 또는 연결 설정을 지원하는 클라이언트입니다. 실제 동작 여부와 지원 범위는 각 클라이언트의 MCP 지원 방식과 버전에 따라 달라질 수 있습니다.","These clients support automatic connection or connection setup. Availability and scope may vary by each client's MCP implementation and version."],["사용 중인 AI와 PageRivet을 연결해보세요.","Connect PageRivet with the AI You Use."],["직접 코드 편집과 AI 협업을 하나의 프로젝트 안에서 이어갈 수 있습니다.","Continue direct code editing and AI collaboration within one project."],["처음 시작하기","Get Started"],["MCP 연결 보기","View MCP Connection"],["PageRivet 다운로드","Download PageRivet"],
 
 ["PageRivet 사용 가이드","PageRivet User Guide"],["프로젝트를 시작하고 코드를 편집하는 방법부터 미리보기, 검증, 복구, 내보내기와 MCP 기반 AI 협업까지 작업 순서에 따라 안내합니다.","Follow the workflow from starting a project and editing code through preview, validation, recovery, export, and MCP-based AI collaboration."],["가이드 목차","Guide Contents"],["다운로드 및 실행","Download and Run"],["프로젝트 시작","Start a Project"],["코드 편집과 적용","Edit and Apply Code"],["미리보기","Preview"],["검증과 오류 확인","Validation and Errors"],["외부 파일 변경","External File Changes"],["프로젝트 내보내기","Export Project"],["MCP와 AI 연결","Connect MCP and AI"],["문제 해결","Troubleshooting"],["지원 및 문의","Support and Contact"],
-["PageRivet은 Windows에서 실행되는 포터블 데스크톱 애플리케이션입니다. 설치 과정 없이 다운로드한 패키지를 준비해 실행할 수 있습니다.","PageRivet is a portable Windows desktop application. Prepare the downloaded package and run it without installation."],["공식 GitHub Releases에서 최신 PageRivet 패키지를 다운로드합니다.","Download the latest PageRivet package from the official GitHub Releases page."],["파일 준비","Prepare Files"],["다운로드한 압축 파일을 작업하기 편한 위치에 풀어둡니다.","Extract the downloaded archive to a convenient working location."],["실행","Run"],["PageRivet 실행 파일을 열고 시작 화면이 표시되는지 확인합니다.","Open the PageRivet executable and confirm that the start screen appears."],["다운로드 위치","Download Location"],["GitHub Releases에서 PageRivet 다운로드","Download PageRivet from GitHub Releases"],
+["PageRivet은 Windows에서 실행되는 포터블 데스크톱 애플리케이션입니다. 설치 과정 없이 다운로드한 패키지를 준비해 실행할 수 있습니다.","PageRivet is a portable Windows desktop application. Prepare the downloaded package and run it without installation."],["GitHub Releases에서 내려받거나, 이 다운로드 버튼을 눌러 최신 PageRivet 패키지를 다운로드합니다.","Download the latest PageRivet package from GitHub Releases or by selecting this download button."],["파일 준비","Prepare Files"],["다운로드한 압축 파일을 작업하기 편한 위치에 풀어둡니다.","Extract the downloaded archive to a convenient working location."],["실행","Run"],["PageRivet 실행 파일을 열고 시작 화면이 표시되는지 확인합니다.","Open the PageRivet executable and confirm that the start screen appears."],["다운로드 위치","Download Location"],["GitHub Releases에서 PageRivet 다운로드","Download PageRivet from GitHub Releases"],
 ["새 정적 웹 프로젝트를 만들거나 기존 HTML, CSS, JavaScript 프로젝트를 열어 작업할 수 있습니다.","Create a new static web project or open an existing HTML, CSS, and JavaScript project."],["새 프로젝트","New Project"],["새 프로젝트 만들기를 선택합니다.","Select Create New Project."],["프로젝트 이름과 저장할 위치를 지정합니다.","Choose a project name and save location."],["생성된 기본 파일을 확인하고 작업을 시작합니다.","Review the generated starter files and begin working."],["기존 프로젝트","Existing Project"],["기존 프로젝트 열기를 선택합니다.","Select Open Existing Project."],["HTML, CSS, JavaScript 파일이 있는 프로젝트를 선택합니다.","Choose a project containing HTML, CSS, and JavaScript files."],["파일 목록과 미리보기 페이지를 확인합니다.","Review the file list and preview page."],["파일 관리","File Management"],["여러 HTML, CSS, JavaScript 파일을 생성하고 이름을 변경하거나 삭제할 수 있습니다. 작업 전 현재 선택한 파일을 확인하세요.","You can create, rename, and delete multiple HTML, CSS, and JavaScript files. Check the currently selected file before working."],
 ["PageRivet은 편집 중인 코드와 프로젝트에 적용된 상태를 구분합니다. 코드를 입력하는 즉시 적용하지 않고 검증을 거쳐 정상 상태를 반영합니다.","PageRivet separates code being edited from the state applied to the project. Changes are validated before entering the valid project state."],["파일 선택","Select File"],["프로젝트 목록에서 편집할 HTML, CSS 또는 JavaScript 파일을 선택합니다.","Choose the HTML, CSS, or JavaScript file to edit from the project list."],["구문 강조, 줄 번호, 검색과 줄 이동 기능을 이용해 코드를 수정합니다.","Edit with syntax highlighting, line numbers, search, and go-to-line."],["변경 상태 확인","Check Change State"],["저장되지 않았거나 아직 적용되지 않은 변경이 있는지 확인합니다.","Check for unsaved or unapplied changes."],["적용 및 검증","Apply and Validate"],["변경을 적용하면 PageRivet이 코드를 검증하고 정상적인 변경을 프로젝트에 반영합니다.","When you apply changes, PageRivet validates the code and updates the project with valid changes."],["결과 확인","Review Results"],["미리보기와 오류·콘솔 영역에서 적용 결과를 확인합니다.","Review applied results in the preview, errors, and console areas."],["적용되지 않은 편집 내용","Unapplied Editor Content"],["에디터에 입력한 내용과 실제 프로젝트 상태가 다를 수 있습니다. 파일을 전환하거나 AI 작업을 시작하기 전에 미적용 변경 여부를 확인하세요.","Editor content can differ from the applied project state. Check for unapplied changes before switching files or starting AI work."],
 ["웹 페이지 미리보기","Web Page Preview"],["WebView2 기반 미리보기에서 적용된 프로젝트 결과를 확인합니다.","Review the applied project in the WebView2-based preview."],["미리볼 HTML 페이지를 선택합니다.","Choose the HTML page to preview."],["코드를 적용한 뒤 미리보기가 갱신되는지 확인합니다.","After applying code, confirm that the preview refreshes."],["CSS 디자인과 JavaScript 동작을 확인합니다.","Review the CSS design and JavaScript behavior."],["더 넓게 확인하려면 미리보기를 최대화하고 필요할 때 복원합니다.","Maximize the preview for more space and restore it when needed."],["기준 상태","Reference State"],["미리보기는 에디터에 입력만 한 내용이 아니라 프로젝트에 적용된 코드를 기준으로 표시됩니다.","The preview uses applied project code, not content merely typed into the editor."],
@@ -321,6 +376,7 @@ function applyLanguage(language, persist) {
         window.clearTimeout(window.__pagerivetRevealTimer);
         window.__pagerivetRevealTimer = 0;
     }
+    document.dispatchEvent(new CustomEvent("pagerivet:languagechange", {detail: {language: activeLanguage}}));
     if (persist) savePreference("pagerivet-language", activeLanguage);
 }
 document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
@@ -351,21 +407,202 @@ document.querySelectorAll("a[href]").forEach((link) => {
     }
 });
 
-const updateLogOpenButtons = document.querySelectorAll("[data-open-update-log]");
+const updateVersionList = document.querySelector("[data-update-version-list]");
+const updateLogModal = document.querySelector("[data-update-log-modal]");
 const updateLogCloseButtons = document.querySelectorAll("[data-close-update-log]");
+const updateLogContent = document.querySelector("[data-update-log-content]");
+const updateLogCache = new Map();
+let updateIndexData = null;
+let activeUpdateLogData = null;
 let activeUpdateLogModal = null;
 let updateLogPreviousFocus = null;
 
-function openUpdateLogModal(button) {
-    const modalId = button.getAttribute("aria-controls");
-    const modal = modalId ? document.getElementById(modalId) : null;
-    if (!modal) return;
+function localizedValue(value) {
+    if (value && typeof value === "object") {
+        return value[activeLanguage] || value.ko || value.en || "";
+    }
+    return typeof value === "string" ? value : "";
+}
 
-    activeUpdateLogModal = modal;
+async function fetchProjectJson(path) {
+    const response = await fetch(path, {cache: "no-store"});
+    if (!response.ok) {
+        throw new Error(`Unable to load ${path}: ${response.status}`);
+    }
+    return response.json();
+}
+
+function createLoadStatus(message, includeReleasesLink = false) {
+    const status = document.createElement("p");
+    status.className = "data-load-status";
+    status.append(document.createTextNode(message));
+    if (includeReleasesLink) {
+        status.append(document.createTextNode(" "));
+        const link = document.createElement("a");
+        link.href = "https://github.com/raneree/PageRivet/releases";
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = activeLanguage === "en" ? "Open GitHub Releases" : "GitHub Releases에서 확인";
+        status.append(link);
+    }
+    return status;
+}
+
+function renderUpdateVersionList() {
+    if (!updateVersionList || !updateIndexData) return;
+    const heading = document.createElement("strong");
+    heading.textContent = activeLanguage === "en" ? "Updates by Version" : "버전별 업데이트";
+    const fragment = document.createDocumentFragment();
+    fragment.append(heading);
+
+    updateIndexData.versions.forEach((release) => {
+        if (!release || !/^assets\/data\/update-[0-9A-Za-z.-]+\.json$/.test(release.dataFile || "")) return;
+        const button = document.createElement("button");
+        button.className = "update-version-button";
+        button.type = "button";
+        button.dataset.updateFile = release.dataFile;
+        button.setAttribute("aria-haspopup", "dialog");
+        button.setAttribute("aria-controls", "update-log-modal");
+        button.textContent = localizedValue(release.title) || `PageRivet ${release.version || ""} Update`;
+        fragment.append(button);
+    });
+
+    updateVersionList.replaceChildren(fragment);
+}
+
+function renderUpdateLog(data) {
+    if (!updateLogModal || !updateLogContent || !data) return;
+    const previouslyOpen = new Set(
+        Array.from(updateLogContent.querySelectorAll(".update-group[open]"))
+            .map((details) => details.dataset.groupId)
+            .filter(Boolean)
+    );
+
+    const badge = updateLogModal.querySelector("[data-update-log-badge]");
+    const title = updateLogModal.querySelector("[data-update-log-title]");
+    const meta = updateLogModal.querySelector("[data-update-log-meta]");
+    badge.textContent = data.latest ? (activeLanguage === "en" ? "Latest Release" : "최신 공개 버전") : "Release";
+    title.textContent = localizedValue(data.title) || `PageRivet ${data.version || ""} Update`;
+
+    meta.replaceChildren();
+    [data.date, data.platform, data.packageType].filter(Boolean).forEach((value) => {
+        const item = document.createElement("span");
+        item.textContent = value;
+        meta.append(item);
+    });
+
+    const contentFragment = document.createDocumentFragment();
+    const overview = document.createElement("div");
+    overview.className = "update-release-overview";
+    const overviewBadge = document.createElement("span");
+    overviewBadge.className = "update-badge";
+    overviewBadge.textContent = data.latest ? (activeLanguage === "en" ? "Latest Release" : "최신 공개 버전") : "Release";
+    const overviewText = document.createElement("p");
+    overviewText.textContent = localizedValue(data.overview);
+    overview.append(overviewBadge, overviewText);
+    contentFragment.append(overview);
+
+    if (Array.isArray(data.highlights) && data.highlights.length) {
+        const highlights = document.createElement("div");
+        highlights.className = "update-highlights";
+        highlights.setAttribute("aria-label", activeLanguage === "en" ? "Update Highlights" : "업데이트 핵심 요약");
+        data.highlights.forEach((highlight) => {
+            const item = document.createElement("div");
+            const value = document.createElement("strong");
+            const label = document.createElement("span");
+            value.textContent = highlight.value || "";
+            label.textContent = localizedValue(highlight.label);
+            item.append(value, label);
+            highlights.append(item);
+        });
+        contentFragment.append(highlights);
+    }
+
+    const groups = document.createElement("div");
+    groups.className = "update-groups";
+    (Array.isArray(data.groups) ? data.groups : []).forEach((group) => {
+        const details = document.createElement("details");
+        details.className = "update-group";
+        details.dataset.groupId = group.id || "";
+        details.open = previouslyOpen.size ? previouslyOpen.has(group.id) : Boolean(group.open);
+
+        const summary = document.createElement("summary");
+        const summaryText = document.createElement("span");
+        const groupTitle = document.createElement("b");
+        groupTitle.textContent = localizedValue(group.title);
+        summaryText.append(groupTitle, document.createTextNode(localizedValue(group.subtitle)));
+        const icon = document.createElement("i");
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = "+";
+        summary.append(summaryText, icon);
+
+        const body = document.createElement("div");
+        body.className = "update-group-body";
+        const list = document.createElement("ul");
+        const items = group.items?.[activeLanguage] || group.items?.ko || [];
+        items.forEach((entry) => {
+            const item = document.createElement("li");
+            item.textContent = entry;
+            list.append(item);
+        });
+        body.append(list);
+        details.append(summary, body);
+        groups.append(details);
+    });
+    contentFragment.append(groups);
+    updateLogContent.replaceChildren(contentFragment);
+}
+
+async function loadUpdateIndex() {
+    if (!updateVersionList) return;
+    try {
+        const data = await fetchProjectJson("assets/data/updates-index.json");
+        if (!data || !Array.isArray(data.versions)) throw new Error("Invalid update index");
+        updateIndexData = data;
+        renderUpdateVersionList();
+    } catch (_) {
+        updateVersionList.replaceChildren(
+            createLoadStatus(
+                activeLanguage === "en" ? "The update list could not be loaded." : "업데이트 목록을 불러오지 못했습니다.",
+                true
+            )
+        );
+    }
+}
+
+async function loadUpdateLog(path) {
+    if (updateLogCache.has(path)) return updateLogCache.get(path);
+    const data = await fetchProjectJson(path);
+    if (!data || !Array.isArray(data.groups)) throw new Error("Invalid update log");
+    updateLogCache.set(path, data);
+    return data;
+}
+
+async function openUpdateLogModal(button) {
+    if (!updateLogModal || !updateLogContent) return;
+    const path = button.dataset.updateFile;
+    if (!/^assets\/data\/update-[0-9A-Za-z.-]+\.json$/.test(path || "")) return;
+
+    activeUpdateLogModal = updateLogModal;
     updateLogPreviousFocus = document.activeElement;
-    modal.hidden = false;
+    updateLogModal.hidden = false;
     document.body.classList.add("modal-open");
-    modal.querySelector(".update-log-close")?.focus();
+    updateLogContent.replaceChildren(
+        createLoadStatus(activeLanguage === "en" ? "Loading update log…" : "업데이트 로그를 불러오는 중입니다.")
+    );
+    updateLogModal.querySelector(".update-log-close")?.focus();
+
+    try {
+        activeUpdateLogData = await loadUpdateLog(path);
+        renderUpdateLog(activeUpdateLogData);
+    } catch (_) {
+        updateLogContent.replaceChildren(
+            createLoadStatus(
+                activeLanguage === "en" ? "The update log could not be loaded." : "업데이트 로그를 불러오지 못했습니다.",
+                true
+            )
+        );
+    }
 }
 
 function closeUpdateLogModal() {
@@ -376,15 +613,19 @@ function closeUpdateLogModal() {
     updateLogPreviousFocus?.focus();
 }
 
-updateLogOpenButtons.forEach((button) => {
-    button.addEventListener("click", () => openUpdateLogModal(button));
+updateVersionList?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-update-file]");
+    if (button) openUpdateLogModal(button);
 });
-updateLogCloseButtons.forEach((button) => {
-    button.addEventListener("click", closeUpdateLogModal);
-});
+updateLogCloseButtons.forEach((button) => button.addEventListener("click", closeUpdateLogModal));
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeUpdateLogModal();
 });
+document.addEventListener("pagerivet:languagechange", () => {
+    if (updateIndexData) renderUpdateVersionList();
+    if (activeUpdateLogData) renderUpdateLog(activeUpdateLogData);
+});
+loadUpdateIndex();
 
 const releaseUpdateToast = document.querySelector("[data-release-update-toast]");
 const releaseUpdateCloseButtons = document.querySelectorAll("[data-close-release-update]");
