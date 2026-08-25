@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PageRivet MCP &amp; AI 협업</title>
+    <script>
+(() => {
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    let initialTheme = systemTheme;
+    try {
+        initialTheme = localStorage.getItem("pagerivet-theme") || systemTheme;
+    } catch (_) {}
+    document.documentElement.dataset.theme = initialTheme;
+    document.documentElement.style.colorScheme = initialTheme;
+})();
+</script>
+<link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body class="mcp-theme">
+<header>
+    <div class="wrap">
+        <nav>
+            <a class="brand" href="index.html" aria-label="PageRivet 홈"><span class="mark"></span><span>PageRivet</span></a>
+            <div class="links"><a href="about.html">소개</a><a href="features.html">기능</a><a href="mcp.html" aria-current="page">MCP &amp; AI 협업</a><a href="guide.html">가이드</a><a href="https://github.com/raneree/PageRivet/releases">다운로드</a><a href="https://discord.gg/CFx4Emrxgf">커뮤니티</a></div>
+            <div class="tools"><button class="chip theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환" aria-pressed="false">◐</button><button class="chip on" type="button" data-language="ko" aria-pressed="true">한국어</button><button class="chip" type="button" data-language="en" aria-pressed="false">ENG</button></div>
+        </nav>
+    </div>
+</header>
+<main class="content-page mcp-page">
+    <section class="page-hero">
+        <div class="wrap about-narrow">
+            <div class="eyebrow">MCP &amp; AI Collaboration</div>
+            <h1>사용자가 선택한 AI와 함께 작업합니다</h1>
+            <p class="page-lead">PageRivet은 특정 AI를 직접 내장하지 않습니다. 로컬 MCP 서버를 통해 사용자가 선택한 AI 클라이언트와 프로젝트를 연결합니다.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="wrap mcp-choice">
+            <div><div class="section-kicker">Why MCP</div><h2>PageRivet이 정하는 AI가 아닌,<br>사용자가 선택한 AI와 연결합니다</h2></div>
+            <p>특정 모델이나 채팅 기능에 종속되는 대신 MCP를 사용합니다. 사용자는 익숙한 AI 클라이언트에서 자연어로 요청하고, AI는 PageRivet의 활성 프로젝트를 기준으로 코드를 확인하고 작업합니다.</p>
+        </div>
+    </section>
+
+    <section class="content-section content-soft">
+        <div class="wrap">
+            <div class="content-heading"><div class="section-kicker">Connected Workflow</div><h2>복사와 붙여넣기를 하나의 흐름으로</h2><p>AI와 편집기 사이에서 코드를 반복해서 옮기는 과정을 줄이고 사용자와 AI가 같은 프로젝트를 기준으로 협업합니다.</p></div>
+            <div class="workflow-compare">
+                <article class="workflow-card"><small>일반적인 작업 흐름</small><ol class="flow-steps"><li>AI에게 코드 요청</li><li>생성된 코드 확인</li><li>코드 복사 및 붙여넣기</li><li>결과 확인</li><li>다시 수정 요청</li></ol></article>
+                <article class="workflow-card workflow-card-accent"><small>PageRivet + MCP</small><ol class="flow-steps"><li>사용자가 AI에게 작업 요청</li><li>AI가 PageRivet 프로젝트 확인</li><li>필요한 코드 분석 및 변경</li><li>PageRivet에서 검증과 적용</li><li>사용자가 결과 확인</li></ol></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="wrap">
+            <div class="content-heading"><div class="section-kicker">AI Capabilities</div><h2>연결된 AI가 할 수 있는 일</h2></div>
+            <div class="capability-grid">
+                <article class="capability-card"><h3>프로젝트 이해</h3><ul class="feature-list"><li>활성 프로젝트 정보와 상태 확인</li><li>프로젝트 파일 목록 조회</li><li>HTML, CSS, JavaScript 읽기</li></ul></article>
+                <article class="capability-card"><h3>코드 작업</h3><ul class="feature-list"><li>HTML, CSS, JavaScript 수정</li><li>파일 생성 및 이름 변경</li><li>필요한 파일 삭제</li></ul></article>
+                <article class="capability-card"><h3>오류 확인</h3><ul class="feature-list"><li>프로젝트 검증 요청</li><li>코드와 실행 오류 확인</li><li>브라우저 콘솔 정보 확인</li></ul></article>
+                <article class="capability-card"><h3>변경 기록 활용</h3><ul class="feature-list"><li>히스토리 조회와 상태 비교</li><li>이전 상태 확인</li><li>선택한 상태 복원</li></ul></article>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section content-soft">
+        <div class="wrap prompt-layout">
+            <div><div class="section-kicker">Natural Language</div><h2>도구 이름을 외우지 않아도 됩니다</h2><p>평소 AI와 대화하듯 원하는 작업을 설명하면 AI 클라이언트가 필요한 PageRivet MCP 도구를 선택해 프로젝트를 확인하고 작업합니다.</p></div>
+            <div class="prompt-list"><blockquote>“메인 페이지 상단에 다운로드 버튼을 추가하고 전체 디자인에 어울리게 만들어줘.”</blockquote><blockquote>“모바일 화면에서 메뉴가 깨지는 원인을 찾아서 수정해줘.”</blockquote><blockquote>“기존 페이지 스타일에 맞춰 새로운 소개 페이지를 만들어줘.”</blockquote></div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="wrap safe-change">
+            <div class="content-heading"><div class="section-kicker">Safe Changes</div><h2>AI 변경도 PageRivet의 작업 흐름을 따릅니다</h2><p>AI는 검증과 히스토리 시스템을 우회하지 않습니다. 사용자는 변경 과정을 확인하고 문제가 생기면 이전 상태로 돌아갈 수 있습니다.</p></div>
+            <div class="safe-flow"><span>프로젝트 상태 확인</span><i>→</i><span>변경 작업</span><i>→</i><span>코드 검증</span><i>→</i><span>사용자 승인</span><i>→</i><span>히스토리 기록</span></div>
+        </div>
+    </section>
+
+    <section class="content-section mcp-dark-section">
+        <div class="wrap">
+            <div class="content-heading"><div class="section-kicker">Local Connection</div><h2>로컬에서 연결되는 협업 구조</h2><p>PageRivet MCP 서버는 사용자의 PC에서 실행되며 AI 클라이언트와 활성 프로젝트 사이를 연결합니다.</p></div>
+            <div class="connection-stack" aria-label="PageRivet MCP 연결 구조"><span>사용자 · 자연어 요청</span><i>↓</i><span>AI Client</span><i>↓ MCP</i><span>PageRivet MCP Server</span><i>↓</i><span>HTML · CSS · JavaScript Project</span></div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="wrap">
+            <div class="content-heading"><div class="section-kicker">AI Clients</div><h2>다양한 MCP 클라이언트와 연결</h2><p>자동 연결 또는 연결 설정을 지원하는 클라이언트입니다. 실제 동작 여부와 지원 범위는 각 클라이언트의 MCP 지원 방식과 버전에 따라 달라질 수 있습니다.</p></div>
+            <div class="client-list"><span>Codex</span><span>Claude Code</span><span>Cursor</span><span>VS Code / GitHub Copilot</span><span>Windsurf</span><span>Cline</span><span>GitHub Copilot CLI</span><span>Gemini CLI</span><span>Antigravity</span><span>OpenClaw</span><span>Generic MCP Client</span></div>
+            <div class="content-cta"><div><strong>사용 중인 AI와 PageRivet을 연결해보세요.</strong><p>직접 코드 편집과 AI 협업을 하나의 프로젝트 안에서 이어갈 수 있습니다.</p></div><div class="cta-links"><a class="btn secondary" href="guide.html">시작 가이드</a><a class="btn primary" href="https://github.com/raneree/PageRivet/releases/download/v1.1.1/PageRivet-1.1.1-Portable.zip">PageRivet 다운로드</a></div></div>
+        </div>
+    </section>
+</main>
+<footer>
+    <div class="wrap">
+        <div class="footer-grid">
+            <div><a class="brand" href="index.html"><span class="mark"></span><span>PageRivet</span></a><p>정적 웹 프로젝트의 개발과 AI 협업을 하나로.</p></div>
+            <div><h4>링크</h4><div><a href="about.html">소개</a></div><div><a href="features.html">기능</a></div><div><a href="mcp.html">MCP &amp; AI 협업</a></div><div><a href="guide.html">가이드</a></div></div>
+            <div><h4>지원</h4><div><a href="https://github.com/raneree/PageRivet">GitHub</a></div><div><a href="https://discord.gg/CFx4Emrxgf">Discord</a></div><div><a href="mailto:pagerivet.support@gmail.com">문의하기</a></div></div>
+            <div><h4>고마운 플랫폼</h4><div><a href="https://cozit.app/">Cozit</a></div><div><a href="https://disquiet.io/">Disquiet</a></div></div>
+        </div>
+        <div class="copy">© 2026 PageRivet</div>
+    </div>
+</footer>
+</body>
+</html>
