@@ -1,13 +1,22 @@
 {
   "versions": [
     {
+      "version": "2.3.0",
+      "title": {
+        "ko": "PageRivet 2.3.0 Update",
+        "en": "PageRivet 2.3.0 Update"
+      },
+      "dataFile": "assets/data/update-2.3.0.json",
+      "latest": true
+    },
+    {
       "version": "2.2.1",
       "title": {
         "ko": "PageRivet 2.2.1 Update",
         "en": "PageRivet 2.2.1 Update"
       },
       "dataFile": "assets/data/update-2.2.1.json",
-      "latest": true
+      "latest": false
     }
   ]
 }

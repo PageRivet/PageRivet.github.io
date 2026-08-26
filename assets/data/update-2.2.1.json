@@ -3,7 +3,7 @@
   "date": "2026.08.25",
   "platform": "Windows x64",
   "packageType": "Portable",
-  "latest": true,
+  "latest": false,
   "title": {
     "ko": "PageRivet 2.2.1 Update",
     "en": "PageRivet 2.2.1 Update"

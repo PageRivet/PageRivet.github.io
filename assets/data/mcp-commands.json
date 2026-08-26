@@ -1,5 +1,5 @@
 {
-  "total": 39,
+  "total": 42,
   "groups": [
     {
       "id": "application-project",
@@ -24,7 +24,7 @@
     {
       "id": "resource-management",
       "title": { "ko": "리소스 관리", "en": "Manage Resources" },
-      "commands": ["import_project_resource", "rename_project_resource", "delete_project_resource"]
+      "commands": ["import_project_resource", "rename_project_resource", "delete_project_resource", "read_text_resource", "create_text_resource", "apply_text_resource_patch"]
     },
     {
       "id": "validation-diagnostics",
