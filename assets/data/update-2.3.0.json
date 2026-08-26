@@ -9,8 +9,8 @@
     "en": "PageRivet 2.3.0 Update"
   },
   "overview": {
-    "ko": "PageRivet 2.3.0은 2.2.1의 편집·미리보기·리소스 관리·MCP 기능을 유지하면서 Claude Desktop 자동 연결 지원을 추가한 버전입니다.",
-    "en": "PageRivet 2.3.0 keeps the editing, preview, resource management, and MCP features of 2.2.1 while adding automatic Claude Desktop connection support."
+    "ko": "PageRivet 2.3.0은 Claude Desktop 자동 연결 지원을 추가한 버전입니다.",
+    "en": "PageRivet 2.3.0 adds automatic Claude Desktop connection support."
   },
   "highlights": [
     {
