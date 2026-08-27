@@ -11,6 +11,7 @@ export const TRANSLATIONS = {
   "about.nav.overview": { ko: "PageRivet 소개", en: "About PageRivet" },
   "about.nav.features": { ko: "주요 기능", en: "Core Features" },
   "about.nav.mcp": { ko: "MCP & AI 협업", en: "MCP & AI Collaboration" },
+  "update.nav.title": { ko: "업데이트 목록", en: "Update List" },
   "notice.eyebrow": { ko: "NOTICE", en: "NOTICE" },
   "notice.title": { ko: "공지사항", en: "Notices" },
   "notice.description": { ko: "PageRivet의 새로운 소식과 중요한 안내를 한곳에서 확인하세요.", en: "Find the latest PageRivet news and important announcements in one place." },

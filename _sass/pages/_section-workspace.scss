@@ -145,6 +145,23 @@
 .update-version-list {
   position: sticky;
   top: 94px;
+  z-index: 4;
+  align-self: start;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.update-version-list > strong {
+  padding: 0 4px 10px;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.update-version-buttons {
+  display: grid;
+  gap: 8px;
 }
 
 .update-stage {
@@ -197,7 +214,8 @@
     position: static;
   }
 
-  .section-subnav-list {
+  .section-subnav-list,
+  .update-version-buttons {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
@@ -231,7 +249,7 @@
     padding: 24px 20px;
   }
 
-  .update-version-list {
+  .update-version-buttons {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

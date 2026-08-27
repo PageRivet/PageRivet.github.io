@@ -633,7 +633,14 @@
     });
 
     window.addEventListener("popstate", function () {
-      navigatePreview(new URL(window.location.href), false);
+      const url = new URL(window.location.href);
+      const currentPageKey = document.body.dataset.previewPage || "home";
+
+      if (pageKeyFromUrl(url) === currentPageKey) {
+        return;
+      }
+
+      navigatePreview(url, false);
     });
   }
 

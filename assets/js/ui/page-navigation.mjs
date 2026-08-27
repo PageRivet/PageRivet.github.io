@@ -44,7 +44,14 @@ function getNavigationTarget(event) {
   }
 
   const rawHref = link.getAttribute("href");
-  if (!rawHref || rawHref === "#" || rawHref.startsWith("javascript:")) return null;
+  if (
+    !rawHref ||
+    rawHref === "#" ||
+    rawHref.startsWith("#") ||
+    rawHref.startsWith("javascript:")
+  ) {
+    return null;
+  }
 
   const url = new URL(link.href, window.location.href);
   if (!isPageUrl(url)) return null;
@@ -136,6 +143,11 @@ function updateMetadata(nextDocument) {
   }
 }
 
+function getPageKeyFromUrl(url) {
+  const fileName = url.pathname.split("/").pop() || "index.html";
+  return fileName.replace(/\.html?$/i, "") || "home";
+}
+
 function getPageKey(nextDocument, url) {
   const activeNavigation = nextDocument.querySelector(
     '.site-header [data-nav-id][aria-current="page"]'
@@ -145,8 +157,7 @@ function getPageKey(nextDocument, url) {
     return activeNavigation.dataset.navId;
   }
 
-  const fileName = url.pathname.split("/").pop() || "index.html";
-  return fileName.replace(/\.html?$/i, "") || "home";
+  return getPageKeyFromUrl(url);
 }
 
 function getCurrentPageKey() {
@@ -378,6 +389,12 @@ export function initPageNavigation(onPageChange) {
   document.addEventListener("focusin", prefetchLink);
 
   window.addEventListener("popstate", function () {
-    navigate(new URL(window.location.href), false, onPageChange);
+    const url = new URL(window.location.href);
+
+    if (getPageKeyFromUrl(url) === getCurrentPageKey()) {
+      return;
+    }
+
+    navigate(url, false, onPageChange);
   });
 }

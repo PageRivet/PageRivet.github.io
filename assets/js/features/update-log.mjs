@@ -127,11 +127,16 @@ function renderVersionList(container, stage) {
     button.addEventListener("click", async function () {
       if (index === currentVersionIndex || updateTransitioning) return;
 
+      const versionButtons = container.querySelectorAll(".update-version-button");
+      versionButtons.forEach(function (item) {
+        item.classList.toggle("is-active", item === button);
+      });
+
       const changed = await selectVersion(stage, entry.file, index, true);
 
-      if (changed) {
-        container.querySelectorAll(".update-version-button").forEach(function (item) {
-          item.classList.toggle("is-active", item === button);
+      if (!changed) {
+        versionButtons.forEach(function (item, itemIndex) {
+          item.classList.toggle("is-active", itemIndex === currentVersionIndex);
         });
       }
     });

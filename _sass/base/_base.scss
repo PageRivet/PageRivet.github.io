@@ -139,6 +139,7 @@ html.is-page-navigating {
   scroll-behavior: auto;
 }
 
+
 #main-content.page-router-forward {
   --page-router-exit-x: clamp(-220px, -12vw, -72px);
   --page-router-enter-x: clamp(72px, 12vw, 220px);

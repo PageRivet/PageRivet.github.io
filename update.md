@@ -10,7 +10,10 @@ body_class: update-theme
 
 <section class="content-section">
   <div class="wrap update-layout">
-    <aside class="update-version-list" data-update-version-list aria-label="버전별 업데이트" aria-live="polite"><div class="data-status">업데이트 목록을 불러오는 중입니다.</div></aside>
+    <aside class="update-version-list" aria-label="버전별 업데이트">
+      <strong data-i18n="update.nav.title">업데이트 목록</strong>
+      <div class="update-version-buttons" data-update-version-list aria-live="polite"><div class="data-status">업데이트 목록을 불러오는 중입니다.</div></div>
+    </aside>
     <div class="update-stage" data-update-stage>
       <div class="update-details" data-update-details><div class="data-status">업데이트 내용을 불러오는 중입니다.</div></div>
     </div>
