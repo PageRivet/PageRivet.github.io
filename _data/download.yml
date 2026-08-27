@@ -1,6 +1,6 @@
-version: "2.3.3"
-url: https://github.com/raneree/PageRivet/releases/download/v2.3.3/PageRivet-2.3.3-Windows-x64-Portable.zip
-file_name: PageRivet-2.3.3-Windows-x64-Portable.zip
+version: "3.3.0-beta.1"
+url: https://github.com/raneree/PageRivet/releases/download/v3.3.0-beta.1/PageRivet-3.3.0-beta.1-Windows-x64-Portable.zip
+file_name: PageRivet-3.3.0-beta.1-Windows-x64-Portable.zip
 platform: Windows
 architecture: x64
 package_type: Portable ZIP

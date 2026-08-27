@@ -1,0 +1,206 @@
+{
+  "version": "3.3.0-beta.1",
+  "date": "2026.08.27",
+  "platform": "Windows x64",
+  "packageType": "Portable ZIP · Beta",
+  "latest": true,
+  "title": {
+    "ko": "PageRivet 3.3.0-beta.1",
+    "en": "PageRivet 3.3.0-beta.1"
+  },
+  "overview": {
+    "ko": "Avalonia 12.1 기반 UI 전환과 PageRivet YAML 페이지 지원, 플랫폼 공통 구조 개편을 완료한 첫 베타 버전입니다. Windows x64 배포 후보는 자동 검증을 완료했으며 macOS와 Linux는 실제 환경 검증이 남아 있습니다.",
+    "en": "The first beta release completing the Avalonia 12.1 UI migration, PageRivet YAML page support, and a shared cross-platform architecture. The Windows x64 release candidate passed automated validation, while real-environment validation remains for macOS and Linux."
+  },
+  "highlights": [
+    {
+      "value": "Avalonia 12.1",
+      "label": {
+        "ko": "새로운 데스크톱 UI",
+        "en": "New Desktop UI"
+      }
+    },
+    {
+      "value": "HTML · YAML",
+      "label": {
+        "ko": "통합 미리보기",
+        "en": "Unified Preview"
+      }
+    },
+    {
+      "value": "384",
+      "label": {
+        "ko": "통과한 자동 테스트",
+        "en": "Automated Tests Passed"
+      }
+    },
+    {
+      "value": "0",
+      "label": {
+        "ko": "Release 빌드 경고·오류",
+        "en": "Release Build Warnings · Errors"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "added",
+      "title": {
+        "ko": "추가",
+        "en": "Added"
+      },
+      "open": true,
+      "items": [
+        {
+          "ko": "Avalonia 12.1 기반의 플랫폼 공통 데스크톱 UI를 추가하고 기존 프로젝트 생성·열기·저장·내보내기 흐름을 연결했습니다.",
+          "en": "Added an Avalonia 12.1 cross-platform desktop UI connected to the existing create, open, save, and export workflows."
+        },
+        {
+          "ko": "pagerivet.page/v1 스키마의 *.page.yml 및 *.page.yaml 페이지를 렌더링하는 PageRivet.YamlWeb을 추가했습니다.",
+          "en": "Added PageRivet.YamlWeb for rendering *.page.yml and *.page.yaml pages using the pagerivet.page/v1 schema."
+        },
+        {
+          "ko": "하나의 NativeWebView에서 HTML 페이지와 PageRivet YAML 페이지 미리보기를 전환할 수 있습니다.",
+          "en": "A single NativeWebView can now switch between HTML and PageRivet YAML previews."
+        },
+        {
+          "ko": "YAML 페이지에서 프로젝트 CSS·JavaScript·MJS·관리 리소스와 선언형 이벤트를 사용할 수 있습니다.",
+          "en": "YAML pages can use project CSS, JavaScript, MJS, managed resources, and declarative events."
+        },
+        {
+          "ko": "Windows x64 Portable, macOS .app, Linux x64 Portable 패키징 스크립트와 안내를 추가했습니다.",
+          "en": "Added packaging scripts and guidance for Windows x64 Portable, macOS .app, and Linux x64 Portable builds."
+        }
+      ]
+    },
+    {
+      "id": "changed",
+      "title": {
+        "ko": "변경",
+        "en": "Changed"
+      },
+      "items": [
+        {
+          "ko": "작업 공간을 Preview, Editor, Project의 독립된 세 열로 재구성하고 Sources와 Resources를 Project 패널에 배치했습니다.",
+          "en": "Reorganized the workspace into three independently titled columns—Preview, Editor, and Project—with Sources and Resources inside the Project panel."
+        },
+        {
+          "ko": "편집 가능한 관리 리소스를 별도 창 대신 기존 코드 편집기에서 열며, 적용 전 초안은 메모리에 유지하고 검증과 원자적 저장을 거칩니다.",
+          "en": "Editable managed resources now open in the existing code editor; drafts stay in memory until apply and pass validation and atomic saving."
+        },
+        {
+          "ko": "미리보기와 내보내기가 동일한 YAML 렌더러를 사용하며, 내보내기 결과에 원본 YAML과 생성된 HTML을 함께 포함합니다.",
+          "en": "Preview and export now share the same YAML renderer, and exports include both the original YAML and generated HTML."
+        },
+        {
+          "ko": "프로젝트 흐름, 미리보기, Avalonia UI를 각각 PageRivet.Application, PageRivet.Preview, PageRivet.Avalonia로 분리했습니다.",
+          "en": "Separated project workflows, preview, and Avalonia UI into PageRivet.Application, PageRivet.Preview, and PageRivet.Avalonia."
+        },
+        {
+          "ko": "설정·MCP 인증·Recovery·WebView·Bridge 데이터 경로를 플랫폼 서비스로 통합하고 MCP 승인 평가를 공통 애플리케이션 계층으로 이동했습니다.",
+          "en": "Unified settings, MCP authentication, Recovery, WebView, and Bridge data paths through platform services and moved MCP approval evaluation into the shared application layer."
+        }
+      ]
+    },
+    {
+      "id": "removed",
+      "title": {
+        "ko": "제거",
+        "en": "Removed"
+      },
+      "items": [
+        {
+          "ko": "활성 제품 구성에서 Windows Forms UI, Scintilla5.NET, Microsoft.Web.WebView2 직접 의존성을 제거했습니다.",
+          "en": "Removed the Windows Forms UI and direct Scintilla5.NET and Microsoft.Web.WebView2 dependencies from the active product."
+        },
+        {
+          "ko": "이식 완료 후 기존 WinForms 소스·테스트·레거시 솔루션을 제거했습니다.",
+          "en": "Removed the old WinForms sources, tests, and legacy solution after completing the migration."
+        },
+        {
+          "ko": "저장소에서 추적하던 2.3.2·2.3.3 바이너리와 이전 게시 산출물을 제거했습니다.",
+          "en": "Removed tracked 2.3.2 and 2.3.3 binaries and older publish artifacts."
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "title": {
+        "ko": "안정성 및 보안",
+        "en": "Stability and Security"
+      },
+      "items": [
+        {
+          "ko": "일반 YAML은 실행하지 않으며 파일명과 pagerivet.page/v1 스키마가 모두 일치하는 PageRivet YAML 페이지만 처리합니다.",
+          "en": "Ordinary YAML is never executed; only PageRivet YAML pages matching both the filename rules and pagerivet.page/v1 schema are processed."
+        },
+        {
+          "ko": "YAML 크기·노드·깊이·별칭·필드·경로·이벤트 제한을 적용했습니다.",
+          "en": "Applied limits for YAML size, nodes, depth, aliases, fields, paths, and events."
+        },
+        {
+          "ko": "상대 경로, reparse point, loopback, 외부 탐색, MCP 범위와 Revision 검사를 유지했습니다.",
+          "en": "Preserved checks for relative paths, reparse points, loopback, external navigation, MCP scope, and revisions."
+        },
+        {
+          "ko": "설정, 최근 프로젝트, MCP 인증·인스턴스 정보와 Recovery 데이터는 배포 패키지에서 제외합니다.",
+          "en": "Settings, recent projects, MCP authentication and instance data, and Recovery data remain excluded from packages."
+        }
+      ]
+    },
+    {
+      "id": "validation",
+      "title": {
+        "ko": "검증 및 배포 후보",
+        "en": "Validation and Release Candidate"
+      },
+      "items": [
+        {
+          "ko": "Release 빌드는 경고 0건, 오류 0건으로 완료했습니다.",
+          "en": "The Release build completed with 0 warnings and 0 errors."
+        },
+        {
+          "ko": "공통 330개, Avalonia 44개, Windows 10개 등 총 384개 테스트를 통과했습니다.",
+          "en": "All 384 tests passed: 330 common, 44 Avalonia, and 10 Windows tests."
+        },
+        {
+          "ko": "Windows NativeWebView에서 HTML·YAML 전환을 6회 반복하고 Portable smoke test를 통과했습니다.",
+          "en": "Passed six repeated HTML/YAML switches in Windows NativeWebView and the portable smoke test."
+        },
+        {
+          "ko": "Windows x64 자체 포함 Portable 패키지는 403개 파일, 274,274,741바이트이며 ZIP 크기는 99,711,015바이트입니다.",
+          "en": "The self-contained Windows x64 Portable package contains 403 files totaling 274,274,741 bytes; the ZIP is 99,711,015 bytes."
+        },
+        {
+          "ko": "ZIP SHA-256: 01CE6EE9D69E849B749D71795B7E4358F85C3F37A6429FFA36E4C4630253EA58",
+          "en": "ZIP SHA-256: 01CE6EE9D69E849B749D71795B7E4358F85C3F37A6429FFA36E4C4630253EA58"
+        },
+        {
+          "ko": "금지된 WinForms·WebView2·Scintilla 의존성과 개인 데이터 포함 여부는 모두 0건으로 확인했습니다.",
+          "en": "Confirmed zero forbidden WinForms, WebView2, or Scintilla dependencies and zero personal-data findings."
+        }
+      ]
+    },
+    {
+      "id": "remaining",
+      "title": {
+        "ko": "남은 검증",
+        "en": "Remaining Validation"
+      },
+      "items": [
+        {
+          "ko": "macOS와 Linux의 실제 NativeWebView 및 Bridge 동작 검증이 남아 있습니다.",
+          "en": "Real-environment NativeWebView and Bridge validation remains for macOS and Linux."
+        },
+        {
+          "ko": "한국어 IME, 고해상도·접근성, 장시간 안정성을 추가 검증할 예정입니다.",
+          "en": "Further validation is planned for Korean IME, high-DPI and accessibility behavior, and long-term stability."
+        },
+        {
+          "ko": "macOS 서명·공증과 각 플랫폼의 깨끗한 환경에서 패키지를 검증해야 합니다.",
+          "en": "macOS signing and notarization and clean-environment package validation on each platform remain pending."
+        }
+      ]
+    }
+  ]
+}

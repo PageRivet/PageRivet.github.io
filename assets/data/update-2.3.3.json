@@ -3,7 +3,7 @@
   "date": "2026.08.27",
   "platform": "Windows x64",
   "packageType": "Portable ZIP",
-  "latest": true,
+  "latest": false,
   "title": {
     "ko": "PageRivet 2.3.3",
     "en": "PageRivet 2.3.3"

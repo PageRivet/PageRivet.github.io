@@ -11,6 +11,8 @@ html {
 
 body {
   min-width: 320px;
+  word-break: keep-all;
+  overflow-wrap: break-word;
   margin: 0;
   color: var(--color-text);
   background:
@@ -67,6 +69,14 @@ h3 {
 
 p {
   color: var(--color-muted);
+}
+
+pre,
+code,
+kbd,
+samp {
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 ::selection {

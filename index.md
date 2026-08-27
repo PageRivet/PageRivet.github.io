@@ -68,7 +68,7 @@ show_release_toast: true
     <div class="head"><div class="eyebrow">Features</div><h2 data-i18n="home.features.title">주요 기능</h2><p data-i18n="home.features.description">웹 프로젝트 제작과 안전한 AI 협업을 위한 핵심 기능</p></div>
     <div class="cards">
       <article class="card"><div class="icon">&lt;/&gt;</div><h3 data-i18n="home.feature.editor.title">직관적인 코드 편집</h3><p data-i18n="home.feature.editor.description">HTML, CSS, JavaScript를 파일 단위로 편집하고 빠르게 적용합니다.</p></article>
-      <article class="card"><div class="icon">◉</div><h3 data-i18n="home.feature.preview.title">실시간 미리보기</h3><p data-i18n="home.feature.preview.description">WebView2 기반 미리보기로 결과를 즉시 확인합니다.</p></article>
+      <article class="card"><div class="icon">◉</div><h3 data-i18n="home.feature.preview.title">실시간 미리보기</h3><p data-i18n="home.feature.preview.description">NativeWebView 기반 통합 미리보기에서 HTML과 YAML 결과를 즉시 확인합니다.</p></article>
       <article class="card"><div class="icon">↶</div><h3 data-i18n="home.feature.history.title">히스토리 & 복구</h3><p data-i18n="home.feature.history.description">변경 기록을 저장하고 원하는 시점으로 복원합니다.</p></article>
       <article class="card"><div class="icon">✓</div><h3 data-i18n="home.feature.validation.title">검증 & 안전한 저장</h3><p data-i18n="home.feature.validation.description">코드 검증과 트랜잭션 기반 저장으로 변경 안정성을 높입니다.</p></article>
       <article class="card"><div class="icon">⌘</div><h3 data-i18n="home.feature.mcp.title">MCP 기반 AI 협업</h3><p data-i18n="home.feature.mcp.description">외부 AI 클라이언트가 프로젝트를 읽고 수정할 수 있도록 연결합니다.</p></article>
