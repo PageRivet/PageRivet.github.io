@@ -1,0 +1,157 @@
+{
+  "version": "2.3.0",
+  "date": "2026.08.26",
+  "platform": "Windows x64",
+  "packageType": "Portable",
+  "latest": true,
+  "title": {
+    "ko": "PageRivet 2.3.0 Update",
+    "en": "PageRivet 2.3.0 Update"
+  },
+  "overview": {
+    "ko": "PageRivet 2.3.0은 Claude Desktop 자동 연결 지원을 추가한 버전입니다.",
+    "en": "PageRivet 2.3.0 adds automatic Claude Desktop connection support."
+  },
+  "highlights": [
+    {
+      "value": "42",
+      "label": { "ko": "MCP 명령어", "en": "MCP Commands" }
+    },
+    {
+      "value": "Claude Desktop",
+      "label": { "ko": "자동 연결 지원", "en": "Auto-Connect Support" }
+    }
+  ],
+  "groups": [
+    {
+      "id": "added",
+      "title": { "ko": "추가", "en": "Added" },
+      "subtitle": { "ko": "새롭게 사용할 수 있는 기능", "en": "New capabilities" },
+      "open": true,
+      "items": {
+        "ko": [
+          "Claude Desktop용 PageRivet.StdioBridge를 추가했습니다.",
+          "Claude Desktop의 일반 설치판과 Microsoft Store/MSIX 설치판을 감지하고, MCP 설정 화면에서 연결 구성을 자동으로 적용할 수 있습니다.",
+          "Claude Desktop 설정에 하나의 고정 pagerivet Bridge 항목을 등록합니다.",
+          "실행 중인 PageRivet의 로컬 MCP 주소를 Bridge가 찾을 수 있도록 프로세스별 연결 등록 정보를 추가했습니다.",
+          "Claude Desktop 연결을 한 번에 하나의 PageRivet에만 배정하는 단일 연결 점유 기능을 추가했습니다.",
+          "PageRivet이 종료돼도 Bridge가 Claude Desktop과의 연결 및 마지막으로 확인한 Tool 정의를 유지하고, 다음 PageRivet 실행 후 다시 연결합니다.",
+          "Claude Desktop이 감지되면 프로그램 시작 후 별도 안내창으로 단일 연결 제한을 알립니다.",
+          "MCP 설정 화면의 Claude Desktop 항목에도 같은 단일 연결 안내를 표시합니다.",
+          "JSON, XML, CSV, WebVTT, TXT, Markdown, Web App Manifest, Source Map, glTF JSON과 SVG 리소스의 텍스트 미리보기·편집을 추가했습니다.",
+          "리소스 목록을 이름·확장자·종류·크기의 오름차순 또는 내림차순으로 정렬하는 드롭다운을 추가했습니다.",
+          "관리 리소스를 위한 read_text_resource, create_text_resource, apply_text_resource_patch MCP Tool을 추가했습니다."
+        ],
+        "en": [
+          "Added PageRivet.StdioBridge for Claude Desktop.",
+          "Detects both the standard installer and the Microsoft Store/MSIX build of Claude Desktop, and can automatically apply the connection configuration from the MCP settings screen.",
+          "Registers a single fixed pagerivet Bridge entry in the Claude Desktop configuration.",
+          "Added per-process connection registration information so the Bridge can locate the local MCP address of a running PageRivet instance.",
+          "Added single-connection ownership so a Claude Desktop connection is assigned to only one PageRivet instance at a time.",
+          "If PageRivet exits, the Bridge keeps the Claude Desktop connection and the last confirmed tool definitions, then reconnects once PageRivet runs again.",
+          "When Claude Desktop is detected, a separate notice window after startup explains the single-connection limit.",
+          "The Claude Desktop entry in the MCP settings screen shows the same single-connection notice.",
+          "Added text preview and editing for JSON, XML, CSV, WebVTT, TXT, Markdown, Web App Manifest, Source Map, glTF JSON, and SVG resources.",
+          "Added a dropdown to sort the resource list by name, extension, kind, or size in ascending or descending order.",
+          "Added the read_text_resource, create_text_resource, and apply_text_resource_patch MCP tools for managed resources."
+        ]
+      }
+    },
+    {
+      "id": "changed",
+      "title": { "ko": "변경", "en": "Changed" },
+      "subtitle": { "ko": "기존 흐름과 사용성 개선", "en": "Workflow and usability improvements" },
+      "open": false,
+      "items": {
+        "ko": [
+          "Claude Desktop을 자동 연결 지원 클라이언트 목록에 포함했습니다.",
+          "Claude Desktop 설정에는 MCP Access Token이나 프로젝트 정보를 직접 기록하지 않고 Bridge 실행 경로만 기록하도록 구성했습니다.",
+          "제품, 어셈블리 및 파일 버전을 2.3.0 / 2.3.0.0으로 통일했습니다.",
+          "포터블 패키지에 PageRivet.StdioBridge 실행 파일과 필수 런타임 파일을 포함했습니다.",
+          "메인 창의 초기 크기를 1400×900에서 1120×720으로 약 20% 축소했습니다. 최소 크기, 사용자 크기 조절 및 최대화 동작은 유지됩니다.",
+          "내장 MCP Tool 수를 39개에서 42개로 확장했습니다."
+        ],
+        "en": [
+          "Included Claude Desktop in the list of clients with automatic connection support.",
+          "Configured the Claude Desktop entry to record only the Bridge executable path, without writing the MCP Access Token or project information directly.",
+          "Aligned the product, assembly, and file versions to 2.3.0 / 2.3.0.0.",
+          "Included the PageRivet.StdioBridge executable and required runtime files in the portable package.",
+          "Reduced the main window's initial size from 1400×900 to 1120×720, about 20% smaller. Minimum size, user resizing, and maximize behavior remain unchanged.",
+          "Expanded the built-in MCP tool set from 39 to 42 commands."
+        ]
+      }
+    },
+    {
+      "id": "fixed",
+      "title": { "ko": "수정", "en": "Fixed" },
+      "subtitle": { "ko": "안정성과 호환성 문제 해결", "en": "Stability and compatibility fixes" },
+      "open": false,
+      "items": {
+        "ko": [
+          "MCP 응답의 nullable 필드가 값이 없을 때 생략되지 않고 명시적인 null로 직렬화되도록 수정했습니다.",
+          "위 수정으로 Claude Desktop에서 get_project_info 등 structured content 응답의 실제 필드와 출력 스키마가 달라 Tool 호출이 실패하던 호환성 문제를 해결했습니다.",
+          "Bridge 실행 파일만 존재하고 필수 DLL 또는 런타임 설정 파일이 누락된 경우 연결 성공처럼 표시하지 않고 설정 오류로 안내하도록 했습니다.",
+          "이전 5-Slot 시험 설정이 남아 있을 때 PageRivet이 생성한 항목임이 확인되는 pagerivet-2부터 pagerivet-5까지만 정리하도록 했습니다."
+        ],
+        "en": [
+          "Fixed nullable MCP response fields to serialize as an explicit null instead of being omitted when no value is present.",
+          "This fix resolved a compatibility issue in Claude Desktop where tool calls such as get_project_info failed because the structured content response's actual fields diverged from the output schema.",
+          "If only the Bridge executable exists while required DLLs or runtime configuration files are missing, PageRivet now reports a configuration error instead of showing a successful connection.",
+          "When a leftover 5-slot trial configuration remains, only entries confirmed as PageRivet-created, pagerivet-2 through pagerivet-5, are now cleaned up."
+        ]
+      }
+    },
+    {
+      "id": "security",
+      "title": { "ko": "안정성 및 보안", "en": "Security" },
+      "subtitle": { "ko": "프로젝트와 사용자 정보 보호", "en": "Project and user data protection" },
+      "open": false,
+      "items": {
+        "ko": [
+          "Claude Desktop 설정을 변경하기 전에 claude_desktop_config.json.pagerivet.bak 백업을 생성합니다.",
+          "기존 Claude Desktop 환경설정과 다른 MCP 서버 항목은 보존합니다.",
+          "여러 실제 Claude Desktop 설정 파일이 동시에 발견되면 임의의 파일을 선택하거나 변경하지 않습니다.",
+          "다른 프로그램이 사용 중이거나 사용자가 변경한 동명 MCP 항목은 PageRivet 소유가 확인되지 않으면 삭제하지 않습니다.",
+          "실행 등록 정보에는 InstanceId, PID, 프로세스 시작 시각, 연결 이름 및 루프백 주소만 기록하며 MCP Access Token과 프로젝트 정보는 기록하지 않습니다.",
+          "PID가 재사용되더라도 프로세스 시작 시각이 일치하지 않으면 유효한 PageRivet으로 인정하지 않습니다.",
+          "Claude Desktop 연결은 LeaseId까지 일치하는 소유자만 반환할 수 있어 이전 프로세스가 새 연결을 제거할 수 없습니다.",
+          "Bridge와 PageRivet 사이의 연결은 로컬 루프백 주소만 사용하고 기존 Bearer 인증을 유지합니다.",
+          "연결 대상이 바뀌거나 일시적으로 끊긴 경우 진행 중인 Tool 요청을 다른 PageRivet에 자동 재전송하지 않습니다."
+        ],
+        "en": [
+          "Creates a claude_desktop_config.json.pagerivet.bak backup before changing the Claude Desktop configuration.",
+          "Preserves MCP server entries that differ from the existing Claude Desktop configuration.",
+          "If multiple genuine Claude Desktop configuration files are found at once, none is arbitrarily selected or modified.",
+          "MCP entries with the same name that are in use by another program or changed by the user are not removed unless PageRivet ownership is confirmed.",
+          "Runtime registration records only the InstanceId, PID, process start time, connection name, and loopback address; the MCP Access Token and project information are never recorded.",
+          "Even if a PID is reused, PageRivet is not recognized as valid unless the process start time also matches.",
+          "A Claude Desktop connection can only be returned by an owner whose LeaseId also matches, so a previous process cannot remove a new connection.",
+          "The connection between the Bridge and PageRivet uses only the local loopback address and keeps the existing Bearer authentication.",
+          "In-progress tool requests are not automatically resent to another PageRivet instance if the connection target changes or is temporarily lost."
+        ]
+      }
+    },
+    {
+      "id": "claude-desktop-scope",
+      "title": { "ko": "Claude Desktop 지원 범위", "en": "Claude Desktop Support Scope" },
+      "subtitle": { "ko": "연결 방식과 제한 사항", "en": "Connection model and limitations" },
+      "open": false,
+      "items": {
+        "ko": [
+          "Claude Desktop은 연결 방식 제한으로 한 번에 하나의 PageRivet만 연결할 수 있습니다.",
+          "Codex, Claude Code 등 기존 Streamable HTTP 클라이언트의 다중 PageRivet 연결은 그대로 유지됩니다.",
+          "최초 연결 설정 또는 Bridge 경로 변경 후에는 Claude Desktop을 완전히 종료한 뒤 다시 실행해야 합니다.",
+          "Claude Desktop이 Bridge의 Tool 목록을 한 번 확인한 이후에는 PageRivet만 종료하고 다시 실행해도 Bridge가 새 PageRivet을 찾아 다시 연결합니다.",
+          "Claude Desktop 프로세스 자동 종료, 강제 재시작 및 실행 중인 Tool 요청의 자동 재전송은 지원하지 않습니다."
+        ],
+        "en": [
+          "Due to its connection model, Claude Desktop can connect to only one PageRivet instance at a time.",
+          "Multiple PageRivet connections from existing Streamable HTTP clients such as Codex and Claude Code remain unaffected.",
+          "After the initial connection setup or a Bridge path change, Claude Desktop must be fully closed and relaunched.",
+          "Once Claude Desktop has confirmed the Bridge's tool list, simply closing and relaunching PageRivet is enough for the Bridge to find and reconnect to the new PageRivet instance.",
+          "Automatic termination or forced restart of the Claude Desktop process, and automatic resending of in-progress tool requests, are not supported."
+        ]
+      }
+    }
+  ]
+}
