@@ -1,40 +1,310 @@
 {
-  "total": 42,
+  "total": 56,
   "groups": [
     {
-      "id": "application-project",
-      "title": { "ko": "애플리케이션 및 프로젝트", "en": "Application and Project" },
-      "commands": ["get_application_info", "get_project_info", "get_project_files", "get_project_resources"]
+      "id": "application",
+      "title": {
+        "ko": "애플리케이션 상태와 작업",
+        "en": "Application State & Actions"
+      },
+      "commands": [
+        {
+          "name": "export_project",
+          "description": "Requests an export through PageRivet's existing Export workflow. The request follows the active MCP approval policy, while validation errors still block execution. A one-time configuration is never saved as a user preset."
+        },
+        {
+          "name": "get_application_info",
+          "description": "Returns PageRivet application capabilities and runtime information. This tool never changes editor state."
+        },
+        {
+          "name": "get_export_presets",
+          "description": "Returns every built-in and user export preset plus the active project's selected preset. It never modifies or selects a preset."
+        },
+        {
+          "name": "get_mcp_log",
+          "description": "Returns recent PageRivet MCP activity log entries with authentication values and machine-specific data redacted."
+        },
+        {
+          "name": "get_mcp_status",
+          "description": "Returns the current MCP server, transport, port, approval-policy, authentication-presence, and Claude Desktop bridge state. Secret values are never returned."
+        },
+        {
+          "name": "get_preview_state",
+          "description": "Returns Preview initialization and current-page state without changing Preview or project data."
+        },
+        {
+          "name": "get_recovery_status",
+          "description": "Returns read-only Recovery availability and recoverable snapshot metadata. It never returns recovery source content or a machine path."
+        },
+        {
+          "name": "get_ui_state",
+          "description": "Returns the current PageRivet language, theme, and high-level UI operation state without changing user settings."
+        },
+        {
+          "name": "preview_html_page",
+          "description": "Shows one existing project-relative HTML page in Preview without changing project files or layout settings."
+        },
+        {
+          "name": "refresh_preview",
+          "description": "Refreshes the active project's current Preview page without modifying project files or UI settings."
+        },
+        {
+          "name": "save_project",
+          "description": "Saves only the validated, already-applied state of the active project. It never applies pending editor text, changes project, or performs Save As."
+        }
+      ]
     },
     {
-      "id": "source-reading",
-      "title": { "ko": "소스 파일 읽기", "en": "Read Source Files" },
-      "commands": ["read_html", "read_html_page", "read_css", "read_css_file", "read_javascript", "read_javascript_file"]
+      "id": "project",
+      "title": {
+        "ko": "프로젝트 조회",
+        "en": "Project Discovery"
+      },
+      "commands": [
+        {
+          "name": "get_project_files",
+          "description": "Lists every project-relative HTML, CSS, JavaScript, YAML, Markdown, SCSS, MJS, and TypeScript source of the active project with size and SHA-256 metadata."
+        },
+        {
+          "name": "get_project_info",
+          "description": "Returns metadata and revision state for the single active PageRivet project. It cannot access any other directory."
+        },
+        {
+          "name": "get_project_resources",
+          "description": "Lists every managed resource in the active project with its project-relative path, resource kind, media type, byte size, and all supported extensions. It never reads outside the active project."
+        }
+      ]
     },
     {
-      "id": "code-changes",
-      "title": { "ko": "코드 변경", "en": "Change Code" },
-      "commands": ["apply_html_patch", "apply_html_page_patch", "apply_css_patch", "apply_css_file_patch", "apply_javascript_patch", "apply_javascript_file_patch", "apply_project_patch"]
+      "id": "read",
+      "title": {
+        "ko": "소스와 리소스 읽기",
+        "en": "Read Sources & Resources"
+      },
+      "commands": [
+        {
+          "name": "read_css",
+          "description": "Reads the applied style.css source from the active project. Unapplied editor text is reported but is not returned as applied code."
+        },
+        {
+          "name": "read_css_file",
+          "description": "Reads one applied project-relative CSS file from the active project by path."
+        },
+        {
+          "name": "read_html",
+          "description": "Reads the applied index.html source from the active project. Unapplied editor text is reported but is not returned as applied code."
+        },
+        {
+          "name": "read_html_page",
+          "description": "Reads one applied project-relative HTML page from the active project by path. Unapplied editor text is reported but is not returned as applied code."
+        },
+        {
+          "name": "read_javascript",
+          "description": "Reads the applied script.js source from the active project. Unapplied editor text is reported but is not returned as applied code."
+        },
+        {
+          "name": "read_javascript_file",
+          "description": "Reads one applied project-relative JavaScript file from the active project by path."
+        },
+        {
+          "name": "read_text_resource",
+          "description": "Reads one supported UTF-8 text resource from the active project's managed assets. Supported editable formats are JSON, XML, CSV, WebVTT, text, Markdown, web manifest, source map, glTF JSON, and SVG."
+        },
+        {
+          "name": "read_text_source",
+          "description": "Reads one applied project-relative YAML, Markdown, SCSS, MJS, or TypeScript source from the active project by path."
+        }
+      ]
     },
     {
-      "id": "source-management",
-      "title": { "ko": "파일 생성·이름 변경·삭제", "en": "Create, Rename, and Delete Files" },
-      "commands": ["create_html_page", "create_css_file", "create_javascript_file", "rename_html_page", "rename_css_file", "rename_javascript_file", "delete_html_page", "delete_css_file", "delete_javascript_file"]
+      "id": "create",
+      "title": {
+        "ko": "파일과 리소스 생성",
+        "en": "Create & Import"
+      },
+      "commands": [
+        {
+          "name": "create_css_file",
+          "description": "Creates one new project-relative CSS file. The required style.css file already exists and cannot be recreated."
+        },
+        {
+          "name": "create_html_page",
+          "description": "Creates one new project-relative HTML page in the active project. PageRivet validates the complete project and follows its write approval policy before applying anything."
+        },
+        {
+          "name": "create_javascript_file",
+          "description": "Creates one new project-relative JavaScript file. The required script.js file already exists and cannot be recreated."
+        },
+        {
+          "name": "create_text_resource",
+          "description": "Creates one supported UTF-8 text resource in the active project's managed assets after applying PageRivet's write approval policy. JSON, XML, WebVTT, SVG, and JSON-based formats are syntax-validated before approval and again before writing."
+        },
+        {
+          "name": "create_text_source",
+          "description": "Creates one project-relative YAML, Markdown, SCSS, MJS, or TypeScript source after applying PageRivet's write approval policy."
+        },
+        {
+          "name": "import_project_resource",
+          "description": "Imports one supported local file into the active project's managed assets folder after PageRivet approval. The exact local source path is shown to the user before access is granted."
+        }
+      ]
     },
     {
-      "id": "resource-management",
-      "title": { "ko": "리소스 관리", "en": "Manage Resources" },
-      "commands": ["import_project_resource", "rename_project_resource", "delete_project_resource", "read_text_resource", "create_text_resource", "apply_text_resource_patch"]
+      "id": "patch",
+      "title": {
+        "ko": "파일 수정",
+        "en": "Patch Sources"
+      },
+      "commands": [
+        {
+          "name": "apply_css_file_patch",
+          "description": "Submits minimal exact-text replacements for one existing project-relative CSS file, including style.css."
+        },
+        {
+          "name": "apply_css_patch",
+          "description": "Submits minimal exact-text replacements for style.css. PageRivet validates the complete project and requires approval in its own UI before applying anything."
+        },
+        {
+          "name": "apply_html_page_patch",
+          "description": "Submits minimal exact-text replacements for one existing project-relative HTML page, including index.html. PageRivet validates the complete project and follows its write approval policy before applying anything."
+        },
+        {
+          "name": "apply_html_patch",
+          "description": "Submits minimal exact-text replacements for index.html. PageRivet validates the complete project and requires approval in its own UI before applying anything."
+        },
+        {
+          "name": "apply_javascript_file_patch",
+          "description": "Submits minimal exact-text replacements for one existing project-relative JavaScript file, including script.js."
+        },
+        {
+          "name": "apply_javascript_patch",
+          "description": "Submits minimal exact-text replacements for script.js. PageRivet validates the complete project and requires approval in its own UI before applying anything."
+        },
+        {
+          "name": "apply_project_patch",
+          "description": "Submits one atomic patch spanning any existing project-relative HTML, CSS, JavaScript, YAML, Markdown, SCSS, MJS, and/or TypeScript sources. Use this when one requested change spans multiple files."
+        },
+        {
+          "name": "apply_text_resource_patch",
+          "description": "Submits ordered exact-text replacements for one existing managed UTF-8 text resource. PageRivet validates supported structured formats and applies the approved change atomically."
+        },
+        {
+          "name": "apply_text_source_patch",
+          "description": "Submits ordered exact-text replacements for one existing project-relative YAML, Markdown, SCSS, MJS, or TypeScript source."
+        }
+      ]
     },
     {
-      "id": "validation-diagnostics",
-      "title": { "ko": "검증 및 진단", "en": "Validation and Diagnostics" },
-      "commands": ["validate_project", "get_errors", "get_console_log", "get_debug_context", "get_export_preset", "validate_export"]
+      "id": "organize",
+      "title": {
+        "ko": "이름 변경과 삭제",
+        "en": "Rename & Delete"
+      },
+      "commands": [
+        {
+          "name": "delete_css_file",
+          "description": "Deletes one project-relative CSS file. The required style.css file cannot be deleted."
+        },
+        {
+          "name": "delete_html_page",
+          "description": "Deletes one existing project-relative HTML page. The required index.html entry page cannot be deleted. PageRivet follows its write approval policy before applying anything."
+        },
+        {
+          "name": "delete_javascript_file",
+          "description": "Deletes one project-relative JavaScript file. The required script.js file cannot be deleted."
+        },
+        {
+          "name": "delete_project_resource",
+          "description": "Deletes one managed project resource after applying PageRivet's write approval policy."
+        },
+        {
+          "name": "delete_text_source",
+          "description": "Deletes one project-relative YAML, Markdown, SCSS, MJS, or TypeScript source."
+        },
+        {
+          "name": "rename_css_file",
+          "description": "Renames one project-relative CSS file. The required style.css file cannot be renamed."
+        },
+        {
+          "name": "rename_html_page",
+          "description": "Renames one existing project-relative HTML page. The required index.html entry page cannot be renamed. PageRivet follows its write approval policy before applying anything."
+        },
+        {
+          "name": "rename_javascript_file",
+          "description": "Renames one project-relative JavaScript file. The required script.js file cannot be renamed."
+        },
+        {
+          "name": "rename_project_resource",
+          "description": "Renames one managed project resource without changing its resource kind, after applying PageRivet's write approval policy."
+        },
+        {
+          "name": "rename_text_source",
+          "description": "Renames one project-relative YAML, Markdown, SCSS, MJS, or TypeScript source."
+        }
+      ]
     },
     {
-      "id": "history-recovery",
-      "title": { "ko": "변경 기록과 복원", "en": "History and Recovery" },
-      "commands": ["get_history", "get_history_diff", "get_recent_changes", "restore_history"]
+      "id": "validation",
+      "title": {
+        "ko": "검증과 진단",
+        "en": "Validation & Diagnostics"
+      },
+      "commands": [
+        {
+          "name": "get_console_log",
+          "description": "Returns the newest structured browser preview and editor console entries."
+        },
+        {
+          "name": "get_debug_context",
+          "description": "Returns a compact AI debugging starting point for the active project: current revision state, recent errors and console entries, recent changes, the nearest prior validation-valid history state, selected export preset, and recommended follow-up tool calls. It never changes editor state."
+        },
+        {
+          "name": "get_errors",
+          "description": "Returns structured validation, preview, runtime, file, export, MCP, and recovery errors recorded by PageRivet. Machine-specific paths and credentials are redacted from diagnostic text."
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "title": {
+        "ko": "변경 기록 조회",
+        "en": "History Inspection"
+      },
+      "commands": [
+        {
+          "name": "get_history",
+          "description": "Returns the active project's history timeline and current undo/redo position."
+        },
+        {
+          "name": "get_history_diff",
+          "description": "Returns a line diff between two active-project history snapshots. If IDs are omitted, compares the current snapshot with its predecessor."
+        },
+        {
+          "name": "get_recent_changes",
+          "description": "Returns the newest project history snapshots, including change origin, changed files, and validation result."
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "title": {
+        "ko": "기타",
+        "en": "Other"
+      },
+      "commands": [
+        {
+          "name": "get_export_preset",
+          "description": "Returns the export preset currently selected for the active project, including all restrictions."
+        },
+        {
+          "name": "validate_export",
+          "description": "Validates the applied active project against its selected export preset without creating output."
+        },
+        {
+          "name": "validate_project",
+          "description": "Validates the applied active-project HTML, CSS, and JavaScript without modifying files or editor state."
+        }
+      ]
     }
   ]
 }

@@ -1,199 +1,38 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" data-theme="light">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PageRivet</title>
-<meta name="color-scheme" content="light dark">
-<style>
-html{background-color:#fbfcff}
-html[data-theme="dark"]{background-color:#080b12}
-html.theme-preload *,html.theme-preload *::before,html.theme-preload *::after{transition:none!important}
-html.i18n-pending body{visibility:hidden}
-</style>
-<script>
-(() => {
-    const root = document.documentElement;
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    let initialTheme = systemTheme;
-    let initialLanguage = "ko";
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PageRivet 미리보기 불러오는 중</title>
+  <meta name="robots" content="noindex">
+  <script>
     try {
-        initialTheme = localStorage.getItem("pagerivet-theme") || systemTheme;
-        initialLanguage = localStorage.getItem("pagerivet-language") === "en" ? "en" : "ko";
-    } catch (_) {}
-    root.classList.add("theme-preload");
-    if (initialLanguage === "en") {
-        root.classList.add("i18n-pending");
+      const savedTheme = localStorage.getItem("pagerivet.theme");
+      const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = savedTheme || preferredTheme;
+    } catch (_error) {
+      document.documentElement.dataset.theme = "light";
     }
-    root.lang = initialLanguage;
-    root.dataset.theme = initialTheme;
-    root.style.colorScheme = initialTheme;
-    root.style.backgroundColor = initialTheme === "dark" ? "#080b12" : "#fbfcff";
-    window.__pagerivetRevealTimer = window.setTimeout(() => {
-        root.classList.remove("theme-preload", "i18n-pending");
-    }, 2500);
-})();
-</script>
-<link rel="stylesheet" href="style.css?v=2.3.0-1">
-<script src="script.js?v=2.3.0-1" defer></script>
+  </script>
+  <style>
+    @view-transition { navigation: none; }
+    :root { color-scheme: light; font-family: system-ui, sans-serif; }
+    html[data-theme="dark"] { color-scheme: dark; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #f7f8fc; color: #151926; }
+    .preview-status { width: min(36rem, calc(100% - 3rem)); padding: 2rem; border: 1px solid #dfe3ed; border-radius: 1rem; background: #fff; }
+    .preview-status h1 { margin: 0 0 .75rem; font-size: 1.25rem; }
+    .preview-status p { margin: 0; color: #667085; line-height: 1.7; }
+    html[data-theme="dark"] body { background: #080b12; color: #f1f4fa; }
+    html[data-theme="dark"] .preview-status { border-color: #2c374b; background: #121925; }
+    html[data-theme="dark"] .preview-status p { color: #aab4c6; }
+  </style>
 </head>
-<body class="home-theme">
-<header>
-  <div class="wrap">
-    <nav>
-      <button class="mobile-menu-toggle" type="button" data-mobile-menu-toggle aria-expanded="false" aria-controls="site-navigation" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
-      <a class="brand" href="index.html" aria-label="PageRivet 홈"><span class="mark"></span><span>PageRivet</span></a>
-      <div class="mobile-menu-panel" id="site-navigation" data-mobile-menu-panel>
-        <div class="links"><a href="about.html">소개</a><a href="features.html">기능</a><a href="mcp.html">MCP & AI 협업</a><a href="guide.html">가이드</a><a href="update.html">업데이트</a><a href="https://github.com/raneree/PageRivet/releases/download/v2.3.0/PageRivet-2.3.0-Windows-x64-Portable.zip">다운로드</a><a href="https://discord.gg/CFx4Emrxgf">커뮤니티</a></div>
-        <div class="tools"><button class="chip theme-toggle" type="button" data-theme-toggle aria-label="다크 모드로 전환" aria-pressed="false">◐</button><button class="chip on" type="button" data-language="ko" aria-pressed="true">한국어</button><button class="chip" type="button" data-language="en" aria-pressed="false">ENG</button></div>
-      </div>
-    </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">MCP-integrated Web Editor</div>
-      <h1>PageRivet</h1>
-      <h2>정적 웹 프로젝트의<br>개발과 AI 협업을 하나로</h2>
-      <p>HTML, CSS, JavaScript 편집부터 실시간 미리보기, 검증, 히스토리 관리, MCP 기반 AI 협업까지 하나의 작업 공간으로 연결합니다.</p>
-      <div class="actions"><a class="btn primary" href="https://github.com/raneree/PageRivet/releases/download/v2.3.0/PageRivet-2.3.0-Windows-x64-Portable.zip">지금 다운로드</a><a class="btn secondary" href="guide.html">시작 가이드 보기</a></div>
-      <div class="version platform-note" role="note"><strong>지원 환경</strong><span>현재 PageRivet은 Windows x64 전용으로 제공됩니다. macOS와 Linux는 지원하지 않습니다.</span></div>
-    </div>
-
-    <div class="mock">
-      <div class="titlebar"><span>PageRivet — My Web Project</span><span>— □ ×</span></div>
-      <div class="menubar"><span>파일</span><span>편집</span><span>보기</span><span>프로젝트</span><span>도움말</span></div>
-      <div class="workspace">
-        <aside class="files">
-          <div><b>프로젝트</b></div>
-          <div class="file">▾ My Web Project</div>
-          <button class="file on" type="button" data-demo-file="index.html" aria-pressed="true">▧ index.html</button>
-          <button class="file" type="button" data-demo-file="about.html" aria-pressed="false">▧ about.html</button>
-          <button class="file" type="button" data-demo-file="style.css" aria-pressed="false">▧ style.css</button>
-          <button class="file" type="button" data-demo-file="main.js" aria-pressed="false">▧ main.js</button>
-          <div class="file">▸ images</div>
-        </aside>
-        <div class="editor">
-          <div class="tabs" data-demo-tab>index.html</div>
-          <pre class="code-view" data-demo-code aria-live="polite">&lt;!doctype html&gt;
-&lt;html lang="ko"&gt;
-  &lt;head&gt;
-    &lt;link rel="stylesheet" href="style.css"&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;PageRivet&lt;/h1&gt;
-    &lt;p&gt;AI와 함께 만드는 웹 프로젝트&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre>
-        </div>
-        <aside class="preview">
-          <div class="url">preview.pagerivet.local</div>
-          <div class="mini"><small>PageRivet</small><h3>웹 제작과 AI 협업을 하나로</h3><p>정적 웹 프로젝트를 더 빠르고 안전하게 구성하세요.</p><span class="btn primary" style="padding:8px 12px;font-size:10px">시작하기</span></div>
-        </aside>
-      </div>
-      <div class="bottom"><span>기록</span><span>오류</span><span>MCP 로그</span><span>콘솔</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="head"><div class="eyebrow">Features</div><h2>주요 기능</h2><p>웹 프로젝트 제작과 안전한 AI 협업을 위한 핵심 기능</p></div>
-    <div class="cards">
-      <article class="card"><div class="icon">&lt;/&gt;</div><h3>직관적인 코드 편집</h3><p>HTML, CSS, JavaScript를 파일 단위로 편집하고 빠르게 적용합니다.</p></article>
-      <article class="card"><div class="icon">◉</div><h3>실시간 미리보기</h3><p>WebView2 기반 미리보기로 결과를 즉시 확인합니다.</p></article>
-      <article class="card"><div class="icon">↶</div><h3>히스토리 & 복구</h3><p>변경 기록을 저장하고 원하는 시점으로 복원합니다.</p></article>
-      <article class="card"><div class="icon">✓</div><h3>검증 & 안전한 저장</h3><p>코드 검증과 트랜잭션 기반 저장으로 변경 안정성을 높입니다.</p></article>
-      <article class="card"><div class="icon">⌘</div><h3>MCP 기반 AI 협업</h3><p>외부 AI 클라이언트가 프로젝트를 읽고 수정할 수 있도록 연결합니다.</p></article>
-      <article class="card"><div class="icon">▣</div><h3>다중 파일 지원</h3><p>여러 HTML, CSS, JavaScript 파일을 하나의 프로젝트에서 관리합니다.</p></article>
-    </div>
-  </div>
-</section>
-
-<section class="mcp">
-  <div class="wrap mcp-grid">
-    <div>
-      <div class="eyebrow">MCP & AI Collaboration</div>
-      <h2>AI와 함께 더 나은 결과를</h2>
-      <p>PageRivet은 특정 AI를 강제하지 않습니다. MCP를 통해 사용자가 사용하는 AI 클라이언트와 프로젝트를 연결하고, 검증과 히스토리 흐름 안에서 변경을 관리합니다.</p>
-      <div class="checks"><div>프로젝트 읽기 및 분석</div><div>코드 수정 제안 및 적용</div><div>히스토리 기반 변경 추적</div><div>사용자 승인 기반 안전한 변경</div></div>
-    </div>
-    <div class="flow">
-      <div class="flow-box"><b>AI Client</b><span>Codex</span><span>Claude</span><span>Cursor</span><span>VS Code</span></div>
-      <div class="arrow">→</div>
-      <div class="flow-box"><b>PageRivet MCP Server</b><span>프로젝트 읽기</span><span>수정 제안</span><span>변경 적용</span><span>히스토리 관리</span></div>
-      <div class="arrow">→</div>
-      <div class="flow-box"><b>Project</b><span>index.html</span><span>style.css</span><span>main.js</span><span>assets/...</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="quick">
-  <div class="wrap">
-    <div class="eyebrow">Quick Start</div>
-    <h2>빠르게 시작하기</h2>
-    <div class="steps">
-      <div class="step"><small>01</small><h3>다운로드</h3><p>공식 GitHub Releases에서 최신 버전을 다운로드합니다.</p></div>
-      <div class="step"><small>02</small><h3>프로젝트 열기</h3><p>새 프로젝트를 만들거나 기존 프로젝트를 불러옵니다.</p></div>
-      <div class="step"><small>03</small><h3>코드 편집</h3><p>코드를 수정하고 미리보기로 결과를 확인합니다.</p></div>
-      <div class="step"><small>04</small><h3>AI와 협업</h3><p>MCP 클라이언트를 연결하고 자연어로 작업을 요청합니다.</p></div>
-    </div>
-    <div class="cta">
-      <div><strong>PageRivet을 다운로드하고 시작해보세요.</strong></div>
-      <div class="actions" style="margin:0"><a class="btn primary" href="https://github.com/raneree/PageRivet/releases/download/v2.3.0/PageRivet-2.3.0-Windows-x64-Portable.zip">지금 다운로드</a></div>
-    </div>
-  </div>
-</section>
-
-<section class="thanks-section" aria-labelledby="thanks-title">
-  <div class="wrap">
-    <div class="thanks-layout">
-      <div class="thanks-copy">
-        <div class="eyebrow">Thanks To</div>
-        <h2 id="thanks-title">감사합니다</h2>
-        <p>PageRivet이 세상과 만날 수 있도록 크고 작은 계기와 영감을 건네주신 모든 분께 감사드립니다.</p>
-      </div>
-      <p class="thanks-principle">이 목록은 제휴, 후원, 광고 또는 특정한 관계를 의미하지 않습니다.<br>PageRivet의 여정에 계기와 영감을 더해준 모든 만남을 기억하기 위한 순수한 감사의 인사입니다.</p>
-    </div>
-    <div class="thanks-grid">
-      <a class="thanks-card" href="https://cozit.app/">
-        <small>Platform</small>
-        <strong>Cozit</strong>
-        <p>PageRivet을 소개할 수 있는 공간을 마련해준 데 감사드립니다.</p>
-        <em>방문하기 →</em>
-      </a>
-      <a class="thanks-card" href="https://disquiet.io/">
-        <small>Platform</small>
-        <strong>Disquiet</strong>
-        <p>PageRivet을 소개할 수 있는 공간을 마련해준 데 감사드립니다.</p>
-        <em>방문하기 →</em>
-      </a>
-    </div>
-  </div>
-</section>
-
-<aside class="release-update-toast" data-release-update-toast hidden role="status" aria-live="polite" aria-labelledby="release-update-title">
-  <button class="release-update-close" type="button" data-close-release-update aria-label="업데이트 안내 닫기">×</button>
-  <div class="release-update-copy">
-    <span class="update-badge">New Update</span>
-    <strong id="release-update-title">PageRivet 2.3.0 업데이트</strong>
-    <p>새로운 버전의 주요 변경점을 확인하세요.</p>
-  </div>
-  <div class="release-update-actions"><a href="update.html" data-dismiss-release-update>업데이트 내용 보기</a><a class="release-update-download" href="https://github.com/raneree/PageRivet/releases/download/v2.3.0/PageRivet-2.3.0-Windows-x64-Portable.zip" data-dismiss-release-update>다운로드</a></div>
-</aside>
-
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div><div class="brand"><span class="mark"></span><span>PageRivet</span></div><p>정적 웹 프로젝트의 개발과 AI 협업을 하나로.</p></div>
-      <div><h4>링크</h4><div><a href="about.html">소개</a></div><div><a href="features.html">기능</a></div><div><a href="mcp.html">MCP & AI 협업</a></div><div><a href="guide.html">가이드</a></div><div><a href="update.html">업데이트</a></div></div>
-      <div><h4>지원</h4><div><a href="https://github.com/raneree/PageRivet">GitHub</a></div><div><a href="https://discord.gg/CFx4Emrxgf">Discord</a></div><div><a href="mailto:pagerivet.support@gmail.com">문의하기</a></div></div>
-      <div><h4>고마운 플랫폼</h4><div><a href="https://cozit.app/">Cozit</a></div><div><a href="https://disquiet.io/">Disquiet</a></div></div>
-    </div>
-    <div class="copy">© 2026 PageRivet · Reference brand page concept</div>
-  </div>
-</footer>
+<body>
+  <main class="preview-status" id="preview-status" aria-live="polite">
+    <h1>PageRivet 홈페이지를 불러오는 중입니다.</h1>
+    <p>현재 Jekyll 원본과 공통 데이터를 미리보기용 HTML로 조립하고 있습니다.</p>
+    <noscript>미리보기에는 JavaScript가 필요합니다.</noscript>
+  </main>
+  <script src="script.js" defer></script>
 </body>
 </html>

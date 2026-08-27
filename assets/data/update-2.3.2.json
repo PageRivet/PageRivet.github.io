@@ -1,0 +1,166 @@
+{
+  "version": "2.3.2",
+  "platform": "Windows x64",
+  "packageType": "Portable ZIP",
+  "latest": false,
+  "title": {
+    "ko": "PageRivet 2.3.2",
+    "en": "PageRivet 2.3.2"
+  },
+  "overview": {
+    "ko": "애플리케이션 상태 조회와 안전한 작업 요청 범위를 확장하고, 민감한 사용자 제어 영역의 보안 경계를 강화했습니다.",
+    "en": "Expanded application state inspection and safe action requests while strengthening security boundaries around user-controlled operations."
+  },
+  "highlights": [
+    {
+      "value": "56",
+      "label": {
+        "ko": "내장 MCP Tool",
+        "en": "Built-in MCP Tools"
+      }
+    },
+    {
+      "value": "10",
+      "label": {
+        "ko": "새 애플리케이션 도구",
+        "en": "New Application Tools"
+      }
+    },
+    {
+      "value": "2.3.2.0",
+      "label": {
+        "ko": "통합 파일 버전",
+        "en": "Unified File Version"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "added",
+      "title": {
+        "ko": "추가",
+        "en": "Added"
+      },
+      "items": [
+        {
+          "ko": "get_ui_state: 현재 언어, 테마와 주요 UI 처리 상태를 조회합니다.",
+          "en": "get_ui_state: Inspect the current language, theme, and major UI processing state."
+        },
+        {
+          "ko": "get_preview_state: Preview 초기화 여부와 현재 표시 페이지를 조회합니다.",
+          "en": "get_preview_state: Inspect Preview initialization and the currently displayed page."
+        },
+        {
+          "ko": "get_recovery_status: 소스 내용을 노출하지 않고 Recovery 존재 여부와 복구 가능 메타데이터를 조회합니다.",
+          "en": "get_recovery_status: Inspect safe Recovery metadata without exposing source content."
+        },
+        {
+          "ko": "get_mcp_status: 인증값을 제외한 MCP 서버, 연결 및 승인 정책 상태를 조회합니다.",
+          "en": "get_mcp_status: Inspect MCP server, connection, and approval state without credentials."
+        },
+        {
+          "ko": "get_mcp_log: 민감정보가 제거된 최근 MCP 활동 로그를 조회합니다.",
+          "en": "get_mcp_log: Read recent MCP activity logs with sensitive values removed."
+        },
+        {
+          "ko": "get_export_presets: 기본 및 사용자 내보내기 프리셋 목록을 읽기 전용으로 조회합니다.",
+          "en": "get_export_presets: Read built-in and user export preset lists."
+        },
+        {
+          "ko": "save_project: 미적용 편집을 자동 적용하지 않고 검증된 현재 프로젝트 상태만 저장합니다.",
+          "en": "save_project: Save only the validated current project without applying pending edits."
+        },
+        {
+          "ko": "refresh_preview: 프로젝트를 변경하지 않고 현재 Preview를 새로고침합니다.",
+          "en": "refresh_preview: Refresh the current Preview without changing the project."
+        },
+        {
+          "ko": "preview_html_page: 현재 프로젝트에 존재하는 HTML 페이지를 Preview에 표시합니다.",
+          "en": "preview_html_page: Display an existing project HTML page in Preview."
+        },
+        {
+          "ko": "export_project: 기존 프리셋 또는 비영속 일회성 설정으로 프로젝트 내보내기를 요청합니다.",
+          "en": "export_project: Request export using a preset or non-persistent one-time settings."
+        }
+      ]
+    },
+    {
+      "id": "changed",
+      "title": {
+        "ko": "변경",
+        "en": "Changed"
+      },
+      "items": [
+        {
+          "ko": "내장 MCP Tool 수를 47개에서 56개로 확장했습니다.",
+          "en": "Expanded the built-in MCP tool set from 47 to 56."
+        },
+        {
+          "ko": "MCP 애플리케이션 요청을 UI 스레드와 기존 Coordinator로 전달하는 전용 브로커를 추가했습니다.",
+          "en": "Added a broker that routes MCP application requests through the UI thread and existing coordinators."
+        },
+        {
+          "ko": "내보내기 요청에 프리셋 선택 영속화 여부, 일회성 설정 여부와 최종 승인 요구를 명시했습니다.",
+          "en": "Clarified preset persistence, one-time settings, and final approval requirements for exports."
+        },
+        {
+          "ko": "한국어·영어 최종 내보내기 승인 안내에 프로젝트, 형식, 출력 위치, 덮어쓰기 및 경고 정보를 표시합니다.",
+          "en": "Final export approval now shows project, format, destination, overwrite, and warning details in Korean and English."
+        },
+        {
+          "ko": "내장 MCP 가이드와 기본 README를 56개 Tool 및 애플리케이션 접근 범위에 맞게 갱신했습니다.",
+          "en": "Updated the built-in MCP guide and README for 56 tools and the expanded application access scope."
+        },
+        {
+          "ko": "제품, 어셈블리 및 파일 버전을 2.3.2 / 2.3.2.0으로 통일했습니다.",
+          "en": "Unified product, assembly, and file versions as 2.3.2 / 2.3.2.0."
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "title": {
+        "ko": "안정성 및 보안",
+        "en": "Stability & Security"
+      },
+      "items": [
+        {
+          "ko": "AI가 Undo, Redo, History 복원, Recovery 적용·삭제, 보안·승인 설정 변경, 프로젝트 전환 및 프로그램 종료·재실행을 수행하지 못하도록 제한했습니다.",
+          "en": "Restricted AI from Undo, Redo, History restoration, Recovery apply/delete, security and approval changes, project switching, and app lifecycle actions."
+        },
+        {
+          "ko": "정책상 허용되지 않는 restore_history MCP Tool과 관련 AI 복원 경로를 제거했습니다.",
+          "en": "Removed the disallowed restore_history MCP tool and related AI restoration paths."
+        },
+        {
+          "ko": "MCP 저장은 현재 활성 프로젝트와 Revision이 일치할 때만 실행하며 미적용 편집 버퍼가 있으면 거부합니다.",
+          "en": "MCP saving requires matching active project and revision and rejects pending editor buffers."
+        },
+        {
+          "ko": "Preview 작업은 현재 활성 프로젝트에 이미 존재하는 HTML 페이지만 대상으로 합니다.",
+          "en": "Preview actions are limited to existing HTML pages in the active project."
+        },
+        {
+          "ko": "Recovery 상태는 파일명과 저장 시각 등 안전한 메타데이터만 제공하고 소스 내용과 절대 경로를 반환하지 않습니다.",
+          "en": "Recovery status returns only safe metadata, never source content or absolute paths."
+        },
+        {
+          "ko": "MCP 상태와 로그는 Access Token을 반환하지 않으며 민감값을 제거합니다.",
+          "en": "MCP status and logs never return access tokens and redact sensitive values."
+        },
+        {
+          "ko": "MCP 내보내기는 자동 적용 승인 정책에서도 항상 사용자 최종 승인을 요구합니다.",
+          "en": "MCP export always requires final user approval."
+        },
+        {
+          "ko": "사용자가 거부한 내보내기는 출력이나 내보내기 설정을 만들지 않습니다.",
+          "en": "Rejected exports create no output or export settings."
+        },
+        {
+          "ko": "일회성 내보내기 설정은 사용자 프리셋과 현재 선택 설정에 저장되지 않습니다.",
+          "en": "One-time export settings are not persisted to user presets or the current selection."
+        }
+      ]
+    }
+  ]
+}

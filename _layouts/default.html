@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'ko' }}" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.data.site.name }}</title>
+  <meta name="description" content="{{ page.description | default: site.data.site.description }}">
+  <meta name="theme-color" content="#0b0f18">
+  <script>
+    try {
+      const savedTheme = localStorage.getItem("pagerivet.theme");
+      const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = savedTheme || preferredTheme;
+    } catch {
+      document.documentElement.dataset.theme = "light";
+    }
+  </script>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?rev={{ site.data.site.asset_revision }}" blocking="render">
+</head>
+<body class="{{ page.body_class | default: 'default-theme' }}">
+  <a class="skip-link" href="#main-content">본문으로 바로가기</a>
+  {% include header.md %}
+  <main id="main-content">
+    {{ content }}
+  </main>
+  {% include update-toast.md %}
+  {% include footer.md %}
+  {% include download-guard.md %}
+  <script type="module" src="{{ '/assets/js/main.mjs' | relative_url }}"></script>
+</body>
+</html>
