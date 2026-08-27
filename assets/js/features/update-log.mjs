@@ -1,4 +1,5 @@
 import { fetchProjectJson, currentLanguage, localized } from "../core/json.mjs";
+import { transitionContentPanels } from "../ui/content-transition.mjs";
 
 const UI_TEXT = {
   ko: {
@@ -25,6 +26,8 @@ function textFor(key) {
 let indexData = null;
 let currentUpdate = null;
 let languageListenerRegistered = false;
+let currentVersionIndex = 0;
+let updateTransitioning = false;
 
 function renderDetails(container, data) {
   if (!container || !data) return;
@@ -66,18 +69,53 @@ function renderDetails(container, data) {
   });
 }
 
-async function selectVersion(details, file) {
-  details.innerHTML = '<div class="data-status">' + textFor("loadingDetails") + '</div>';
+async function selectVersion(stage, file, targetIndex, animate) {
+  const currentDetails = stage.querySelector("[data-update-details]");
+  if (!currentDetails || updateTransitioning) return false;
+
+  updateTransitioning = true;
+
   try {
-    currentUpdate = await fetchProjectJson("assets/data/" + file);
-    renderDetails(details, currentUpdate);
+    const nextUpdate = await fetchProjectJson("assets/data/" + file);
+
+    if (!animate) {
+      currentUpdate = nextUpdate;
+      currentVersionIndex = targetIndex;
+      renderDetails(currentDetails, currentUpdate);
+      return true;
+    }
+
+    const nextDetails = document.createElement("div");
+    nextDetails.className = "update-details";
+    nextDetails.dataset.updateDetails = "";
+    nextDetails.hidden = true;
+    renderDetails(nextDetails, nextUpdate);
+    stage.appendChild(nextDetails);
+
+    const direction = targetIndex > currentVersionIndex ? "forward" : "backward";
+    const changed = await transitionContentPanels(
+      currentDetails,
+      nextDetails,
+      direction,
+      { removeCurrent: true, scrollToStart: true }
+    );
+
+    if (changed) {
+      currentUpdate = nextUpdate;
+      currentVersionIndex = targetIndex;
+    }
+
+    return changed;
   } catch (error) {
-    details.innerHTML = '<div class="data-status">' + textFor("detailsError") + '</div>';
+    currentDetails.innerHTML = '<div class="data-status">' + textFor("detailsError") + '</div>';
     console.error(error);
+    return false;
+  } finally {
+    updateTransitioning = false;
   }
 }
 
-function renderVersionList(container, details) {
+function renderVersionList(container, stage) {
   container.innerHTML = "";
   indexData.versions.forEach(function (entry, index) {
     const button = document.createElement("button");
@@ -85,12 +123,17 @@ function renderVersionList(container, details) {
     button.type = "button";
     button.textContent = "PageRivet " + entry.version;
     button.dataset.updateFile = entry.file;
-    button.classList.toggle("is-active", index === 0);
-    button.addEventListener("click", function () {
-      container.querySelectorAll(".update-version-button").forEach(function (item) {
-        item.classList.toggle("is-active", item === button);
-      });
-      selectVersion(details, entry.file);
+    button.classList.toggle("is-active", index === currentVersionIndex);
+    button.addEventListener("click", async function () {
+      if (index === currentVersionIndex || updateTransitioning) return;
+
+      const changed = await selectVersion(stage, entry.file, index, true);
+
+      if (changed) {
+        container.querySelectorAll(".update-version-button").forEach(function (item) {
+          item.classList.toggle("is-active", item === button);
+        });
+      }
     });
     container.appendChild(button);
   });
@@ -98,16 +141,23 @@ function renderVersionList(container, details) {
 
 export function initUpdateLog() {
   const versionList = document.querySelector("[data-update-version-list]");
-  const details = document.querySelector("[data-update-details]");
-  if (!versionList || !details) return;
+  const stage = document.querySelector("[data-update-stage]");
+  if (!versionList || !stage) return;
 
   function start(data) {
     if (!Array.isArray(data.versions) || !data.versions.length) {
       throw new Error("Update index is empty.");
     }
+
     indexData = data;
-    renderVersionList(versionList, details);
-    selectVersion(details, data.versions[0].file);
+    currentVersionIndex = Math.min(currentVersionIndex, data.versions.length - 1);
+    renderVersionList(versionList, stage);
+    selectVersion(
+      stage,
+      data.versions[currentVersionIndex].file,
+      currentVersionIndex,
+      false
+    );
   }
 
   if (indexData) {

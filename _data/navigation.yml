@@ -1,16 +1,12 @@
 items:
+  - id: notice
+    label_ko: 공지사항
+    label_en: Notices
+    url: /notice.html
   - id: about
     label_ko: 소개
     label_en: About
     url: /about.html
-  - id: features
-    label_ko: 기능
-    label_en: Features
-    url: /features.html
-  - id: mcp
-    label_ko: MCP & AI 협업
-    label_en: MCP & AI
-    url: /mcp.html
   - id: guide
     label_ko: 가이드
     label_en: Guide

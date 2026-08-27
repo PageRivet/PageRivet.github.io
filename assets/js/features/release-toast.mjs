@@ -1,7 +1,7 @@
 import { readPreference, removePreference, savePreference } from "../core/preferences.mjs";
 
 const VISIBLE_DURATION = 7000;
-const EXIT_DURATION = 220;
+const EXIT_DURATION = 380;
 let showTimer = null;
 let autoCloseTimer = null;
 let exitTimer = null;
@@ -68,10 +68,12 @@ export function initReleaseToast() {
 
     toast.hidden = false;
     window.requestAnimationFrame(function () {
-      toast.classList.add("is-visible");
-      autoCloseTimer = window.setTimeout(function () {
-        closeToast(toast);
-      }, VISIBLE_DURATION);
+      window.requestAnimationFrame(function () {
+        toast.classList.add("is-visible");
+        autoCloseTimer = window.setTimeout(function () {
+          closeToast(toast);
+        }, VISIBLE_DURATION);
+      });
     });
   }, 700);
 }

@@ -7,6 +7,10 @@ markdown: kramdown
 sass:
   sass_dir: _sass
   style: compressed
+collections:
+  notices:
+    output: false
+    sort_by: date
 exclude:
   - README.md
   - index.html

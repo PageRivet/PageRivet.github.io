@@ -1,4 +1,5 @@
 export const TRANSLATIONS = {
+  "navigation.notice": { ko: "공지사항", en: "Notices" },
   "navigation.about": { ko: "소개", en: "About" },
   "navigation.features": { ko: "기능", en: "Features" },
   "navigation.mcp": { ko: "MCP & AI 협업", en: "MCP & AI Collaboration" },
@@ -6,6 +7,22 @@ export const TRANSLATIONS = {
   "navigation.update": { ko: "업데이트", en: "Updates" },
   "navigation.download": { ko: "다운로드", en: "Download" },
   "navigation.community": { ko: "커뮤니티", en: "Community" },
+  "about.nav.title": { ko: "소개 메뉴", en: "About Menu" },
+  "about.nav.overview": { ko: "PageRivet 소개", en: "About PageRivet" },
+  "about.nav.features": { ko: "주요 기능", en: "Core Features" },
+  "about.nav.mcp": { ko: "MCP & AI 협업", en: "MCP & AI Collaboration" },
+  "notice.eyebrow": { ko: "NOTICE", en: "NOTICE" },
+  "notice.title": { ko: "공지사항", en: "Notices" },
+  "notice.description": { ko: "PageRivet의 새로운 소식과 중요한 안내를 한곳에서 확인하세요.", en: "Find the latest PageRivet news and important announcements in one place." },
+  "notice.section_kicker": { ko: "PAGERIVET NEWS", en: "PAGERIVET NEWS" },
+  "notice.section_title": { ko: "새로운 소식을 전해드립니다", en: "Latest news from PageRivet" },
+  "notice.section_description": { ko: "업데이트, 서비스 안내와 꼭 확인해야 할 내용을 순서대로 제공합니다.", en: "Updates, service notices, and important information will be shared here." },
+  "notice.status": { ko: "공지 준비 중", en: "Notices coming soon" },
+  "notice.count_suffix": { ko: "개의 공지", en: "notices" },
+  "notice.latest": { ko: "최신", en: "Latest" },
+  "notice.empty_badge": { ko: "준비 중", en: "Coming Soon" },
+  "notice.empty_title": { ko: "등록된 공지사항이 없습니다", en: "No notices have been posted yet" },
+  "notice.empty_description": { ko: "새로운 안내가 준비되면 이 페이지에서 가장 먼저 확인할 수 있습니다.", en: "New announcements will appear here as soon as they are ready." },
   "footer.tagline": { ko: "정적 웹 프로젝트의 개발과 AI 협업을 하나로.", en: "Static web development and AI collaboration in one place." },
   "footer.links": { ko: "링크", en: "Links" },
   "footer.support": { ko: "지원", en: "Support" },
@@ -282,9 +299,13 @@ export const PAGE_METADATA = {
     title: { ko: "PageRivet", en: "PageRivet" },
     description: { ko: "정적 웹 프로젝트의 개발과 AI 협업을 하나로 연결합니다.", en: "Connect static web project development and AI collaboration in one workspace." }
   },
+  notice: {
+    title: { ko: "공지사항", en: "Notices" },
+    description: { ko: "PageRivet의 새로운 소식과 중요한 안내를 확인합니다.", en: "Review the latest PageRivet news and important announcements." }
+  },
   about: {
     title: { ko: "소개", en: "About" },
-    description: { ko: "PageRivet이 해결하려는 문제와 제품 원칙을 소개합니다.", en: "Learn about the problems PageRivet addresses and the principles behind the product." }
+    description: { ko: "PageRivet의 소개, 주요 기능과 MCP 기반 AI 협업 방식을 안내합니다.", en: "Explore PageRivet, its core features, and its MCP-based AI collaboration workflow." }
   },
   features: {
     title: { ko: "기능", en: "Features" },

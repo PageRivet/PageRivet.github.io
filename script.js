@@ -8,9 +8,8 @@
 
   const PAGE_SOURCES = Object.freeze({
     home: "index.md",
+    notice: "notice.md",
     about: "about.md",
-    features: "features.md",
-    mcp: "mcp.md",
     guide: "guide.md",
     update: "update.md"
   });
@@ -18,6 +17,7 @@
   const PAGE_ROUTES = Object.freeze({
     "/": "home",
     "/index.html": "home",
+    "/notice.html": "notice",
     "/about.html": "about",
     "/features.html": "features",
     "/mcp.html": "mcp",
@@ -37,7 +37,9 @@
     "_sass/base/_base.scss",
     "_sass/layout/_site.scss",
     "_sass/components/_components.scss",
-    "_sass/pages/_pages.scss"
+    "_sass/pages/_pages.scss",
+    "_sass/pages/_notice.scss",
+    "_sass/pages/_section-workspace.scss"
   ]);
 
   function fetchText(path) {
@@ -134,10 +136,74 @@
     };
   }
 
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function renderInlineMarkdown(value) {
+    return escapeHtml(value)
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/`([^`]+)`/g, "<code>$1</code>")
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  }
+
+  function renderNoticeMarkdown(source) {
+    const output = [];
+    let paragraph = [];
+    let listItems = [];
+
+    function flushParagraph() {
+      if (!paragraph.length) return;
+      output.push("<p>" + renderInlineMarkdown(paragraph.join(" ")) + "</p>");
+      paragraph = [];
+    }
+
+    function flushList() {
+      if (!listItems.length) return;
+      output.push("<ul>" + listItems.map(function (item) {
+        return "<li>" + renderInlineMarkdown(item) + "</li>";
+      }).join("") + "</ul>");
+      listItems = [];
+    }
+
+    String(source || "").split(/\r?\n/).forEach(function (line) {
+      const heading = line.match(/^(#{2,4})\s+(.+)$/);
+      const listItem = line.match(/^[-*]\s+(.+)$/);
+
+      if (!line.trim()) {
+        flushParagraph();
+        flushList();
+      } else if (heading) {
+        flushParagraph();
+        flushList();
+        const level = heading[1].length;
+        output.push("<h" + level + ">" + renderInlineMarkdown(heading[2]) + "</h" + level + ">");
+      } else if (listItem) {
+        flushParagraph();
+        listItems.push(listItem[1]);
+      } else {
+        flushList();
+        paragraph.push(line.trim());
+      }
+    });
+
+    flushParagraph();
+    flushList();
+    return output.join("\n");
+  }
+
   function resolvePath(context, path) {
     return path.split(".").reduce(function (value, key) {
       if (value === undefined || value === null) {
         return undefined;
+      }
+
+      if (key === "size" && (Array.isArray(value) || typeof value === "string")) {
+        return value.length;
       }
 
       return value[key];
@@ -182,6 +248,11 @@
 
     if (Object.prototype.hasOwnProperty.call(PAGE_ROUTES, path)) {
       const key = PAGE_ROUTES[path];
+
+      if (key === "features" || key === "mcp") {
+        return "index.html?page=about#" + key;
+      }
+
       return key === "home" ? "index.html" + suffix : "index.html?page=" + encodeURIComponent(key) + suffix;
     }
 
@@ -204,11 +275,28 @@
     }
 
     if (name === "date") {
-      if (argument.replace(/['"]/g, "") === "%Y") {
-        return String(new Date().getFullYear());
+      const format = argument.replace(/['"]/g, "");
+      const rawDate = String(value || "");
+      let dateParts = rawDate.match(/^(\d{4})-(\d{2})-(\d{2})/);
+
+      if (rawDate === "now") {
+        const currentDate = new Date();
+        dateParts = [
+          rawDate,
+          String(currentDate.getFullYear()),
+          String(currentDate.getMonth() + 1).padStart(2, "0"),
+          String(currentDate.getDate()).padStart(2, "0")
+        ];
       }
 
-      throw new Error("미리보기에서 지원하지 않는 date 형식입니다: " + argument);
+      if (!dateParts) {
+        throw new Error("미리보기에서 날짜 값을 해석할 수 없습니다: " + value);
+      }
+
+      return format
+        .replace(/%Y/g, dateParts[1])
+        .replace(/%m/g, dateParts[2])
+        .replace(/%d/g, dateParts[3]);
     }
 
     throw new Error("미리보기에서 지원하지 않는 Liquid 필터입니다: " + name);
@@ -255,17 +343,24 @@
 
   function renderLoops(template, context) {
     return template.replace(
-      /{%\s*for\s+([A-Za-z_][A-Za-z0-9_]*)\s+in\s+([A-Za-z0-9_.]+)\s*%}([\s\S]*?){%\s*endfor\s*%}/g,
-      function (_match, itemName, collectionPath, content) {
+      /{%\s*for\s+([A-Za-z_][A-Za-z0-9_]*)\s+in\s+([A-Za-z0-9_.]+)(?:\s+(reversed))?\s*%}([\s\S]*?){%\s*endfor\s*%}/g,
+      function (_match, itemName, collectionPath, reversed, content) {
         const collection = resolvePath(context, collectionPath);
 
         if (!Array.isArray(collection)) {
           throw new Error(collectionPath + " 값은 반복 가능한 목록이 아닙니다.");
         }
 
-        return collection.map(function (item) {
+        const items = reversed ? collection.slice().reverse() : collection;
+
+        return items.map(function (item, index) {
           const childContext = Object.assign({}, context);
           childContext[itemName] = item;
+          childContext.forloop = {
+            first: index === 0,
+            last: index === items.length - 1,
+            index: index + 1
+          };
           return renderConditionals(content, childContext).replace(
             /{{\s*([\s\S]*?)\s*}}/g,
             function (_variableMatch, expression) {
@@ -431,6 +526,11 @@
 
   function pageKeyFromUrl(url) {
     const requestedPage = url.searchParams.get("page") || "home";
+
+    if (requestedPage === "features" || requestedPage === "mcp") {
+      return "about";
+    }
+
     return requestedPage === "index" ? "home" : requestedPage;
   }
 
@@ -570,7 +670,8 @@
       fetchText("_config.yml"),
       fetchText("_data/site.yml"),
       fetchText("_data/download.yml"),
-      fetchText("_data/navigation.yml")
+      fetchText("_data/navigation.yml"),
+      fetchText("_data/notices.yml")
     ];
 
     includeNames.forEach(function (name) {
@@ -587,22 +688,40 @@
     const siteData = parseTopLevelYaml(sources[3]);
     const downloadData = parseTopLevelYaml(sources[4]);
     const navigationData = parseNavigationYaml(sources[5]);
+    const noticeIndex = parseNavigationYaml(sources[6]);
     const includes = {};
 
     includeNames.forEach(function (name, index) {
-      includes[name] = sources[6 + index];
+      includes[name] = sources[7 + index];
     });
 
-    const styleOffset = 6 + includeNames.length;
+    const noticeSources = await Promise.all(noticeIndex.items.map(function (item) {
+      return fetchText(item.path);
+    }));
+    const notices = noticeSources.map(function (source, index) {
+      const fileName = noticeIndex.items[index].path;
+      const document = splitFrontMatter(source, fileName);
+
+      return Object.assign({}, document.page, {
+        content: renderNoticeMarkdown(document.content),
+        path: fileName
+      });
+    }).sort(function (left, right) {
+      return String(left.date).localeCompare(String(right.date));
+    });
+
+    const styleOffset = 7 + includeNames.length;
     const cssText = sources.slice(styleOffset).join("\n\n");
     const context = {
       content: pageDocument.content,
       page: pageDocument.page,
       site: Object.assign({}, config, {
+        notices: notices,
         data: {
           site: siteData,
           download: downloadData,
-          navigation: navigationData
+          navigation: navigationData,
+          notices: noticeIndex
         }
       })
     };
