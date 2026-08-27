@@ -25,10 +25,10 @@ function closeToast(toast) {
 }
 
 export function initReleaseToast() {
+  clearToastTimers();
+
   const toast = document.querySelector("[data-release-toast]");
   if (!toast) return;
-
-  clearToastTimers();
   toast.classList.remove("is-visible");
   toast.hidden = true;
 

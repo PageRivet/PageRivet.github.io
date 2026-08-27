@@ -2,6 +2,7 @@ import { initI18n, refreshI18n } from "./core/i18n.mjs";
 import { initTheme } from "./ui/theme.mjs";
 import { initMobileMenu } from "./ui/mobile-menu.mjs";
 import { initBackToTop } from "./ui/back-to-top.mjs";
+import { initPageNavigation } from "./ui/page-navigation.mjs";
 import { initDemoEditor } from "./features/demo-editor.mjs";
 import { initGuideToc } from "./features/guide-toc.mjs";
 import { initMcpCommands } from "./features/mcp-commands.mjs";
@@ -46,6 +47,7 @@ function init() {
   initDownloadGuard();
   initPageFeatures();
   initReleaseToast();
+  initPageNavigation(refreshPageFeatures);
 }
 
 if (document.readyState === "loading") {

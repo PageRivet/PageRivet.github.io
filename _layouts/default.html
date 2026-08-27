@@ -26,6 +26,6 @@
   {% include update-toast.md %}
   {% include footer.md %}
   {% include download-guard.md %}
-  <script type="module" src="{{ '/assets/js/main.mjs' | relative_url }}"></script>
+  <script type="module" src="{{ '/assets/js/main.mjs' | relative_url }}?rev={{ site.data.site.asset_revision }}"></script>
 </body>
 </html>

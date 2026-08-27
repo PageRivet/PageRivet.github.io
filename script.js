@@ -2,6 +2,7 @@
 
 (function () {
   let appModulePromise = null;
+  let previewTransitionModulePromise = null;
   let previewNavigationInitialized = false;
   let isNavigating = false;
 
@@ -428,10 +429,6 @@
     window.scrollTo({ top: 0, behavior: "auto" });
   }
 
-  function prefersReducedMotion() {
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  }
-
   function pageKeyFromUrl(url) {
     const requestedPage = url.searchParams.get("page") || "home";
     return requestedPage === "index" ? "home" : requestedPage;
@@ -461,33 +458,42 @@
     return appModulePromise;
   }
 
+  function loadPreviewTransitionModule() {
+    if (!previewTransitionModulePromise) {
+      previewTransitionModulePromise = import("./assets/js/preview/page-transition.mjs");
+    }
+    return previewTransitionModulePromise;
+  }
+
   async function navigatePreview(url, pushHistory) {
     const pageKey = pageKeyFromUrl(url);
     if (isNavigating || !PAGE_SOURCES[pageKey]) return;
     isNavigating = true;
 
     try {
-      const page = await buildPreviewPage(pageKey);
+      const currentPageKey = document.body.dataset.previewPage || "home";
+      const [page, app, previewTransition] = await Promise.all([
+        buildPreviewPage(pageKey),
+        loadAppModule(),
+        loadPreviewTransitionModule()
+      ]);
+
       const apply = function () {
         applyPageDocument(page.template, pageKey);
+
+        if (typeof app.refreshPageFeatures === "function") {
+          app.refreshPageFeatures();
+        }
       };
 
-      if (!prefersReducedMotion() && typeof document.startViewTransition === "function") {
-        const transition = document.startViewTransition(apply);
-        await transition.finished.catch(function (error) {
-          if (!error || error.name !== "AbortError") throw error;
-        });
-      } else {
-        apply();
-      }
+      await previewTransition.runPreviewPageTransition({
+        currentPageKey: currentPageKey,
+        nextPageKey: pageKey,
+        apply: apply
+      });
 
       if (pushHistory) {
         window.history.pushState({ pageKey: pageKey }, "", url.href);
-      }
-
-      const app = await loadAppModule();
-      if (typeof app.refreshPageFeatures === "function") {
-        app.refreshPageFeatures();
       }
 
       console.info("[PageRivet Preview] " + page.pageSource + " 렌더링 완료");
