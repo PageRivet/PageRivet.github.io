@@ -5,4 +5,4 @@ platform: Windows
 architecture: x64
 package_type: Portable ZIP
 enabled: true
-toast_expires_at: "2026-09-03T23:59:59+09:00"
+toast_expires_at: "2026-08-29T23:59:59+09:00"
