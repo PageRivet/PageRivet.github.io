@@ -70,15 +70,6 @@
   box-shadow: 0 0 10px rgba(var(--page-accent-rgb), 0.55);
 }
 
-.notice-summary-dot::after {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border: 1px solid rgba(var(--page-accent-rgb), 0.52);
-  border-radius: inherit;
-  animation: notice-status-pulse 2.2s ease-out infinite;
-}
-
 .notice-empty {
   position: relative;
   display: grid;
@@ -293,25 +284,7 @@ html[lang="en"] [data-notice-language="ko"] {
   border-radius: 6px;
 }
 
-@keyframes notice-status-pulse {
-  0% {
-    opacity: 0.8;
-    transform: scale(0.72);
-  }
-
-  70%,
-  100% {
-    opacity: 0;
-    transform: scale(1.7);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .notice-summary-dot::after {
-    animation: none;
-    opacity: 0;
-  }
-
   .notice-card {
     transition: none;
   }

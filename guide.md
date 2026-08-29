@@ -39,8 +39,8 @@ body_class: guide-theme
         <h2>다운로드 및 실행</h2>
         <p class="guide-intro">PageRivet은 Windows x64에서 실행되는 포터블 데스크톱 애플리케이션입니다. 설치 과정 없이 공식 패키지를 내려받아 시작할 수 있습니다.</p>
         <div class="guide-steps">
-          <a class="guide-step guide-step-link" href="{{ site.data.download.url }}" data-download-link aria-label="PageRivet {{ site.data.download.version }} 다운로드">
-            <span>1</span><h3>다운로드</h3><p>공식 GitHub Releases에서 PageRivet {{ site.data.download.version }} 패키지를 내려받습니다.</p>
+          <a class="guide-step guide-step-link" href="{{ site.data.download.url }}" data-download-link aria-label="PageRivet 다운로드">
+            <span>1</span><h3>다운로드</h3><p>다운로드를 눌러 PageRivet 패키지를 내려받습니다.</p>
           </a>
           <article class="guide-step"><span>2</span><h3>파일 준비</h3><p>다운로드한 ZIP 파일을 작업하기 편한 위치에 풀어둡니다.</p></article>
           <article class="guide-step"><span>3</span><h3>실행</h3><p>PageRivet 실행 파일을 열고 시작 화면이 표시되는지 확인합니다.</p></article>
@@ -55,15 +55,15 @@ body_class: guide-theme
           <article>
             <h3>새 프로젝트</h3>
             <ol>
-              <li>새 프로젝트 만들기를 선택합니다.</li>
-              <li>프로젝트 이름과 저장할 위치를 지정합니다.</li>
+              <li>상단의 "프로젝트" 버튼을 누른 뒤 "새 프로젝트"를 선택합니다.</li>
+              <li>프로젝트를 저장할 위치를 선택하고 이름을 설정합니다. 지정한 위치에 프로젝트 이름의 폴더가 생성됩니다.</li>
               <li>생성된 기본 파일을 확인하고 작업을 시작합니다.</li>
             </ol>
           </article>
           <article>
             <h3>기존 프로젝트</h3>
             <ol>
-              <li>기존 프로젝트 열기를 선택합니다.</li>
+              <li>상단의 "프로젝트" 버튼을 누른 뒤 "프로젝트 열기"를 선택합니다.</li>
               <li>웹 소스가 있는 프로젝트 폴더를 선택합니다.</li>
               <li>파일 목록과 미리보기 페이지를 확인합니다.</li>
             </ol>
@@ -78,7 +78,7 @@ body_class: guide-theme
         <p class="guide-intro">PageRivet은 에디터에서 수정 중인 내용과 프로젝트에 적용된 상태를 구분합니다. 변경 범위를 확인하고 검증을 거쳐 정상 상태를 반영합니다.</p>
         <ol class="guide-flow-list">
           <li><b>파일 선택</b><span>프로젝트 목록에서 편집할 HTML, CSS 또는 JavaScript 파일을 선택합니다.</span></li>
-          <li><b>코드 편집</b><span>필요한 내용을 수정하고 관련 파일의 변경 범위를 함께 확인합니다.</span></li>
+          <li><b>코드 편집</b><span>필요한 내용을 편집기에서 수정하고 파일의 변경 범위를 함께 확인합니다.</span></li>
           <li><b>변경 상태 확인</b><span>아직 적용되지 않은 편집 내용이 있는지 확인합니다.</span></li>
           <li><b>검증 및 적용</b><span>HTML, CSS, JavaScript 검증 결과를 확인하고 유효한 변경을 프로젝트에 적용합니다.</span></li>
           <li><b>결과 확인</b><span>미리보기와 오류·콘솔 영역에서 적용 결과를 확인합니다.</span></li>
@@ -132,8 +132,8 @@ body_class: guide-theme
         <p class="guide-intro">PageRivet의 로컬 MCP 서버를 사용하면 지원되는 AI 클라이언트가 활성 프로젝트를 읽고 분석하며, 현재 승인 정책과 검증 절차에 따라 허용된 변경을 요청할 수 있습니다.</p>
         <ol class="guide-flow-list">
           <li><b>프로젝트 준비</b><span>AI와 작업할 프로젝트를 PageRivet에서 열고 활성 상태를 확인합니다.</span></li>
-          <li><b>MCP 서버 실행</b><span>PageRivet에서 로컬 MCP 서버를 실행합니다.</span></li>
-          <li><b>AI 클라이언트 연결</b><span>사용 중인 MCP 지원 AI 클라이언트에 PageRivet 연결을 설정합니다.</span></li>
+          <li><b>MCP 서버 실행</b><span>상단의 "설정" 버튼을 누른 뒤 "MCP 설정"을 선택합니다.</span></li>
+          <li><b>AI 클라이언트 연결</b><span>사용자 PC에 설치된 AI 클라이언트 목록을 확인하고, 사용할 클라이언트의 [연결] 버튼을 눌러 PageRivet과 연결합니다.</span></li>
           <li><b>자연어로 요청</b><span>원하는 웹 작업과 대상 페이지를 구체적으로 설명합니다.</span></li>
           <li><b>변경 검토</b><span>제안된 변경 범위와 검증 결과를 확인하고, 현재 승인 정책에 따라 적용합니다.</span></li>
         </ol>
@@ -150,12 +150,13 @@ body_class: guide-theme
       <section class="guide-section" id="export">
         <div class="section-kicker">07 · Export</div>
         <h2>프로젝트 내보내기</h2>
-        <p class="guide-intro">기본 또는 사용자 프리셋을 선택하거나, 저장되지 않는 일회성 설정으로 프로젝트 내보내기를 요청할 수 있습니다.</p>
-        <div class="guide-steps">
-          <article class="guide-step"><span>1</span><h3>방식 선택</h3><p>내보내기 프리셋 또는 일회성 설정을 선택합니다.</p></article>
-          <article class="guide-step"><span>2</span><h3>정보 확인</h3><p>프로젝트, 형식, 출력 위치, 덮어쓰기와 경고 정보를 확인합니다.</p></article>
-          <article class="guide-step"><span>3</span><h3>내보내기 실행</h3><p>현재 MCP 승인 정책과 검증 결과에 따라 내보내기를 진행합니다.</p></article>
-        </div>
+        <p class="guide-intro">출력 형식과 위치를 지정해 프로젝트를 배포하거나 전달할 수 있는 결과물로 내보냅니다.</p>
+        <ol class="guide-flow-list">
+          <li><b>내보내기 열기</b><span>상단의 "프로젝트" 버튼을 누른 뒤 "내보내기"를 선택하거나, 상단 메뉴의 "내보내기" 버튼을 누릅니다.</span></li>
+          <li><b>프리셋 선택</b><span>내보내기 프리셋을 선택합니다. 기본 프리셋은 "General Web"이며, 필요하면 다른 프리셋으로 변경할 수 있습니다.</span></li>
+          <li><b>출력 형식 선택</b><span>프로젝트에 필요한 출력 형식을 선택합니다.</span></li>
+          <li><b>내보내기 실행</b><span>출력 위치를 지정한 뒤 "내보내기" 버튼을 누릅니다. 선택한 폴더 아래에 프로젝트 이름의 폴더가 생성되고 내보내기가 완료됩니다.</span></li>
+        </ol>
         <div class="guide-warning"><strong>검증 오류</strong><p>검증 오류가 있는 작업은 자동 적용 정책에서도 실행되지 않습니다. 오류를 해결한 뒤 다시 요청하세요.</p></div>
       </section>
 
@@ -173,7 +174,7 @@ body_class: guide-theme
       <section class="guide-section guide-support" id="support">
         <div class="section-kicker">09 · Support</div>
         <h2>지원 및 문의</h2>
-        <p class="guide-intro">가이드로 해결되지 않는 문제는 프로젝트 정보와 재현 절차를 함께 알려주세요.</p>
+        <p class="guide-intro">가이드로 해결되지 않는 문의 사항이나 건의 사항은 Discord 또는 이메일로 남겨 주세요. Discord를 이용하면 더 빠르게 지원받을 수 있습니다.</p>
         <div class="support-links">
           <a href="{{ site.data.site.repository_url }}" target="_blank" rel="noopener noreferrer">GitHub 저장소</a>
           <a href="{{ site.data.site.community_url }}" target="_blank" rel="noopener noreferrer">Discord 커뮤니티</a>
