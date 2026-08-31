@@ -251,6 +251,8 @@ export const CONTENT_TRANSLATIONS = {
   "상단의 \"설정\" 버튼을 누른 뒤 \"MCP 설정\"을 선택합니다.": "From the top bar, select \"Settings\", then choose \"MCP Settings\".",
   "AI 클라이언트 연결": "Connect the AI Client",
   "사용자 PC에 설치된 AI 클라이언트 목록을 확인하고, 사용할 클라이언트의 [연결] 버튼을 눌러 PageRivet과 연결합니다.": "Review the AI clients installed on your PC, then select [Connect] for the client you want to use.",
+  "AI 클라이언트와 연결 확인": "Verify the AI Client Connection",
+  "AI클라이언트와 연결을 확인합니다. \"PageRivet MCP 핸드셰이크 확인해줘\"": "Verify the connection with the AI client. \"Check the PageRivet MCP handshake.\"",
   "자연어로 요청": "Request in Natural Language",
   "원하는 웹 작업과 대상 페이지를 구체적으로 설명합니다.": "Describe the desired web task and target page clearly.",
   "변경 검토": "Review the Change",

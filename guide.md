@@ -134,6 +134,7 @@ body_class: guide-theme
           <li><b>프로젝트 준비</b><span>AI와 작업할 프로젝트를 PageRivet에서 열고 활성 상태를 확인합니다.</span></li>
           <li><b>MCP 서버 실행</b><span>상단의 "설정" 버튼을 누른 뒤 "MCP 설정"을 선택합니다.</span></li>
           <li><b>AI 클라이언트 연결</b><span>사용자 PC에 설치된 AI 클라이언트 목록을 확인하고, 사용할 클라이언트의 [연결] 버튼을 눌러 PageRivet과 연결합니다.</span></li>
+          <li><b>AI 클라이언트와 연결 확인</b><span>AI클라이언트와 연결을 확인합니다. "PageRivet MCP 핸드셰이크 확인해줘"</span></li>
           <li><b>자연어로 요청</b><span>원하는 웹 작업과 대상 페이지를 구체적으로 설명합니다.</span></li>
           <li><b>변경 검토</b><span>제안된 변경 범위와 검증 결과를 확인하고, 현재 승인 정책에 따라 적용합니다.</span></li>
         </ol>

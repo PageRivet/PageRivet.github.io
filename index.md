@@ -118,6 +118,7 @@ show_release_toast: true
     <div class="thanks-grid">
       <a class="thanks-card" href="{{ site.data.site.cozit_url }}" target="_blank" rel="noopener noreferrer"><small>Platform</small><strong>Cozit</strong><p data-i18n="home.thanks.platform">PageRivet을 소개할 수 있는 공간을 마련해준 데 감사드립니다.</p><em data-i18n="home.thanks.visit">방문하기 →</em></a>
       <a class="thanks-card" href="{{ site.data.site.disquiet_url }}" target="_blank" rel="noopener noreferrer"><small>Platform</small><strong>Disquiet</strong><p data-i18n="home.thanks.platform">PageRivet을 소개할 수 있는 공간을 마련해준 데 감사드립니다.</p><em data-i18n="home.thanks.visit">방문하기 →</em></a>
+      <a class="thanks-card" href="{{ site.data.site.sidedock_url }}" target="_blank" rel="noopener noreferrer"><small>Platform</small><strong>Sidedock</strong><p data-i18n="home.thanks.platform">PageRivet을 소개할 수 있는 공간을 마련해준 데 감사드립니다.</p><em data-i18n="home.thanks.visit">방문하기 →</em></a>
     </div>
   </div>
 </section>
