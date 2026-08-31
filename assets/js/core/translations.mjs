@@ -306,7 +306,7 @@ export const CONTENT_TRANSLATIONS = {
 
 export const PAGE_METADATA = {
   home: {
-    title: { ko: "PageRivet", en: "PageRivet" },
+    title: { ko: "PageRivet | AI와 MCP로 협업하는 웹 에디터", en: "PageRivet | AI와 MCP로 협업하는 웹 에디터" },
     description: { ko: "정적 웹 프로젝트의 개발과 AI 협업을 하나로 연결합니다.", en: "Connect static web project development and AI collaboration in one workspace." }
   },
   notice: {

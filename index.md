@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /index.html
-title: PageRivet
+title: PageRivet | AI와 MCP로 협업하는 웹 에디터
 description: 정적 웹 프로젝트의 개발과 AI 협업을 하나로 연결합니다.
 nav: home
 body_class: home-theme
