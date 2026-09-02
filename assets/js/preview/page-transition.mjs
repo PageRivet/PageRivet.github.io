@@ -1,4 +1,4 @@
-const PAGE_ORDER = ["home", "notice", "about", "guide", "update"];
+const PAGE_ORDER = ["home", "notice", "about", "guide", "update", "download"];
 const EXIT_DURATION = 450;
 const TRANSITION_GAP = 120;
 const ENTER_DURATION = 520;

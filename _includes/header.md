@@ -8,7 +8,7 @@
           {% for item in site.data.navigation.items %}
             <a href="{{ item.url | relative_url }}" data-nav-id="{{ item.id }}"{% if page.nav == item.id %} aria-current="page" aria-disabled="true" tabindex="-1"{% endif %} data-i18n="navigation.{{ item.id }}">{{ item.label_ko }}</a>
           {% endfor %}
-          <a href="{{ site.data.download.url }}" data-download-link data-i18n="navigation.download">다운로드</a>
+          <a href="{{ '/download.html' | relative_url }}" data-nav-id="download"{% if page.nav == "download" %} aria-current="page" aria-disabled="true" tabindex="-1"{% endif %} data-i18n="navigation.download">다운로드</a>
           <a href="{{ site.data.site.community_url }}" target="_blank" rel="noopener noreferrer" data-i18n="navigation.community">커뮤니티</a>
         </div>
         <div class="tools">

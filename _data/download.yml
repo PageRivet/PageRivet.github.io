@@ -1,8 +1,11 @@
-version: "3.3.0-beta.1"
-url: https://github.com/raneree/PageRivet/releases/download/v3.3.0-beta.1/PageRivet-3.3.0-beta.1-Windows-x64-Portable.zip
-file_name: PageRivet-3.3.0-beta.1-Windows-x64-Portable.zip
+version: "3.3.0-beta.2"
+url: https://github.com/raneree/PageRivet/releases/download/v3.3.0-beta.2/PageRivet-3.3.0-beta.2-Windows-x64-Portable.zip
+file_name: PageRivet-3.3.0-beta.2-Windows-x64-Portable.zip
+diagnostic_url: https://github.com/raneree/PageRivet/releases/download/v3.3.0-beta.2/PageRivet-Diagnostics-Windows-x64.zip
+diagnostic_file_name: PageRivet-Diagnostics-Windows-x64.zip
+diagnostic_package_type: ZIP
 platform: Windows
 architecture: x64
 package_type: Portable ZIP
 enabled: true
-toast_expires_at: "2026-08-29T23:59:59+09:00"
+toast_expires_at: "2026-09-05T23:50:00+09:00"

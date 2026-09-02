@@ -15,7 +15,7 @@ show_release_toast: true
       <h2 data-i18n="home.hero.title">정적 웹 프로젝트의<br>개발과 AI 협업을 하나로</h2>
       <p data-i18n="home.hero.description">HTML, CSS, JavaScript 편집부터 실시간 미리보기, 검증, 히스토리 관리, MCP 기반 AI 협업까지 하나의 작업 공간으로 연결합니다.</p>
       <div class="actions">
-        <a class="btn primary" href="{{ site.data.download.url }}" data-download-link data-i18n="home.download">지금 다운로드</a>
+        <a class="btn primary" href="{{ '/download.html' | relative_url }}" data-i18n="home.download">지금 다운로드</a>
         <a class="btn secondary" href="{{ '/guide.html' | relative_url }}" data-i18n="home.guide">시작 가이드 보기</a>
       </div>
       <div class="version platform-note" role="note">
@@ -105,7 +105,7 @@ show_release_toast: true
       <div class="step"><small>03</small><h3 data-i18n="home.quick.edit.title">코드 편집</h3><p data-i18n="home.quick.edit.description">코드를 수정하고 미리보기로 결과를 확인합니다.</p></div>
       <div class="step"><small>04</small><h3 data-i18n="home.quick.ai.title">AI와 협업</h3><p data-i18n="home.quick.ai.description">MCP 클라이언트를 연결하고 자연어로 작업을 요청합니다.</p></div>
     </div>
-    <div class="cta"><div><strong data-i18n="home.cta">PageRivet을 다운로드하고 시작해보세요.</strong></div><div class="actions cta-actions"><a class="btn primary" href="{{ site.data.download.url }}" data-download-link data-i18n="home.download">지금 다운로드</a></div></div>
+    <div class="cta"><div><strong data-i18n="home.cta">PageRivet을 다운로드하고 시작해보세요.</strong></div><div class="actions cta-actions"><a class="btn primary" href="{{ '/download.html' | relative_url }}" data-i18n="home.download">지금 다운로드</a></div></div>
   </div>
 </section>
 

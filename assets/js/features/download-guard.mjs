@@ -18,16 +18,18 @@ export function initDownloadGuard() {
   initialized = true;
   const message = modal.querySelector("[data-download-guard-message]");
   const title = modal.querySelector("[data-download-guard-title]");
+  const continuation = modal.querySelector("[data-download-continue]");
   const controller = createModalController(modal, "[data-close-download-guard]");
 
   document.addEventListener("click", function (event) {
     const target = event.target instanceof Element ? event.target.closest("[data-download-link]") : null;
-    if (!target) return;
+    if (!(target instanceof HTMLAnchorElement) || !continuation) return;
 
     const current = environment();
     if (current.isWindows && !current.isMobile) return;
 
     event.preventDefault();
+    continuation.setAttribute("href", target.href);
     const isEnglish = document.documentElement.lang === "en";
     if (current.isMobile) {
       title.textContent = isEnglish ? "PageRivet is not available on mobile" : "모바일 환경에서는 사용할 수 없습니다";

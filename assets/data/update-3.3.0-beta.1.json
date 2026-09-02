@@ -3,7 +3,7 @@
   "date": "2026.08.27",
   "platform": "Windows x64",
   "packageType": "Portable ZIP · Beta",
-  "latest": true,
+  "latest": false,
   "title": {
     "ko": "PageRivet 3.3.0-beta.1",
     "en": "PageRivet 3.3.0-beta.1"

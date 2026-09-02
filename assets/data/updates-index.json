@@ -1,9 +1,14 @@
 {
   "versions": [
     {
+      "version": "3.3.0-beta.2",
+      "file": "update-3.3.0-beta.2.json",
+      "latest": true
+    },
+    {
       "version": "3.3.0-beta.1",
       "file": "update-3.3.0-beta.1.json",
-      "latest": true
+      "latest": false
     },
     {
       "version": "2.3.3",

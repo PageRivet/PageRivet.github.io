@@ -39,7 +39,7 @@ body_class: guide-theme
         <h2>다운로드 및 실행</h2>
         <p class="guide-intro">PageRivet은 Windows x64에서 실행되는 포터블 데스크톱 애플리케이션입니다. 설치 과정 없이 공식 패키지를 내려받아 시작할 수 있습니다.</p>
         <div class="guide-steps">
-          <a class="guide-step guide-step-link" href="{{ site.data.download.url }}" data-download-link aria-label="PageRivet 다운로드">
+          <a class="guide-step guide-step-link" href="{{ '/download.html' | relative_url }}" aria-label="PageRivet 다운로드 페이지">
             <span>1</span><h3>다운로드</h3><p>다운로드를 눌러 PageRivet 패키지를 내려받습니다.</p>
           </a>
           <article class="guide-step"><span>2</span><h3>파일 준비</h3><p>다운로드한 ZIP 파일을 작업하기 편한 위치에 풀어둡니다.</p></article>

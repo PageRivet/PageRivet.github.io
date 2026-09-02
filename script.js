@@ -11,7 +11,8 @@
     notice: "notice.md",
     about: "about.md",
     guide: "guide.md",
-    update: "update.md"
+    update: "update.md",
+    download: "download.md"
   });
 
   const PAGE_ROUTES = Object.freeze({
@@ -22,7 +23,8 @@
     "/features.html": "features",
     "/mcp.html": "mcp",
     "/guide.html": "guide",
-    "/update.html": "update"
+    "/update.html": "update",
+    "/download.html": "download"
   });
 
   const INCLUDE_SOURCES = Object.freeze({

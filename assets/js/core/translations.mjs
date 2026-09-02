@@ -100,7 +100,24 @@ export const TRANSLATIONS = {
   "mock.example.label": { ko: "화면 예시:", en: "Interface Demo:" },
   "mock.example.description": { ko: "제품을 설명하기 위한 예시입니다. 화면의 코드, 시작하기 버튼 등은 실제로 작동하지 않습니다.", en: "This is an example provided to explain the product. The code, Get Started button, and other elements shown are not interactive." },
   "release.update_label": { ko: "업데이트", en: "Update" },
-  "release.hide_version": { ko: "더 이상 표시하지 않음", en: "Don't show this update again" }
+  "release.hide_version": { ko: "더 이상 표시하지 않음", en: "Don't show this update again" },
+  "download.page.title": { ko: "PageRivet 다운로드", en: "Download PageRivet" },
+  "download.page.description": { ko: "필요한 도구를 선택해 바로 다운로드하세요.", en: "Choose the tool you need and download it now." },
+  "download.options.title": { ko: "다운로드 항목", en: "Downloads" },
+  "download.options.description": { ko: "사용 목적에 맞는 항목을 선택하면 공식 GitHub Releases 파일을 내려받습니다.", en: "Choose the item that fits your needs to download it from the official GitHub Releases page." },
+  "download.pagerivet.description": { ko: "웹 프로젝트 편집, 미리보기, 검증과 MCP 기반 AI 협업을 위한 데스크톱 애플리케이션입니다.", en: "A desktop application for web project editing, preview, validation, and MCP-based AI collaboration." },
+  "download.detail.version": { ko: "버전", en: "Version" },
+  "download.detail.platform": { ko: "지원 환경", en: "Platform" },
+  "download.detail.package": { ko: "패키지", en: "Package" },
+  "download.detail.purpose": { ko: "용도", en: "Purpose" },
+  "download.detail.type": { ko: "유형", en: "Type" },
+  "download.detail.status": { ko: "상태", en: "Status" },
+  "download.pagerivet.button": { ko: "PageRivet 다운로드", en: "Download PageRivet" },
+  "download.diagnostic.title": { ko: "PageRivet 진단기", en: "PageRivet Diagnostic Tool" },
+  "download.diagnostic.description": { ko: "PageRivet 사용 중 발생한 문제를 확인하고 진단 정보를 준비하는 보조 도구입니다.", en: "A companion tool that checks issues and prepares diagnostic information for PageRivet." },
+  "download.diagnostic.purpose": { ko: "문제 진단", en: "Troubleshooting" },
+  "download.diagnostic.type": { ko: "독립 실행 도구", en: "Standalone tool" },
+  "download.diagnostic.button": { ko: "PageRivet-진단기 다운로드", en: "Download PageRivet Diagnostic Tool" },
 };
 
 export const CONTENT_TRANSLATIONS = {
@@ -332,5 +349,9 @@ export const PAGE_METADATA = {
   update: {
     title: { ko: "업데이트", en: "Updates" },
     description: { ko: "PageRivet 버전별 업데이트 내용을 확인합니다.", en: "Review PageRivet release notes by version." }
+  },
+  download: {
+    title: { ko: "다운로드", en: "Downloads" },
+    description: { ko: "PageRivet과 PageRivet 진단기 다운로드를 한곳에서 제공합니다.", en: "Download PageRivet and the PageRivet Diagnostic Tool from one place." }
   }
 };
