@@ -7,6 +7,7 @@ export const TRANSLATIONS = {
   "navigation.update": { ko: "업데이트", en: "Updates" },
   "navigation.download": { ko: "다운로드", en: "Download" },
   "navigation.community": { ko: "커뮤니티", en: "Community" },
+  "navigation.contact": { ko: "문의", en: "Contact" },
   "about.nav.title": { ko: "소개 메뉴", en: "About Menu" },
   "about.nav.overview": { ko: "PageRivet 소개", en: "About PageRivet" },
   "about.nav.features": { ko: "주요 기능", en: "Core Features" },

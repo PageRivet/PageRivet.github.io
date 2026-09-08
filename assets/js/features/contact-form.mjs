@@ -1,12 +1,23 @@
 const TURNSTILE_SOURCE = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
 const REQUEST_TIMEOUT = 15000;
 const widgetIds = new WeakMap();
+const templateStates = new WeakMap();
 let turnstilePromise;
 let languageListenerInitialized = false;
 
-function getMessage(form, name) {
+function getMessage(form, name, replacements = {}) {
   const node = form.querySelector('[data-contact-message="' + name + '"]');
-  return node ? node.textContent.trim() : "";
+  let message = node ? node.textContent.trim() : "";
+  const values = Object.assign({
+    maxFiles: form.dataset.attachmentMaxFiles || "",
+    maxFileSize: form.dataset.attachmentMaxFileLabel || "",
+    maxTotalSize: form.dataset.attachmentMaxTotalLabel || ""
+  }, replacements);
+
+  Object.entries(values).forEach(function ([key, value]) {
+    message = message.split("{" + key + "}").join(String(value));
+  });
+  return message;
 }
 
 function loadTurnstile() {
@@ -77,11 +88,145 @@ function parseResponse(response) {
   });
 }
 
+function getSelectedCategory(form) {
+  const select = form.querySelector("[data-contact-category]");
+  if (!select || !select.value) return null;
+  return select.options[select.selectedIndex] || null;
+}
+
+function syncCategoryFields(form) {
+  const option = getSelectedCategory(form);
+  const templateButton = form.querySelector("[data-contact-template-load]");
+
+  if (templateButton) templateButton.disabled = !option;
+}
+
+function setTemplateStatus(form, message) {
+  const status = form.querySelector("[data-contact-template-status]");
+  if (status) status.textContent = message || "";
+}
+
+async function loadCategoryTemplate(form, options = {}) {
+  const option = getSelectedCategory(form);
+  const textarea = form.querySelector("[data-contact-message-input]");
+  const button = form.querySelector("[data-contact-template-load]");
+  const state = templateStates.get(form);
+
+  if (!option || !textarea || !state || !option.dataset.templateUrl) return false;
+
+  const hasUserContent = textarea.value.trim() && textarea.value !== state.appliedTemplate;
+  if (options.confirmReplace && hasUserContent && !window.confirm(getMessage(form, "template_replace"))) {
+    return false;
+  }
+
+  const requestId = state.requestId + 1;
+  state.requestId = requestId;
+  if (button) {
+    button.disabled = true;
+    button.setAttribute("aria-busy", "true");
+  }
+  setTemplateStatus(form, getMessage(form, "template_loading"));
+
+  try {
+    const response = await fetch(option.dataset.templateUrl, {
+      credentials: "same-origin",
+      headers: { Accept: "text/markdown, text/plain;q=0.9" }
+    });
+
+    if (!response.ok) throw new Error("Template request failed.");
+    const template = (await response.text()).replace(/\r\n/g, "\n").trim();
+
+    if (state.requestId !== requestId || getSelectedCategory(form) !== option) return false;
+
+    textarea.value = template;
+    state.appliedTemplate = template;
+    setTemplateStatus(form, "");
+    textarea.dispatchEvent(new Event("input", { bubbles: true }));
+    if (options.focus) textarea.focus();
+    return true;
+  } catch {
+    if (state.requestId === requestId) {
+      setTemplateStatus(form, getMessage(form, "template_error"));
+    }
+    return false;
+  } finally {
+    if (state.requestId === requestId && button) {
+      button.disabled = !getSelectedCategory(form);
+      button.removeAttribute("aria-busy");
+    }
+  }
+}
+
+function formatFileSize(bytes, language) {
+  const megabytes = bytes / (1024 * 1024);
+  const locale = language === "en" ? "en-US" : "ko-KR";
+  return new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(megabytes) + "MB";
+}
+
+function setAttachmentStatus(form, message) {
+  const status = form.querySelector("[data-contact-attachment-status]");
+  if (status) status.textContent = message || "";
+}
+
+function validateAttachments(form) {
+  const input = form.querySelector("[data-contact-attachment]");
+  if (!input) return true;
+
+  const files = Array.from(input.files || []);
+  const maxFiles = Number(form.dataset.attachmentMaxFiles || 0);
+  const maxFileBytes = Number(form.dataset.attachmentMaxFileBytes || 0);
+  const maxTotalBytes = Number(form.dataset.attachmentMaxTotalBytes || 0);
+  const totalBytes = files.reduce(function (sum, file) { return sum + file.size; }, 0);
+  const oversizedFile = files.find(function (file) {
+    return maxFileBytes && file.size > maxFileBytes;
+  });
+  let errorMessage = "";
+
+  if (maxFiles && files.length > maxFiles) {
+    errorMessage = getMessage(form, "attachment_too_many");
+  } else if (oversizedFile) {
+    errorMessage = getMessage(form, "attachment_file_too_large", { fileName: oversizedFile.name });
+  } else if (maxTotalBytes && totalBytes > maxTotalBytes) {
+    errorMessage = getMessage(form, "attachment_total_too_large");
+  }
+
+  input.setCustomValidity(errorMessage);
+  if (errorMessage) {
+    setAttachmentStatus(form, errorMessage);
+  } else if (files.length) {
+    setAttachmentStatus(form, getMessage(form, "attachment_summary", {
+      fileCount: files.length,
+      totalSize: formatFileSize(totalBytes, form.dataset.contactLanguage)
+    }));
+  } else {
+    setAttachmentStatus(form, "");
+  }
+
+  return !errorMessage;
+}
+
+function resetContactFormState(form) {
+  const state = templateStates.get(form);
+  if (state) {
+    state.appliedTemplate = "";
+    state.requestId += 1;
+  }
+
+  const attachment = form.querySelector("[data-contact-attachment]");
+  if (attachment) attachment.setCustomValidity("");
+  setAttachmentStatus(form, "");
+  setTemplateStatus(form, "");
+  syncCategoryFields(form);
+}
+
 async function submitContactForm(form) {
   const result = form.querySelector("[data-contact-result]");
   const submitButton = form.querySelector("[data-contact-submit]");
 
-  if (!form.reportValidity()) return;
+  if (!validateAttachments(form) || !form.reportValidity()) {
+    form.reportValidity();
+    return;
+  }
 
   submitButton.disabled = true;
   result.textContent = getMessage(form, "submitting");
@@ -99,9 +244,13 @@ async function submitContactForm(form) {
       throw new Error(getMessage(form, "error"));
     }
 
+    const formData = new FormData(form);
+    const category = getSelectedCategory(form);
+    formData.set("subject", category ? category.dataset.subject || "" : "");
+
     const response = await fetch(form.dataset.endpoint, {
       method: "POST",
-      body: new FormData(form),
+      body: formData,
       headers: { Accept: "application/json" },
       signal: controller.signal
     });
@@ -127,11 +276,50 @@ async function submitContactForm(form) {
 function initContactForm(form) {
   if (form.hasAttribute("data-contact-initialized")) return;
 
+  const category = form.querySelector("[data-contact-category]");
+  const message = form.querySelector("[data-contact-message-input]");
+  const templateButton = form.querySelector("[data-contact-template-load]");
+  const attachment = form.querySelector("[data-contact-attachment]");
+  templateStates.set(form, { appliedTemplate: "", requestId: 0 });
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     submitContactForm(form);
   });
 
+  if (category) {
+    category.addEventListener("change", function () {
+      const state = templateStates.get(form);
+      const canApplyAutomatically = message && state
+        ? !message.value.trim() || message.value === state.appliedTemplate
+        : false;
+
+      syncCategoryFields(form);
+      setTemplateStatus(form, "");
+      if (canApplyAutomatically) loadCategoryTemplate(form);
+    });
+  }
+
+  if (templateButton) {
+    templateButton.addEventListener("click", function () {
+      loadCategoryTemplate(form, { confirmReplace: true, focus: true });
+    });
+  }
+
+  if (attachment) {
+    attachment.addEventListener("change", function () {
+      validateAttachments(form);
+      if (!attachment.checkValidity()) attachment.reportValidity();
+    });
+  }
+
+  form.addEventListener("reset", function () {
+    window.setTimeout(function () {
+      resetContactFormState(form);
+    }, 0);
+  });
+
+  syncCategoryFields(form);
   form.setAttribute("data-contact-initialized", "");
 }
 
