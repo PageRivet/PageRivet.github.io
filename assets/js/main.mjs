@@ -11,10 +11,26 @@ import { initNoticeList } from "./features/notice-list.mjs";
 import { initSectionNavigation } from "./features/section-navigation.mjs";
 import { initDownloadGuard } from "./features/download-guard.mjs";
 import { initReleaseToast } from "./features/release-toast.mjs";
+import { initContactForms } from "./features/contact-form.mjs";
 
 let initialized = false;
 
 function initCurrentNavigation() {
+  const fileName = window.location.pathname.split("/").pop() || "index.html";
+  const pageKey = fileName.replace(/\.html?$/i, "") || "home";
+  const activeKey = pageKey === "index" ? "home" : pageKey;
+
+  document.querySelectorAll(".site-header [data-nav-id]").forEach(function (link) {
+    const isActive = link.dataset.navId === activeKey;
+    link.classList.toggle("is-active", isActive);
+
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+      link.setAttribute("aria-disabled", "true");
+      link.setAttribute("tabindex", "-1");
+    }
+  });
+
   document.addEventListener("click", function (event) {
     const target = event.target instanceof Element
       ? event.target.closest('.site-header a[aria-disabled="true"]')
@@ -31,6 +47,7 @@ export function initPageFeatures() {
   initUpdateLog();
   initNoticeList();
   initSectionNavigation();
+  initContactForms();
 }
 
 export function refreshPageFeatures() {

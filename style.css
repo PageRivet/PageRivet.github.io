@@ -1,13 +1,1 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-html {
-    font-family: system-ui, sans-serif;
-}
-
-body {
-    margin: 0;
-}
+/* PageRivet 필수 호환 파일입니다. 사이트 스타일은 assets/css/style.scss에서 빌드됩니다. */

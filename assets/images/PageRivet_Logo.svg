@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="30" viewBox="0 0 28 30" fill="none" role="img" aria-labelledby="pagerivet-logo-title pagerivet-logo-description">
+  <title id="pagerivet-logo-title">PageRivet logo</title>
+  <desc id="pagerivet-logo-description">Two slanted rounded pillars with a violet-to-blue gradient.</desc>
+  <defs>
+    <linearGradient id="pagerivet-logo-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#955CFF"/>
+      <stop offset="100%" stop-color="#5D6DFF"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(0 3)">
+    <rect x="3" y="0" width="10" height="24" rx="4" fill="url(#pagerivet-logo-gradient)" transform="matrix(1 -0.531709 0 1 0 4.253672)"/>
+    <rect x="14" y="4" width="10" height="19" rx="4" fill="url(#pagerivet-logo-gradient)" transform="matrix(1 -0.531709 0 1 0 10.102471)"/>
+  </g>
+</svg>

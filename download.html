@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>다운로드 · PageRivet</title>
+  <meta name="description" content="PageRivet과 PageRivet 진단기 다운로드를 한곳에서 제공합니다.">
+  <meta name="theme-color" content="#0b0f18">
+  <link rel="icon" type="image/png" href="/assets/images/PageRivet_Logo%20copy.png">
+  <script>
+    try {
+      const savedTheme = localStorage.getItem("pagerivet.theme");
+      const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = savedTheme || preferredTheme;
+    } catch {
+      document.documentElement.dataset.theme = "light";
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css?rev=2026-09-08-refactor-1">
+</head>
+<body class="download-theme">
+  <a class="skip-link" href="#main-content">본문으로 바로가기</a>
+  <header class="site-header" data-site-header>
+  <div class="wrap">
+    <nav class="site-nav" aria-label="주요 메뉴">
+      <button class="mobile-menu-toggle" type="button" data-mobile-menu-toggle aria-expanded="false" aria-controls="site-navigation"><span></span><span></span><span></span><span class="sr-only" data-mobile-menu-label>메뉴 열기</span></button>
+      <a class="brand" href="/" data-nav-id="home" aria-label="PageRivet 홈">
+        <img class="brand-logo" src="/assets/images/PageRivet_Logo.svg" alt="" width="44" height="44">
+        <span>PageRivet</span>
+      </a>
+      <div class="mobile-menu-panel" id="site-navigation" data-mobile-menu-panel>
+        <div class="links">
+          
+            <a href="/notice.html" data-nav-id="notice" data-i18n="navigation.notice">공지사항</a>
+          
+            <a href="/about.html" data-nav-id="about" data-i18n="navigation.about">소개</a>
+          
+            <a href="/guide.html" data-nav-id="guide" data-i18n="navigation.guide">가이드</a>
+          
+            <a href="/update.html" data-nav-id="update" data-i18n="navigation.update">업데이트</a>
+          
+          <a href="/download.html" data-nav-id="download" data-i18n="navigation.download">다운로드</a>
+          <a href="https://discord.gg/CFx4Emrxgf" target="_blank" rel="noopener noreferrer" data-i18n="navigation.community">커뮤니티</a>
+        </div>
+        <div class="tools">
+          <button class="chip theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span aria-hidden="true">◐</span><span class="sr-only">테마 전환</span></button>
+          <button class="chip is-active" type="button" data-language="ko" aria-pressed="true">한국어</button>
+          <button class="chip" type="button" data-language="en" aria-pressed="false">ENG</button>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main id="main-content">
+<div class="download-page">
+  <section class="page-hero download-hero">
+    <div class="wrap about-narrow">
+      <div class="eyebrow">PageRivet Downloads</div>
+      <h1 data-i18n="download.page.title">PageRivet 다운로드</h1>
+      <p class="page-lead" data-i18n="download.page.description">필요한 도구를 선택해 바로 다운로드하세요.</p>
+    </div>
+  </section>
+
+  <section class="content-section download-content" aria-labelledby="download-options-title">
+    <div class="wrap">
+      <div class="download-section-heading">
+        <div><div class="section-kicker">Choose a download</div><h2 id="download-options-title" data-i18n="download.options.title">다운로드 항목</h2></div>
+        <p data-i18n="download.options.description">사용 목적에 맞는 항목을 선택하면 공식 GitHub Releases 파일을 내려받습니다.</p>
+      </div>
+
+      <div class="download-options">
+        <article class="download-card is-primary">
+          <div class="download-card-top"><div class="download-product-mark" aria-hidden="true">PR</div><span class="badge">Web Editor</span></div>
+          <div class="download-card-copy"><h3>PageRivet</h3><p data-i18n="download.pagerivet.description">웹 프로젝트 편집, 미리보기, 검증과 MCP 기반 AI 협업을 위한 데스크톱 애플리케이션입니다.</p></div>
+          <ul class="download-details" aria-label="PageRivet package information">
+            <li><span data-i18n="download.detail.version">버전</span><strong>3.3.0-beta.3</strong></li>
+            <li><span data-i18n="download.detail.platform">지원 환경</span><strong>Windows x64</strong></li>
+            <li><span data-i18n="download.detail.package">패키지</span><strong>Portable ZIP</strong></li>
+          </ul>
+          <a class="button button-primary download-button" href="/downloads/current.ko/" data-download-link="" data-i18n="download.pagerivet.button">PageRivet 다운로드</a>
+        </article>
+
+        <article class="download-card">
+          <div class="download-card-top"><div class="download-product-mark is-diagnostic" aria-hidden="true">DX</div><span class="badge">Diagnostic Tool</span></div>
+          <div class="download-card-copy"><h3 data-i18n="download.diagnostic.title">PageRivet 진단기</h3><p data-i18n="download.diagnostic.description">PageRivet 사용 중 발생한 문제를 확인하고 진단 정보를 준비하는 보조 도구입니다.</p></div>
+          <ul class="download-details" aria-label="PageRivet diagnostic tool information">
+            <li><span data-i18n="download.detail.platform">지원 환경</span><strong>Windows x64</strong></li>
+            <li><span data-i18n="download.detail.package">패키지</span><strong>ZIP</strong></li>
+          </ul>
+          <a class="button button-secondary download-button" href="https://github.com/raneree/PageRivet/releases/download/v3.3.0-beta.3/PageRivet-Diagnostics-Windows-x64.zip" data-download-link="" data-i18n="download.diagnostic.button">PageRivet 진단기 다운로드</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+  
+
+
+  <footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/"><img class="brand-logo" src="/assets/images/PageRivet_Logo.svg" alt="" width="44" height="44"><span>PageRivet</span></a>
+        <p data-i18n="footer.tagline">정적 웹 프로젝트의 개발과 AI 협업을 하나로.</p>
+      </div>
+      <div><h4 data-i18n="footer.links">사이트맵</h4><div><a href="/notice.html" data-i18n="navigation.notice">공지사항</a></div><div><a href="/about.html" data-i18n="navigation.about">소개</a></div><div><a href="/guide.html" data-i18n="navigation.guide">가이드</a></div><div><a href="/update.html" data-i18n="navigation.update">업데이트</a></div></div>
+      <div><h4 data-i18n="footer.support">지원</h4><div><a href="https://github.com/raneree/PageRivet" target="_blank" rel="noopener noreferrer">GitHub</a></div><div><a href="https://discord.gg/CFx4Emrxgf" target="_blank" rel="noopener noreferrer">Discord</a></div><div><a href="/contact.html">문의하기</a></div></div>
+      <div><h4 data-i18n="footer.thanks">고마운 플랫폼</h4><div><a href="https://cozit.app/" target="_blank" rel="noopener noreferrer">Cozit</a></div><div><a href="https://disquiet.io/" target="_blank" rel="noopener noreferrer">Disquiet</a></div><div><a href="https://sidedock.io/" target="_blank" rel="noopener noreferrer">Sidedock</a></div></div>
+    </div>
+    <div class="copy">© 2026 PageRivet · <span data-i18n="footer.contact_label">문의:</span> <a href="/contact.html">pagerivet.support@gmail.com</a></div>
+  </div>
+</footer>
+<button class="back-to-top" type="button" data-back-to-top aria-label="맨 위로 이동">↑</button>
+
+  
+<div class="modal-shell download-guard-modal" data-download-guard hidden>
+  <div class="modal-backdrop" data-close-download-guard></div>
+  <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="download-guard-title" tabindex="-1">
+    <div class="modal-heading">
+      <div><span class="badge">Windows x64</span><h2 id="download-guard-title" data-download-guard-title>다운로드 환경을 확인해 주세요</h2></div>
+      <button class="icon-button" type="button" data-close-download-guard aria-label="닫기">×</button>
+    </div>
+    <p data-download-guard-message>PageRivet은 현재 Windows x64용 포터블 패키지를 제공합니다.</p>
+    <div class="modal-actions">
+      <button class="button button-secondary" type="button" data-close-download-guard data-i18n="download.cancel">취소</button>
+      <a class="button button-primary" href="/downloads/current.ko/" data-download-continue data-i18n="download.continue">그래도 다운로드</a>
+    </div>
+  </section>
+</div>
+
+  <script type="module" src="/assets/js/main.mjs?rev=2026-09-08-refactor-1"></script>
+</body>
+</html>
