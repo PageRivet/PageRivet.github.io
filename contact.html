@@ -16,7 +16,7 @@
       document.documentElement.dataset.theme = "light";
     }
   </script>
-  <link rel="stylesheet" href="/assets/css/style.css?rev=2026-09-08-contact-attachments-1">
+  <link rel="stylesheet" href="/assets/css/style.css?rev=2026-09-08-contact-file-list-1">
 </head>
 <body class="contact-theme">
   <a class="skip-link" href="#main-content">본문으로 바로가기</a>
@@ -112,8 +112,15 @@
     <div class="field field-wide">
       <label for="contact-attachment-ko">첨부파일</label>
       <input id="contact-attachment-ko" name="attachment" type="file" accept=".png,.jpg,.jpeg,.webp,.gif,.txt,.log,.json,.md,.csv,.pdf,.doc,.docx,.zip,.mp4,.webm,.mov" multiple="" aria-describedby="contact-attachment-help-ko contact-attachment-status-ko" data-contact-attachment="" />
+      <input type="file" accept=".png,.jpg,.jpeg,.webp,.gif,.txt,.log,.json,.md,.csv,.pdf,.doc,.docx,.zip,.mp4,.webm,.mov" hidden="" tabindex="-1" data-contact-attachment-replacement="" />
       <p class="contact-field-help" id="contact-attachment-help-ko">스크린샷, 로그, 문서, 압축파일 또는 영상을 여러 개 첨부할 수 있습니다. 최대 5개 · 파일당 8MB · 전체 18MB</p>
-      <p class="contact-field-status" id="contact-attachment-status-ko" data-contact-attachment-status="" role="status" aria-live="polite"></p>
+      <div class="contact-attachment-selection" data-contact-attachment-selection="" hidden="">
+        <div class="contact-attachment-heading">
+          <strong>선택한 첨부파일</strong>
+          <span class="contact-field-status" id="contact-attachment-status-ko" data-contact-attachment-status="" role="status" aria-live="polite"></span>
+        </div>
+        <ul class="contact-attachment-list" data-contact-attachment-list=""></ul>
+      </div>
     </div>
   </div>
 
@@ -134,6 +141,10 @@
   <span hidden="" data-contact-message="attachment_file_too_large">{fileName} 파일은 {maxFileSize} 이하만 전송할 수 있습니다.</span>
   <span hidden="" data-contact-message="attachment_total_too_large">첨부파일 전체 용량은 {maxTotalSize} 이하만 전송할 수 있습니다.</span>
   <span hidden="" data-contact-message="attachment_summary">{fileCount}개 파일 · {totalSize}</span>
+  <span hidden="" data-contact-message="attachment_replace">변경</span>
+  <span hidden="" data-contact-message="attachment_remove">삭제</span>
+  <span hidden="" data-contact-message="attachment_replace_aria">{fileName} 파일 변경</span>
+  <span hidden="" data-contact-message="attachment_remove_aria">{fileName} 파일 삭제</span>
 </form>
 
       </article>
@@ -185,8 +196,15 @@
     <div class="field field-wide">
       <label for="contact-attachment-en">Attachment</label>
       <input id="contact-attachment-en" name="attachment" type="file" accept=".png,.jpg,.jpeg,.webp,.gif,.txt,.log,.json,.md,.csv,.pdf,.doc,.docx,.zip,.mp4,.webm,.mov" multiple="" aria-describedby="contact-attachment-help-en contact-attachment-status-en" data-contact-attachment="" />
+      <input type="file" accept=".png,.jpg,.jpeg,.webp,.gif,.txt,.log,.json,.md,.csv,.pdf,.doc,.docx,.zip,.mp4,.webm,.mov" hidden="" tabindex="-1" data-contact-attachment-replacement="" />
       <p class="contact-field-help" id="contact-attachment-help-en">Attach multiple screenshots, logs, documents, archives, or videos. Up to 5 files · 8MB per file · 18MB total</p>
-      <p class="contact-field-status" id="contact-attachment-status-en" data-contact-attachment-status="" role="status" aria-live="polite"></p>
+      <div class="contact-attachment-selection" data-contact-attachment-selection="" hidden="">
+        <div class="contact-attachment-heading">
+          <strong>Selected attachments</strong>
+          <span class="contact-field-status" id="contact-attachment-status-en" data-contact-attachment-status="" role="status" aria-live="polite"></span>
+        </div>
+        <ul class="contact-attachment-list" data-contact-attachment-list=""></ul>
+      </div>
     </div>
   </div>
 
@@ -207,6 +225,10 @@
   <span hidden="" data-contact-message="attachment_file_too_large">{fileName} must be {maxFileSize} or smaller.</span>
   <span hidden="" data-contact-message="attachment_total_too_large">The combined attachment size must be {maxTotalSize} or smaller.</span>
   <span hidden="" data-contact-message="attachment_summary">{fileCount} files · {totalSize}</span>
+  <span hidden="" data-contact-message="attachment_replace">Replace</span>
+  <span hidden="" data-contact-message="attachment_remove">Remove</span>
+  <span hidden="" data-contact-message="attachment_replace_aria">Replace {fileName}</span>
+  <span hidden="" data-contact-message="attachment_remove_aria">Remove {fileName}</span>
 </form>
 
       </article>
@@ -249,6 +271,6 @@
   </section>
 </div>
 
-  <script type="module" src="/assets/js/main.mjs?rev=2026-09-08-contact-attachments-1"></script>
+  <script type="module" src="/assets/js/main.mjs?rev=2026-09-08-contact-file-list-1"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@ const TURNSTILE_SOURCE = "https://challenges.cloudflare.com/turnstile/v0/api.js?
 const REQUEST_TIMEOUT = 15000;
 const widgetIds = new WeakMap();
 const templateStates = new WeakMap();
+const attachmentStates = new WeakMap();
 let turnstilePromise;
 let languageListenerInitialized = false;
 
@@ -157,15 +158,72 @@ async function loadCategoryTemplate(form, options = {}) {
   }
 }
 
-function formatFileSize(bytes, language) {
-  const megabytes = bytes / (1024 * 1024);
-  const locale = language === "en" ? "en-US" : "ko-KR";
-  return new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(megabytes) + "MB";
+function formatFileSize(bytes) {
+  return (bytes / (1024 * 1024)).toFixed(2) + "MB";
 }
 
 function setAttachmentStatus(form, message) {
   const status = form.querySelector("[data-contact-attachment-status]");
   if (status) status.textContent = message || "";
+}
+
+function replaceInputFiles(input, files) {
+  if (typeof DataTransfer === "undefined") return false;
+
+  const transfer = new DataTransfer();
+  files.forEach(function (file) {
+    transfer.items.add(file);
+  });
+  input.files = transfer.files;
+  return true;
+}
+
+function createAttachmentButton(form, action, index, fileName) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "contact-attachment-action" + (action === "remove" ? " is-remove" : "");
+  button.dataset.attachmentAction = action;
+  button.dataset.attachmentIndex = String(index);
+  button.textContent = getMessage(form, action === "remove" ? "attachment_remove" : "attachment_replace");
+  button.setAttribute("aria-label", getMessage(
+    form,
+    action === "remove" ? "attachment_remove_aria" : "attachment_replace_aria",
+    { fileName }
+  ));
+  return button;
+}
+
+function renderAttachmentList(form, files) {
+  const selection = form.querySelector("[data-contact-attachment-selection]");
+  const list = form.querySelector("[data-contact-attachment-list]");
+  if (!selection || !list) return;
+
+  list.replaceChildren();
+  files.forEach(function (file, index) {
+    const item = document.createElement("li");
+    const information = document.createElement("span");
+    const name = document.createElement("span");
+    const size = document.createElement("span");
+    const actions = document.createElement("span");
+
+    information.className = "contact-attachment-information";
+    name.className = "contact-attachment-name";
+    name.textContent = file.name;
+    name.title = file.name;
+    size.className = "contact-attachment-size";
+    size.textContent = formatFileSize(file.size);
+    actions.className = "contact-attachment-actions";
+
+    information.append(name, size);
+    actions.append(
+      createAttachmentButton(form, "replace", index, file.name),
+      createAttachmentButton(form, "remove", index, file.name)
+    );
+    item.append(information, actions);
+    list.append(item);
+  });
+
+  selection.hidden = files.length === 0;
 }
 
 function validateAttachments(form) {
@@ -190,13 +248,14 @@ function validateAttachments(form) {
     errorMessage = getMessage(form, "attachment_total_too_large");
   }
 
+  renderAttachmentList(form, files);
   input.setCustomValidity(errorMessage);
   if (errorMessage) {
     setAttachmentStatus(form, errorMessage);
   } else if (files.length) {
     setAttachmentStatus(form, getMessage(form, "attachment_summary", {
       fileCount: files.length,
-      totalSize: formatFileSize(totalBytes, form.dataset.contactLanguage)
+      totalSize: formatFileSize(totalBytes)
     }));
   } else {
     setAttachmentStatus(form, "");
@@ -214,6 +273,11 @@ function resetContactFormState(form) {
 
   const attachment = form.querySelector("[data-contact-attachment]");
   if (attachment) attachment.setCustomValidity("");
+  const replacement = form.querySelector("[data-contact-attachment-replacement]");
+  if (replacement) replacement.value = "";
+  const attachmentState = attachmentStates.get(form);
+  if (attachmentState) attachmentState.replaceIndex = null;
+  renderAttachmentList(form, []);
   setAttachmentStatus(form, "");
   setTemplateStatus(form, "");
   syncCategoryFields(form);
@@ -280,7 +344,10 @@ function initContactForm(form) {
   const message = form.querySelector("[data-contact-message-input]");
   const templateButton = form.querySelector("[data-contact-template-load]");
   const attachment = form.querySelector("[data-contact-attachment]");
+  const attachmentReplacement = form.querySelector("[data-contact-attachment-replacement]");
+  const attachmentList = form.querySelector("[data-contact-attachment-list]");
   templateStates.set(form, { appliedTemplate: "", requestId: 0 });
+  attachmentStates.set(form, { replaceIndex: null });
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -308,8 +375,51 @@ function initContactForm(form) {
 
   if (attachment) {
     attachment.addEventListener("change", function () {
+      const state = attachmentStates.get(form);
+      if (state) state.replaceIndex = null;
       validateAttachments(form);
       if (!attachment.checkValidity()) attachment.reportValidity();
+    });
+  }
+
+  if (attachmentList && attachment && attachmentReplacement) {
+    attachmentList.addEventListener("click", function (event) {
+      const button = event.target instanceof Element
+        ? event.target.closest("[data-attachment-action]")
+        : null;
+      if (!button) return;
+
+      const index = Number(button.dataset.attachmentIndex);
+      const files = Array.from(attachment.files || []);
+      if (!Number.isInteger(index) || index < 0 || index >= files.length) return;
+
+      if (button.dataset.attachmentAction === "remove") {
+        files.splice(index, 1);
+        if (replaceInputFiles(attachment, files)) validateAttachments(form);
+        return;
+      }
+
+      const state = attachmentStates.get(form);
+      if (state) state.replaceIndex = index;
+      attachmentReplacement.value = "";
+      attachmentReplacement.click();
+    });
+
+    attachmentReplacement.addEventListener("change", function () {
+      const state = attachmentStates.get(form);
+      const replacementFile = attachmentReplacement.files && attachmentReplacement.files[0];
+      if (!state || state.replaceIndex === null || !replacementFile) return;
+
+      const files = Array.from(attachment.files || []);
+      if (state.replaceIndex >= 0 && state.replaceIndex < files.length) {
+        files[state.replaceIndex] = replacementFile;
+        if (replaceInputFiles(attachment, files)) {
+          validateAttachments(form);
+          if (!attachment.checkValidity()) attachment.reportValidity();
+        }
+      }
+      state.replaceIndex = null;
+      attachmentReplacement.value = "";
     });
   }
 
