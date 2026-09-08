@@ -1,5 +1,5 @@
 const TURNSTILE_SOURCE = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-const REQUEST_TIMEOUT = 15000;
+const TURNSTILE_LOAD_TIMEOUT = 15000;
 const widgetIds = new WeakMap();
 const templateStates = new WeakMap();
 const attachmentStates = new WeakMap();
@@ -45,7 +45,7 @@ function loadTurnstile() {
         return;
       }
 
-      if (Date.now() - startedAt >= REQUEST_TIMEOUT) {
+      if (Date.now() - startedAt >= TURNSTILE_LOAD_TIMEOUT) {
         window.clearInterval(poll);
         reject(new Error("Turnstile could not be loaded."));
       }
@@ -87,6 +87,13 @@ function parseResponse(response) {
       return {};
     }
   });
+}
+
+function getRequestTimeout(form) {
+  const configuredTimeout = Number(form.dataset.requestTimeoutMs || 0);
+  return Number.isFinite(configuredTimeout) && configuredTimeout > 0
+    ? configuredTimeout
+    : 60000;
 }
 
 function getSelectedCategory(form) {
@@ -298,7 +305,7 @@ async function submitContactForm(form) {
   const controller = new AbortController();
   const timeout = window.setTimeout(function () {
     controller.abort();
-  }, REQUEST_TIMEOUT);
+  }, getRequestTimeout(form));
 
   try {
     const widgetId = await renderWidget(form);
@@ -327,9 +334,13 @@ async function submitContactForm(form) {
     result.textContent = data.message || getMessage(form, "success");
     form.reset();
   } catch (error) {
-    result.textContent = error && error.message
-      ? error.message
-      : getMessage(form, "error");
+    if (error && error.name === "AbortError") {
+      result.textContent = getMessage(form, "timeout");
+    } else {
+      result.textContent = error && error.message
+        ? error.message
+        : getMessage(form, "error");
+    }
   } finally {
     window.clearTimeout(timeout);
     submitButton.disabled = false;
