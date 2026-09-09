@@ -74,11 +74,19 @@
       <strong>릴리스 버전</strong>
       <div class="update-version-buttons" data-update-version-list="">
         
-          <button class="update-version-button is-active" type="button" data-update-version="3.3.0-beta.2" data-update-language="en" hidden="">
+          <button class="update-version-button is-active" type="button" data-update-version="3.3.0-beta.3" data-update-language="en" hidden="">
+            PageRivet 3.3.0-beta.3
+          </button>
+        
+          <button class="update-version-button is-active" type="button" data-update-version="3.3.0-beta.3" data-update-language="ko">
+            PageRivet 3.3.0-beta.3
+          </button>
+        
+          <button class="update-version-button" type="button" data-update-version="3.3.0-beta.2" data-update-language="en" hidden="">
             PageRivet 3.3.0-beta.2
           </button>
         
-          <button class="update-version-button is-active" type="button" data-update-version="3.3.0-beta.2" data-update-language="ko">
+          <button class="update-version-button" type="button" data-update-version="3.3.0-beta.2" data-update-language="ko">
             PageRivet 3.3.0-beta.2
           </button>
         
@@ -127,11 +135,199 @@
 
     <div class="update-stage" data-update-stage="" aria-live="polite">
       
+        <article class="update-details" data-update-document="" data-update-version="3.3.0-beta.3" data-update-language="en" hidden="">
+          <header class="section-heading">
+            <span class="badge">LATEST</span>
+            <h2>PageRivet 3.3.0-beta.3</h2>
+            <p>2026.09.09</p>
+          </header>
+          <div class="update-markdown" lang="en"><p>A beta update that adds Inspector, Design Mode, and Source Mapping, expands docked workspace and MCP status capabilities, and fixes Preview and Jekyll export issues.</p>
+
+<p>Inspector and Design Mode are currently available as experimental features.</p>
+
+<p>Depending on the element structure and whether Source Mapping is available, some options may not yet be available or editing may be limited.</p>
+
+<h2 id="added">Added</h2>
+
+<h3 id="inspector">Inspector</h3>
+
+<ul>
+  <li>Hover, select, and highlight elements in Preview, then inspect element information and editable source ranges.</li>
+  <li>Apply text content, links, images, and form attributes to the original editor buffer.</li>
+  <li>Edit the following styles through dedicated input controls:
+    <ul>
+      <li>Font size, weight, style, decoration, and family</li>
+      <li>Line height, letter spacing, text alignment, and text transformation</li>
+      <li>Whitespace, wrapping, long-word handling, and word breaking</li>
+      <li>Text, background, and border color palettes</li>
+      <li>Text shadow, size, spacing, borders, and opacity</li>
+      <li>Supported Display, Flex, and Grid properties</li>
+    </ul>
+  </li>
+  <li>Search Korean display names, CSS property names, and available options from the top of Inspector.</li>
+  <li>Preserve the selected element and edited values when no results match; clear the query or press <code class="language-plaintext highlighter-rouge">Esc</code> to restore all items.</li>
+  <li>Restore selection after Preview refreshes by using stable element identifiers.</li>
+</ul>
+
+<h3 id="design-mode">Design Mode</h3>
+
+<ul>
+  <li>Move selected elements with the pointer in Preview or resize them with corner and edge handles.</li>
+  <li>Show element bounds in real time while editing, then apply confirmed changes to the editor buffer as the smallest patch allowed by Source Mapping.</li>
+  <li>Use width changes together with wrapping policies.</li>
+</ul>
+
+<h3 id="source-mapping">Source Mapping</h3>
+
+<ul>
+  <li>Added shared element identifiers and Source Mapping that connect static HTML, PageRivet YAML, traceable Markdown, and dynamic DOM elements to their original source locations.</li>
+  <li>Preview Bridge sends the selected element’s bounds, computed styles, and source metadata to the application.</li>
+  <li>Runtime-only DOM elements whose original location cannot be uniquely determined remain available for selection and inspection without modifying an arbitrary file.</li>
+</ul>
+
+<h3 id="workspace-and-mcp-status">Workspace and MCP Status</h3>
+
+<ul>
+  <li>Combine Project, Inspector, Preview, Editor, History, MCP Log, and Errors/Debug panels into the same tab group or split them apart again.</li>
+  <li>Reorder tabs through dragging or the context menu, and save panel placement, active tabs, and tab order in the workspace layout.</li>
+  <li>Use the primary commands of the active panel even when Editor and Preview are grouped as tabs.</li>
+  <li>Check MCP ON/OFF status from the right side of the main header.
+    <ul>
+      <li>ON appears in green and lists configured clients.</li>
+      <li>OFF appears in red and explains whether no client is configured, reconnection or reset is required, or the server is unavailable.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="changed">Changed</h2>
+
+<ul>
+  <li>Set Inspector’s minimum width to 400 DIP so its color palettes and required inputs remain fully visible.</li>
+  <li>Adjusted History row and restore-button heights to match the density of MCP Log and Errors/Debug lists.</li>
+  <li>In narrow editors, the important <code class="language-plaintext highlighter-rouge">Apply</code> command remains visible while secondary commands such as search and go-to-line move into the <code class="language-plaintext highlighter-rouge">⋯</code> menu.</li>
+  <li>Changed the home and user-guide links to <code class="language-plaintext highlighter-rouge">https://pagerivet.app/</code> and <code class="language-plaintext highlighter-rouge">https://pagerivet.app/guide.html</code>.</li>
+  <li>Updated the product version to <code class="language-plaintext highlighter-rouge">3.3.0-beta.3</code> and the file version to <code class="language-plaintext highlighter-rouge">3.3.0.3</code>.</li>
+</ul>
+
+<h2 id="fixed">Fixed</h2>
+
+<ul>
+  <li>Fixed an issue introduced in beta.2 where a new project’s Preview used black for both the NativeWebView background and default text, making content difficult to read.</li>
+  <li>Fixed an issue introduced by the beta.2 docking UI where panel drag input blocked the Preview target selector and prevented selecting pages other than <code class="language-plaintext highlighter-rouge">HTML - index.html</code>.</li>
+  <li>Fixed Jekyll exports being blocked because <code class="language-plaintext highlighter-rouge">_includes</code> and <code class="language-plaintext highlighter-rouge">_layouts</code> fragments were incorrectly validated as complete HTML documents under General Web rules. Added a <code class="language-plaintext highlighter-rouge">Jekyll Site</code> export preset that builds the static site in an isolated temporary workspace and exports it as a web folder or ZIP.</li>
+</ul>
+
+<h2 id="safety-boundaries">Safety Boundaries</h2>
+
+<ul>
+  <li>Preview JavaScript never saves files directly.</li>
+  <li>Visual Editing changes are applied to the existing editor buffer only after project, document, and Preview revisions are verified.</li>
+  <li>Project application continues to use the existing Validation, History, Recovery, and save boundaries.</li>
+  <li>DOM or CSS source candidates that cannot be uniquely determined remain read-only instead of selecting an arbitrary source.</li>
+  <li>The MCP status indicator uses server execution state and verified client configuration rather than the momentary connection count of Stateless Streamable HTTP.</li>
+</ul>
+</div>
+        </article>
+      
+        <article class="update-details" data-update-document="" data-update-version="3.3.0-beta.3" data-update-language="ko">
+          <header class="section-heading">
+            <span class="badge">LATEST</span>
+            <h2>PageRivet 3.3.0-beta.3</h2>
+            <p>2026.09.09</p>
+          </header>
+          <div class="update-markdown" lang="ko"><p>Inspector, 디자인 모드와 Source Mapping을 추가하고 도킹 작업공간·MCP 상태 표시를 확장했으며 Preview 및 Jekyll 내보내기 문제를 수정한 베타 업데이트입니다.</p>
+
+<p>현재 Inspector와 디자인 모드는 시험적인 단계로 제공되고 있습니다.</p>
+
+<p>요소의 구조나 Source Mapping 가능 여부에 따라 일부 항목은 아직 사용할 수 없거나 편집이 제한될 수 있습니다.</p>
+
+<h2 id="추가">추가</h2>
+
+<h3 id="inspector">Inspector</h3>
+
+<ul>
+  <li>Preview의 요소를 Hover·선택·강조하고 요소 정보와 편집 가능한 원본 범위를 확인할 수 있습니다.</li>
+  <li>텍스트 내용, 링크, 이미지, 폼 속성을 원본 편집 버퍼에 반영할 수 있습니다.</li>
+  <li>다음 스타일을 전용 입력 UI에서 편집할 수 있습니다.
+    <ul>
+      <li>글꼴 크기·두께·스타일·장식과 글꼴 종류</li>
+      <li>줄 높이·글자 간격·텍스트 정렬·대소문자 변환</li>
+      <li>공백·줄바꿈·긴 단어 처리와 단어 분리</li>
+      <li>글자색·배경색·테두리 색상 팔레트</li>
+      <li>텍스트 그림자, 크기, 여백, 테두리와 불투명도</li>
+      <li>Display, Flex와 Grid의 지원 가능한 속성</li>
+    </ul>
+  </li>
+  <li>Inspector 상단에서 한글 표시명, CSS 속성명과 선택 항목을 검색할 수 있습니다.</li>
+  <li>검색 결과가 없어도 선택 요소와 편집값을 유지하며 검색어 삭제 또는 <code class="language-plaintext highlighter-rouge">Esc</code>로 전체 항목을 복원합니다.</li>
+  <li>Preview가 갱신된 뒤에도 안정적인 요소 식별자로 선택 상태를 복원합니다.</li>
+</ul>
+
+<h3 id="디자인-모드">디자인 모드</h3>
+
+<ul>
+  <li>Preview에서 선택 요소를 마우스로 이동하거나 모서리·가장자리 핸들로 크기를 조절할 수 있습니다.</li>
+  <li>조작 중 요소 경계를 실시간 표시하고, 확정한 변경은 Source Mapping이 허용하는 최소 Patch로 편집 버퍼에 반영합니다.</li>
+  <li>폭 변경과 줄바꿈 정책을 함께 사용할 수 있습니다.</li>
+</ul>
+
+<h3 id="source-mapping">Source Mapping</h3>
+
+<ul>
+  <li>정적 HTML, PageRivet YAML, 추적 가능한 Markdown과 동적 DOM을 원본 위치에 연결하는 공통 요소 식별자와 Source Mapping을 추가했습니다.</li>
+  <li>Preview Bridge가 선택 요소의 경계·계산 스타일·원본 메타데이터를 애플리케이션에 전달합니다.</li>
+  <li>원본 위치를 하나로 확정할 수 없는 런타임 전용 DOM은 선택·검사만 제공하고 임의의 파일을 수정하지 않습니다.</li>
+</ul>
+
+<h3 id="작업공간과-mcp-상태">작업공간과 MCP 상태</h3>
+
+<ul>
+  <li>프로젝트·Inspector·Preview·편집기·기록·MCP 로그·오류/디버그 패널을 같은 탭 그룹으로 합치거나 다시 분리할 수 있습니다.</li>
+  <li>탭 드래그 또는 컨텍스트 메뉴로 탭 순서를 바꾸고 배치·활성 탭·탭 순서를 작업공간 레이아웃에 저장할 수 있습니다.</li>
+  <li>탭으로 합친 편집기와 Preview에서도 현재 패널의 주요 명령을 사용할 수 있습니다.</li>
+  <li>메인 헤더 오른쪽에서 MCP ON/OFF 상태를 확인할 수 있습니다.
+    <ul>
+      <li>ON은 녹색으로 표시하고 설정된 클라이언트 목록을 제공합니다.</li>
+      <li>OFF는 빨간색으로 표시하고 클라이언트 없음, 재연결·재설정 필요 또는 서버 상태를 설명합니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="변경">변경</h2>
+
+<ul>
+  <li>Inspector 최소 폭을 색상 팔레트와 필수 입력이 온전히 표시되는 400 DIP로 설정했습니다.</li>
+  <li>History 행과 복원 버튼의 높이를 MCP 로그 및 오류/디버그 목록과 같은 밀도로 조정했습니다.</li>
+  <li>좁은 편집기에서는 중요한 <code class="language-plaintext highlighter-rouge">[적용]</code> 명령을 직접 표시하고 검색·줄 이동 같은 부가 명령만 <code class="language-plaintext highlighter-rouge">⋯</code>로 이동합니다.</li>
+  <li>홈페이지와 사용 안내 링크를 <code class="language-plaintext highlighter-rouge">https://pagerivet.app/</code> 및 <code class="language-plaintext highlighter-rouge">https://pagerivet.app/guide.html</code>로 변경했습니다.</li>
+  <li>제품 버전을 <code class="language-plaintext highlighter-rouge">3.3.0-beta.3</code>, 파일 버전을 <code class="language-plaintext highlighter-rouge">3.3.0.3</code>으로 변경했습니다.</li>
+</ul>
+
+<h2 id="수정">수정</h2>
+
+<ul>
+  <li>beta.2에서 새 프로젝트 Preview의 NativeWebView 초기 배경과 기본 글자색이 모두 검게 표시돼 내용을 확인하기 어려웠던 문제를 수정했습니다.</li>
+  <li>beta.2의 도킹 UI 적용 이후 Preview 대상 선택 드롭다운이 패널 드래그 입력에 가로막혀 <code class="language-plaintext highlighter-rouge">HTML - index.html</code> 외의 페이지를 선택할 수 없던 문제를 수정했습니다.</li>
+  <li>Jekyll 프로젝트를 General Web 규칙으로 내보낼 때 <code class="language-plaintext highlighter-rouge">_includes</code>와 <code class="language-plaintext highlighter-rouge">_layouts</code> 조각이 완전한 HTML 문서로 잘못 검증되어 내보낼 수 없던 문제를 수정했습니다. 내보내기 프리셋에 <code class="language-plaintext highlighter-rouge">Jekyll Site</code>를 추가했으며, 격리된 임시 작업공간에서 빌드한 정적 사이트를 웹 폴더 또는 ZIP으로 내보낼 수 있습니다.</li>
+</ul>
+
+<h2 id="안전-경계">안전 경계</h2>
+
+<ul>
+  <li>Preview JavaScript는 파일을 직접 저장하지 않습니다.</li>
+  <li>Visual Editing 변경은 프로젝트·문서·Preview Revision을 확인한 뒤 기존 편집 버퍼에 반영합니다.</li>
+  <li>프로젝트 적용 시 기존 Validation, History, Recovery와 저장 경계를 그대로 사용합니다.</li>
+  <li>원본 후보가 모호한 DOM이나 CSS 선언은 임의로 선택하지 않고 읽기 전용으로 유지합니다.</li>
+  <li>MCP 상태 표시기는 Stateless Streamable HTTP의 순간 접속 수가 아니라 서버 실행 상태와 검증된 클라이언트 설정 상태를 사용합니다.</li>
+</ul>
+</div>
+        </article>
+      
         <article class="update-details" data-update-document="" data-update-version="3.3.0-beta.2" data-update-language="en" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable ZIP · Beta</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 3.3.0-beta.2</h2>
-            <p>2026.09.01 · Portable ZIP · Beta</p>
+            <p>2026.09.01</p>
           </header>
           <div class="update-markdown" lang="en"><p>A beta update adding custom themes, Jekyll site preview, a dockable workspace, History restore, and diagnostics integration, while improving current-error refresh and preview stability.</p>
 
@@ -192,11 +388,11 @@
 </div>
         </article>
       
-        <article class="update-details" data-update-document="" data-update-version="3.3.0-beta.2" data-update-language="ko">
+        <article class="update-details" data-update-document="" data-update-version="3.3.0-beta.2" data-update-language="ko" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable ZIP · Beta</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 3.3.0-beta.2</h2>
-            <p>2026.09.01 · Portable ZIP · Beta</p>
+            <p>2026.09.01</p>
           </header>
           <div class="update-markdown" lang="ko"><p>사용자 지정 테마, Jekyll 사이트 미리보기, 도킹 작업공간, History 복원과 진단 연동을 확장하고 현재 오류 갱신 및 미리보기 안정성을 개선한 베타 업데이트입니다.</p>
 
@@ -259,9 +455,9 @@
       
         <article class="update-details" data-update-document="" data-update-version="3.3.0-beta.1" data-update-language="ko" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable ZIP · Beta</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 3.3.0-beta.1</h2>
-            <p>2026.08.27 · Portable ZIP · Beta</p>
+            <p>2026.08.27</p>
           </header>
           <div class="update-markdown" lang="ko"><p>Avalonia 12.1 기반 UI 전환과 PageRivet YAML 페이지 지원, 플랫폼 공통 구조 개편을 완료한 첫 베타 버전입니다. Windows x64 배포 후보는 자동 검증을 완료했으며 macOS와 Linux는 실제 환경 검증이 남아 있습니다.</p>
 
@@ -325,9 +521,9 @@
       
         <article class="update-details" data-update-document="" data-update-version="3.3.0-beta.1" data-update-language="en" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable ZIP · Beta</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 3.3.0-beta.1</h2>
-            <p>2026.08.27 · Portable ZIP · Beta</p>
+            <p>2026.08.27</p>
           </header>
           <div class="update-markdown" lang="en"><p>The first beta release completing the Avalonia 12.1 UI migration, PageRivet YAML page support, and a shared cross-platform architecture. The Windows x64 release candidate passed automated validation, while real-environment validation remains for macOS and Linux.</p>
 
@@ -391,9 +587,9 @@
       
         <article class="update-details" data-update-document="" data-update-version="2.3.3" data-update-language="ko" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable ZIP</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 2.3.3</h2>
-            <p>2026.08.27 · Portable ZIP</p>
+            <p>2026.08.27</p>
           </header>
           <div class="update-markdown" lang="ko"><p>허용된 MCP 상태 변경 작업에 현재 승인 정책을 일관되게 적용하고, 외부 리소스 가져오기와 프로젝트 내보내기의 별도 강제 승인 예외를 제거했습니다.</p>
 
@@ -435,9 +631,9 @@
       
         <article class="update-details" data-update-document="" data-update-version="2.3.3" data-update-language="en" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable ZIP</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 2.3.3</h2>
-            <p>2026.08.27 · Portable ZIP</p>
+            <p>2026.08.27</p>
           </header>
           <div class="update-markdown" lang="en"><p>Applied the active approval policy consistently to allowed MCP state-changing operations and removed separate forced-approval exceptions for external resource imports and project exports.</p>
 
@@ -479,9 +675,9 @@
       
         <article class="update-details" data-update-document="" data-update-version="2.3.0" data-update-language="en" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 2.3.0</h2>
-            <p>2026.08.26 · Portable</p>
+            <p>2026.08.26</p>
           </header>
           <div class="update-markdown" lang="en"><p>PageRivet 2.3.0 adds automatic Claude Desktop connection support.</p>
 
@@ -549,9 +745,9 @@
       
         <article class="update-details" data-update-document="" data-update-version="2.3.0" data-update-language="ko" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 2.3.0</h2>
-            <p>2026.08.26 · Portable</p>
+            <p>2026.08.26</p>
           </header>
           <div class="update-markdown" lang="ko"><p>PageRivet 2.3.0은 Claude Desktop 자동 연결 지원을 추가한 버전입니다.</p>
 
@@ -619,9 +815,9 @@
       
         <article class="update-details" data-update-document="" data-update-version="2.2.1" data-update-language="en" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 2.2.1</h2>
-            <p>2026.08.25 · Portable</p>
+            <p>2026.08.25</p>
           </header>
           <div class="update-markdown" lang="en"><p>This public release brings together resource management, multi-instance recovery and MCP connections, 39 MCP commands, and a redesigned workbench.</p>
 
@@ -681,9 +877,9 @@
       
         <article class="update-details" data-update-document="" data-update-version="2.2.1" data-update-language="ko" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 2.2.1</h2>
-            <p>2026.08.25 · Portable</p>
+            <p>2026.08.25</p>
           </header>
           <div class="update-markdown" lang="ko"><p>리소스 관리, 다중 인스턴스 복구와 MCP 연결, 39개 MCP 명령어, 새로운 워크벤치 디자인을 하나의 공개 버전으로 제공합니다.</p>
 
@@ -743,9 +939,9 @@
       
         <article class="update-details" data-update-document="" data-update-version="2.3.2" data-update-language="en" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable ZIP</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 2.3.2</h2>
-            <p> · Portable ZIP</p>
+            <p></p>
           </header>
           <div class="update-markdown" lang="en"><p>Expanded application state inspection and safe action requests while strengthening security boundaries around user-controlled operations.</p>
 
@@ -793,9 +989,9 @@
       
         <article class="update-details" data-update-document="" data-update-version="2.3.2" data-update-language="ko" hidden="">
           <header class="section-heading">
-            <span class="badge">Portable ZIP</span>
+            <span class="badge">RELEASE</span>
             <h2>PageRivet 2.3.2</h2>
-            <p> · Portable ZIP</p>
+            <p></p>
           </header>
           <div class="update-markdown" lang="ko"><p>애플리케이션 상태 조회와 안전한 작업 요청 범위를 확장하고, 민감한 사용자 제어 영역의 보안 경계를 강화했습니다.</p>
 
