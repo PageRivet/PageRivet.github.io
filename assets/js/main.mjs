@@ -6,10 +6,9 @@ import { initPageNavigation } from "./ui/page-navigation.mjs";
 import { initDemoEditor } from "./features/demo-editor.mjs";
 import { initGuideToc } from "./features/guide-toc.mjs";
 import { initMcpCommands } from "./features/mcp-commands.mjs";
-import { initUpdateLog } from "./features/update-log.mjs";
-import { initNoticeList } from "./features/notice-list.mjs";
+import { initNewsBoard } from "./features/news-board.mjs";
 import { initSectionNavigation } from "./features/section-navigation.mjs";
-import { initDownloadGuard } from "./features/download-guard.mjs";
+import { initDownloadGuard, initLatestDownloadRelease } from "./features/download-guard.mjs";
 import { initReleaseToast } from "./features/release-toast.mjs";
 import { initContactForms } from "./features/contact-form.mjs";
 
@@ -44,9 +43,9 @@ export function initPageFeatures() {
   initDemoEditor();
   initGuideToc();
   initMcpCommands();
-  initUpdateLog();
-  initNoticeList();
+  initNewsBoard();
   initSectionNavigation();
+  initLatestDownloadRelease();
   initContactForms();
 }
 

@@ -1,4 +1,5 @@
 export const TRANSLATIONS = {
+  "navigation.news": { ko: "소식", en: "News" },
   "navigation.notice": { ko: "공지사항", en: "Notices" },
   "navigation.about": { ko: "소개", en: "About" },
   "navigation.features": { ko: "기능", en: "Features" },
@@ -18,6 +19,15 @@ export const TRANSLATIONS = {
   "about.why.workflow": { ko: "AI에게 수정을 요청하면 PageRivet에서 결과를 미리 확인하고, 변경 내용을 기록하며, 문제가 생겼을 때 이전 상태로 되돌릴 수 있습니다.", en: "When you ask AI to make changes, PageRivet lets you preview the results, keep a history of changes, and restore an earlier state if something goes wrong." },
   "about.why.summary": { ko: "<strong>즉, 사용하던 AI는 그대로 사용하면서 웹사이트 수정 과정을 더 안전하고 쉽게 관리할 수 있습니다.</strong>", en: "<strong>Keep using the AI you already use, while managing website changes more safely and easily.</strong>" },
   "update.nav.title": { ko: "업데이트 목록", en: "Update List" },
+  "news.eyebrow": { ko: "PAGERIVET NEWS", en: "PAGERIVET NEWS" },
+  "news.title": { ko: "소식", en: "News" },
+  "news.description": { ko: "공지사항과 업데이트 내역을 한곳에서 확인하세요.", en: "Find PageRivet notices and update logs in one place." },
+  "news.section_kicker": { ko: "NEWS BOARD", en: "NEWS BOARD" },
+  "news.section_title": { ko: "PageRivet의 최신 소식", en: "Latest PageRivet news" },
+  "news.section_description": { ko: "카테고리를 선택해 공지사항과 버전별 업데이트를 확인할 수 있습니다.", en: "Choose a category to browse notices and release updates." },
+  "news.category_notice": { ko: "공지사항", en: "Notices" },
+  "news.category_update": { ko: "업데이트", en: "Updates" },
+  "news.loading": { ko: "소식을 불러오는 중입니다.", en: "Loading news." },
   "notice.eyebrow": { ko: "NOTICE", en: "NOTICE" },
   "notice.title": { ko: "공지사항", en: "Notices" },
   "notice.description": { ko: "PageRivet의 새로운 소식과 중요한 안내를 한곳에서 확인하세요.", en: "Find the latest PageRivet news and important announcements in one place." },
@@ -326,6 +336,10 @@ export const PAGE_METADATA = {
   home: {
     title: { ko: "PageRivet | AI와 MCP로 협업하는 웹 에디터", en: "PageRivet | AI와 MCP로 협업하는 웹 에디터" },
     description: { ko: "정적 웹 프로젝트의 개발과 AI 협업을 하나로 연결합니다.", en: "Connect static web project development and AI collaboration in one workspace." }
+  },
+  news: {
+    title: { ko: "소식", en: "News" },
+    description: { ko: "PageRivet 공지사항과 업데이트 소식을 한곳에서 확인합니다.", en: "Browse PageRivet notices and update logs in one place." }
   },
   notice: {
     title: { ko: "공지사항", en: "Notices" },

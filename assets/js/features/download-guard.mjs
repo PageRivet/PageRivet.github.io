@@ -1,5 +1,7 @@
 import { createModalController } from "../ui/modal.mjs";
 
+const LATEST_RELEASE_ENDPOINT = "https://api.pagerivet.app/releases/latest";
+
 let initialized = false;
 
 function environment() {
@@ -7,6 +9,49 @@ function environment() {
   const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(userAgent);
   const isWindows = /Windows/i.test(userAgent);
   return { isMobile: isMobile, isWindows: isWindows };
+}
+
+function readLatestRelease(data) {
+  const release = data && data.ok === true ? data.release : null;
+  if (
+    !release ||
+    typeof release.version !== "string" ||
+    !release.version ||
+    !release.asset ||
+    typeof release.asset.name !== "string" ||
+    !release.asset.name
+  ) {
+    throw new Error("Invalid latest release response");
+  }
+  return release;
+}
+
+export async function initLatestDownloadRelease() {
+  const root = document.querySelector("[data-latest-download]");
+  if (!root || root.dataset.releaseState) return;
+
+  const version = root.querySelector("[data-latest-release-version]");
+  root.dataset.releaseState = "loading";
+
+  try {
+    const response = await fetch(LATEST_RELEASE_ENDPOINT, {
+      headers: { "Accept": "application/json" },
+    });
+    if (!response.ok) {
+      throw new Error(`Latest release request failed: HTTP ${response.status}`);
+    }
+
+    const release = readLatestRelease(await response.json());
+    if (version) version.textContent = release.version;
+    root.dataset.releaseAsset = release.asset.name;
+    root.dataset.releaseState = "ready";
+  } catch (error) {
+    root.dataset.releaseState = "error";
+    console.warn(JSON.stringify({
+      event: "latest_release_display_error",
+      error: error instanceof Error ? error.message : String(error),
+    }));
+  }
 }
 
 export function initDownloadGuard() {

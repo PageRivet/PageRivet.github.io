@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>소식 · PageRivet</title>
-  <meta name="description" content="공지사항이 통합 소식 게시판으로 이동했습니다.">
+  <meta name="description" content="PageRivet 공지사항과 업데이트 소식을 한곳에서 확인합니다.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="소식 · PageRivet">
-  <meta property="og:description" content="공지사항이 통합 소식 게시판으로 이동했습니다.">
+  <meta property="og:description" content="PageRivet 공지사항과 업데이트 소식을 한곳에서 확인합니다.">
   <meta property="og:image" content="https://pagerivet.app/assets/images/PageRivet_Logo%20copy.png">
-  <meta property="og:url" content="https://pagerivet.app/notice.html">
+  <meta property="og:url" content="https://pagerivet.app/news.html">
   <meta name="theme-color" content="#0b0f18">
   <link rel="icon" type="image/png" href="/assets/images/PageRivet_Logo%20copy.png">
   <script>
@@ -56,14 +56,36 @@
   </div>
 </header>
 
-  <main id="main-content"><script>
-  window.location.replace("/news.html?category=notice");
-</script>
-
-<section class="content-section">
+  <main id="main-content"><section class="page-hero notice-hero">
   <div class="wrap">
-    <h1>소식 페이지로 이동합니다</h1>
-    <p><a href="/news.html?category=notice">공지사항 바로가기</a></p>
+    <p class="eyebrow" data-i18n="news.eyebrow">PAGERIVET NEWS</p>
+    <h1 data-i18n="news.title">소식</h1>
+    <p data-i18n="news.description">공지사항과 업데이트 내역을 한곳에서 확인하세요.</p>
+  </div>
+</section>
+
+<section class="content-section notice-content" aria-labelledby="news-list-title">
+  <div class="wrap" data-news-board="" data-api-base="https://api.pagerivet.app">
+    <header class="notice-list-heading">
+      <div>
+        <p class="section-kicker" data-i18n="news.section_kicker">NEWS BOARD</p>
+        <h2 id="news-list-title" data-i18n="news.section_title">PageRivet의 최신 소식</h2>
+        <p data-i18n="news.section_description">카테고리를 선택해 공지사항과 버전별 업데이트를 확인할 수 있습니다.</p>
+      </div>
+      <div class="notice-summary" aria-live="polite">
+        <span class="notice-summary-dot" aria-hidden="true"></span>
+        <strong data-news-count="">0</strong>
+        <span data-news-count-label="">개의 글</span>
+      </div>
+    </header>
+
+    <div class="news-category-tabs" role="tablist" aria-label="소식 카테고리">
+      <button class="news-category-tab is-active" type="button" role="tab" aria-selected="true" data-news-category="notice" data-i18n="news.category_notice">공지사항</button>
+      <button class="news-category-tab" type="button" role="tab" aria-selected="false" data-news-category="update" data-i18n="news.category_update">업데이트</button>
+    </div>
+
+    <p class="news-board-status" data-news-status="" role="status" data-i18n="news.loading">소식을 불러오는 중입니다.</p>
+    <div class="notice-list" data-news-list="" aria-live="polite"></div>
   </div>
 </section>
 </main>
