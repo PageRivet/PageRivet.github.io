@@ -1,6 +1,6 @@
 import { createModalController } from "../ui/modal.mjs";
 
-const LATEST_RELEASE_ENDPOINT = "https://api.pagerivet.app/releases/latest";
+const DOWNLOADS_ENDPOINT = "https://api.pagerivet.app/downloads";
 
 let initialized = false;
 
@@ -11,44 +11,65 @@ function environment() {
   return { isMobile: isMobile, isWindows: isWindows };
 }
 
-function readLatestRelease(data) {
-  const release = data && data.ok === true ? data.release : null;
-  if (
-    !release ||
-    typeof release.version !== "string" ||
-    !release.version ||
-    !release.asset ||
-    typeof release.asset.name !== "string" ||
-    !release.asset.name
-  ) {
-    throw new Error("Invalid latest release response");
+function readManagedDownloads(data) {
+  if (!data || data.ok !== true || !Array.isArray(data.downloads)) {
+    throw new Error("Invalid download metadata response");
   }
-  return release;
+
+  const items = new Map(data.downloads.map(function (item) {
+    return [item.key, item];
+  }));
+  const pagerivet = items.get("pagerivet");
+  const diagnostic = items.get("diagnostic");
+  if (
+    !pagerivet ||
+    !diagnostic ||
+    typeof pagerivet.versionText !== "string" ||
+    !pagerivet.versionText ||
+    typeof pagerivet.environmentText !== "string" ||
+    !pagerivet.environmentText ||
+    typeof pagerivet.packageText !== "string" ||
+    !pagerivet.packageText ||
+    typeof diagnostic.environmentText !== "string" ||
+    !diagnostic.environmentText ||
+    typeof diagnostic.packageText !== "string" ||
+    !diagnostic.packageText
+  ) {
+    throw new Error("Incomplete download metadata response");
+  }
+
+  return { pagerivet, diagnostic };
+}
+
+function setText(selector, value) {
+  const target = document.querySelector(selector);
+  if (target) target.textContent = value;
 }
 
 export async function initLatestDownloadRelease() {
-  const root = document.querySelector("[data-latest-download]");
-  if (!root || root.dataset.releaseState) return;
+  const root = document.querySelector(".download-page");
+  if (!root || root.dataset.downloadMetadataState) return;
 
-  const version = root.querySelector("[data-latest-release-version]");
-  root.dataset.releaseState = "loading";
-
+  root.dataset.downloadMetadataState = "loading";
   try {
-    const response = await fetch(LATEST_RELEASE_ENDPOINT, {
+    const response = await fetch(DOWNLOADS_ENDPOINT, {
       headers: { "Accept": "application/json" },
     });
     if (!response.ok) {
-      throw new Error(`Latest release request failed: HTTP ${response.status}`);
+      throw new Error(`Download metadata request failed: HTTP ${response.status}`);
     }
 
-    const release = readLatestRelease(await response.json());
-    if (version) version.textContent = release.version;
-    root.dataset.releaseAsset = release.asset.name;
-    root.dataset.releaseState = "ready";
+    const downloads = readManagedDownloads(await response.json());
+    setText("[data-download-version]", downloads.pagerivet.versionText);
+    setText('[data-download-environment="pagerivet"]', downloads.pagerivet.environmentText);
+    setText('[data-download-package="pagerivet"]', downloads.pagerivet.packageText);
+    setText('[data-download-environment="diagnostic"]', downloads.diagnostic.environmentText);
+    setText('[data-download-package="diagnostic"]', downloads.diagnostic.packageText);
+    root.dataset.downloadMetadataState = "ready";
   } catch (error) {
-    root.dataset.releaseState = "error";
+    root.dataset.downloadMetadataState = "error";
     console.warn(JSON.stringify({
-      event: "latest_release_display_error",
+      event: "download_metadata_display_error",
       error: error instanceof Error ? error.message : String(error),
     }));
   }
