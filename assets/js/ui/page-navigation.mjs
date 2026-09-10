@@ -145,7 +145,8 @@ function updateMetadata(nextDocument) {
 
 function getPageKeyFromUrl(url) {
   const fileName = url.pathname.split("/").pop() || "index.html";
-  return fileName.replace(/\.html?$/i, "") || "home";
+  const pageKey = fileName.replace(/\.html?$/i, "") || "home";
+  return pageKey === "index" ? "home" : pageKey;
 }
 
 function getPageKey(nextDocument, url) {
@@ -189,8 +190,13 @@ function syncNavigation(pageKey) {
 
     if (isActive) {
       link.setAttribute("aria-current", "page");
-      link.setAttribute("aria-disabled", "true");
-      link.setAttribute("tabindex", "-1");
+      if (link.hasAttribute("data-home-brand")) {
+        link.removeAttribute("aria-disabled");
+        link.removeAttribute("tabindex");
+      } else {
+        link.setAttribute("aria-disabled", "true");
+        link.setAttribute("tabindex", "-1");
+      }
     } else {
       link.removeAttribute("aria-current");
       link.removeAttribute("aria-disabled");

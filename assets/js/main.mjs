@@ -25,8 +25,13 @@ function initCurrentNavigation() {
 
     if (isActive) {
       link.setAttribute("aria-current", "page");
-      link.setAttribute("aria-disabled", "true");
-      link.setAttribute("tabindex", "-1");
+      if (link.hasAttribute("data-home-brand")) {
+        link.removeAttribute("aria-disabled");
+        link.removeAttribute("tabindex");
+      } else {
+        link.setAttribute("aria-disabled", "true");
+        link.setAttribute("tabindex", "-1");
+      }
     }
   });
 
@@ -36,6 +41,42 @@ function initCurrentNavigation() {
       : null;
 
     if (target) event.preventDefault();
+  });
+}
+
+function initHomeBrandLinks() {
+  document.addEventListener("click", function (event) {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    const link = event.target instanceof Element
+      ? event.target.closest("[data-home-brand]")
+      : null;
+    if (!link) return;
+
+    const previewPage = document.body.dataset.previewPage;
+    const fileName = window.location.pathname.split("/").pop() || "index.html";
+    const pageKey = fileName.replace(/\.html?$/i, "") || "home";
+    const isHome = previewPage
+      ? previewPage === "home" || previewPage === "index"
+      : pageKey === "index" || pageKey === "home";
+    if (!isHome) return;
+
+    event.preventDefault();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: reduceMotion ? "auto" : "smooth"
+    });
   });
 }
 
@@ -63,6 +104,7 @@ function init() {
   initI18n();
   initMobileMenu();
   initCurrentNavigation();
+  initHomeBrandLinks();
   initBackToTop();
   initDownloadGuard();
   initPageFeatures();
