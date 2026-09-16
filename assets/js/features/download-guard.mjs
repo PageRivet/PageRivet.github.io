@@ -33,7 +33,9 @@ function readManagedDownloads(data) {
     typeof diagnostic.environmentText !== "string" ||
     !diagnostic.environmentText ||
     typeof diagnostic.packageText !== "string" ||
-    !diagnostic.packageText
+    !diagnostic.packageText ||
+    typeof pagerivet.enabled !== "boolean" ||
+    typeof diagnostic.enabled !== "boolean"
   ) {
     throw new Error("Incomplete download metadata response");
   }
@@ -44,6 +46,13 @@ function readManagedDownloads(data) {
 function setText(selector, value) {
   const target = document.querySelector(selector);
   if (target) target.textContent = value;
+}
+
+function setDownloadAvailability(key, enabled) {
+  const target = document.querySelector(`[data-download-key="${key}"]`);
+  if (!(target instanceof HTMLAnchorElement)) return;
+  target.dataset.downloadEnabled = enabled ? "true" : "false";
+  target.setAttribute("aria-disabled", enabled ? "false" : "true");
 }
 
 export async function initLatestDownloadRelease() {
@@ -65,6 +74,8 @@ export async function initLatestDownloadRelease() {
     setText('[data-download-package="pagerivet"]', downloads.pagerivet.packageText);
     setText('[data-download-environment="diagnostic"]', downloads.diagnostic.environmentText);
     setText('[data-download-package="diagnostic"]', downloads.diagnostic.packageText);
+    setDownloadAvailability("pagerivet", downloads.pagerivet.enabled);
+    setDownloadAvailability("diagnostic", downloads.diagnostic.enabled);
     root.dataset.downloadMetadataState = "ready";
   } catch (error) {
     root.dataset.downloadMetadataState = "error";
@@ -85,18 +96,34 @@ export function initDownloadGuard() {
   const message = modal.querySelector("[data-download-guard-message]");
   const title = modal.querySelector("[data-download-guard-title]");
   const continuation = modal.querySelector("[data-download-continue]");
+  const dismiss = modal.querySelector("[data-download-guard-dismiss]");
   const controller = createModalController(modal, "[data-close-download-guard]");
 
   document.addEventListener("click", function (event) {
     const target = event.target instanceof Element ? event.target.closest("[data-download-link]") : null;
-    if (!(target instanceof HTMLAnchorElement) || !continuation) return;
+    if (!(target instanceof HTMLAnchorElement) || !continuation || !dismiss) return;
 
+    const isEnglish = document.documentElement.lang === "en";
+    const isDisabled = target.dataset.downloadEnabled === "false" || target.getAttribute("aria-disabled") === "true";
+    if (isDisabled) {
+      event.preventDefault();
+      continuation.hidden = true;
+      dismiss.textContent = isEnglish ? "OK" : "확인";
+      title.textContent = isEnglish ? "Download temporarily unavailable" : "다운로드 일시 중지";
+      message.textContent = isEnglish
+        ? "This download is currently unavailable due to maintenance."
+        : "현재 점검으로 인해 다운로드할 수 없습니다.";
+      controller.open();
+      return;
+    }
+
+    continuation.hidden = false;
+    dismiss.textContent = isEnglish ? "Cancel" : "취소";
     const current = environment();
     if (current.isWindows && !current.isMobile) return;
 
     event.preventDefault();
     continuation.setAttribute("href", target.href);
-    const isEnglish = document.documentElement.lang === "en";
     if (current.isMobile) {
       title.textContent = isEnglish ? "PageRivet is not available on mobile" : "모바일 환경에서는 사용할 수 없습니다";
       message.textContent = isEnglish

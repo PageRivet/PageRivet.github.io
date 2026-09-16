@@ -82,7 +82,7 @@
             <li><span data-i18n="download.detail.platform">지원 환경</span><strong data-download-environment="pagerivet">Windows x64</strong></li>
             <li><span data-i18n="download.detail.package">패키지</span><strong data-download-package="pagerivet">Portable ZIP</strong></li>
           </ul>
-          <a class="button button-primary download-button" href="https://api.pagerivet.app/download/pagerivet" data-download-link="" data-i18n="download.pagerivet.button">PageRivet 다운로드</a>
+          <a class="button button-primary download-button" href="https://api.pagerivet.app/download/pagerivet" data-download-link="" data-download-key="pagerivet" data-i18n="download.pagerivet.button">PageRivet 다운로드</a>
         </article>
 
         <article class="download-card">
@@ -92,7 +92,7 @@
             <li><span data-i18n="download.detail.platform">지원 환경</span><strong data-download-environment="diagnostic">Windows x64</strong></li>
             <li><span data-i18n="download.detail.package">패키지</span><strong data-download-package="diagnostic">ZIP</strong></li>
           </ul>
-          <a class="button button-secondary download-button" href="https://api.pagerivet.app/download/diagnostic" data-download-link="" data-i18n="download.diagnostic.button">PageRivet 진단기 다운로드</a>
+          <a class="button button-secondary download-button" href="https://api.pagerivet.app/download/diagnostic" data-download-link="" data-download-key="diagnostic" data-download-enabled="false" aria-disabled="true" data-i18n="download.diagnostic.button">PageRivet 진단기 다운로드</a>
         </article>
       </div>
     </div>
@@ -127,7 +127,7 @@
     </div>
     <p data-download-guard-message>PageRivet은 현재 Windows x64용 포터블 패키지를 제공합니다.</p>
     <div class="modal-actions">
-      <button class="button button-secondary" type="button" data-close-download-guard data-i18n="download.cancel">취소</button>
+      <button class="button button-secondary" type="button" data-close-download-guard data-download-guard-dismiss data-i18n="download.cancel">취소</button>
       <a class="button button-primary" href="/downloads/current.ko/" data-download-continue data-i18n="download.continue">그래도 다운로드</a>
     </div>
   </section>
