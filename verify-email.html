@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>소식 · PageRivet</title>
-  <meta name="description" content="PageRivet 공지사항과 업데이트 소식을 한곳에서 확인합니다.">
+  <title>이메일 확인 · PageRivet</title>
+  <meta name="description" content="PageRivet Account 이메일 확인 안내입니다.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="소식 · PageRivet">
-  <meta property="og:description" content="PageRivet 공지사항과 업데이트 소식을 한곳에서 확인합니다.">
+  <meta property="og:title" content="이메일 확인 · PageRivet">
+  <meta property="og:description" content="PageRivet Account 이메일 확인 안내입니다.">
   <meta property="og:image" content="https://pagerivet.app/assets/images/PageRivet_Logo%20copy.png">
-  <meta property="og:url" content="https://pagerivet.app/news.html">
+  <meta property="og:url" content="https://pagerivet.app/verify-email.html">
   <meta name="theme-color" content="#0b0f18">
   <link rel="icon" type="image/png" href="/assets/images/PageRivet_Logo%20copy.png">
   <script>
@@ -23,7 +23,7 @@
   </script>
   <link rel="stylesheet" href="/assets/css/style.css?rev=2026-09-18-legal-modal-1">
 </head>
-<body class="news-theme">
+<body class="auth-theme">
   <a class="skip-link" href="#main-content">본문으로 바로가기</a>
   <header class="site-header" data-site-header>
   <div class="wrap">
@@ -59,39 +59,29 @@
   </div>
 </header>
 
-  <main id="main-content"><section class="page-hero notice-hero">
-  <div class="wrap">
-    <p class="eyebrow" data-i18n="news.eyebrow">PAGERIVET NEWS</p>
-    <h1 data-i18n="news.title">소식</h1>
-    <p data-i18n="news.description">공지사항과 업데이트 내역을 한곳에서 확인하세요.</p>
-  </div>
-</section>
-
-<section class="content-section notice-content" aria-labelledby="news-list-title">
-  <div class="wrap" data-news-board="" data-api-base="https://api.pagerivet.app">
-    <header class="notice-list-heading">
-      <div>
-        <p class="section-kicker" data-i18n="news.section_kicker">NEWS BOARD</p>
-        <h2 id="news-list-title" data-i18n="news.section_title">PageRivet의 최신 소식</h2>
-        <p data-i18n="news.section_description">카테고리를 선택해 공지사항과 버전별 업데이트를 확인할 수 있습니다.</p>
+  <main id="main-content"><section class="auth-page">
+  <div class="wrap auth-layout auth-layout-single">
+    <div class="auth-card" data-auth-card data-auth-mode="verify">
+      <div class="auth-card-heading">
+        <span class="auth-mark" aria-hidden="true">P</span>
+        <div>
+          <p class="auth-kicker">PageRivet Account</p>
+          <h2>이메일을 확인해 주세요</h2>
+        </div>
       </div>
-      <div class="notice-summary" aria-live="polite">
-        <span class="notice-summary-dot" aria-hidden="true"></span>
-        <strong data-news-count="">0</strong>
-        <span data-news-count-label="">개의 글</span>
-      </div>
-    </header>
-
-    <div class="news-category-tabs" role="tablist" aria-label="소식 카테고리">
-      <button class="news-category-tab is-active" type="button" role="tab" aria-selected="true" data-news-category="notice" data-i18n="news.category_notice">공지사항</button>
-      <button class="news-category-tab" type="button" role="tab" aria-selected="false" data-news-category="update" data-i18n="news.category_update">업데이트</button>
+      <p class="auth-description">가입한 이메일로 확인 링크를 보냈습니다. 링크를 누르면 계정이 활성화됩니다.</p>
+      <form class="auth-form" data-auth-form novalidate>
+        <label class="auth-field">
+          <span>이메일</span>
+          <input type="email" name="email" autocomplete="email" inputmode="email" required placeholder="name@example.com">
+        </label>
+        <button class="btn secondary auth-submit" type="submit">확인 메일 다시 보내기</button>
+      </form>
+      <p class="auth-status" data-auth-status role="status" aria-live="polite" hidden></p>
+      <p class="auth-switch"><a href="/login.html">로그인으로 돌아가기</a></p>
     </div>
-
-    <p class="news-board-status" data-news-status="" role="status" data-i18n="news.loading">소식을 불러오는 중입니다.</p>
-    <div class="notice-list" data-news-list="" aria-live="polite"></div>
   </div>
-</section>
-</main>
+</section></main>
   
 
   <footer class="site-footer">

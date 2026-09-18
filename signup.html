@@ -21,7 +21,7 @@
       document.documentElement.dataset.theme = "light";
     }
   </script>
-  <link rel="stylesheet" href="/assets/css/style.css?rev=2026-09-10-download-metadata-admin-1">
+  <link rel="stylesheet" href="/assets/css/style.css?rev=2026-09-18-legal-modal-1">
 </head>
 <body class="auth-theme">
   <a class="skip-link" href="#main-content">본문으로 바로가기</a>
@@ -48,8 +48,6 @@
         </div>
         <div class="tools">
           <div class="account-actions" aria-label="PageRivet Account">
-            <a class="account-link account-signup" href="/signup.html" data-nav-id="signup" data-i18n="navigation.signup">회원가입</a>
-            <span aria-hidden="true"></span>
             <a class="account-link" href="/login.html" data-nav-id="login" data-i18n="navigation.login">로그인</a>
           </div>
           <button class="chip theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span aria-hidden="true">◐</span><span class="sr-only">테마 전환</span></button>
@@ -67,11 +65,6 @@
       <div class="eyebrow">Create your account</div>
       <h1 id="signup-title" data-i18n="auth.signup.title">PageRivet과<br>함께 시작하세요.</h1>
       <p data-i18n="auth.signup.description">필요한 정보만 받고, 이메일 인증 또는 신뢰할 수 있는 계정으로 간단하게 가입합니다.</p>
-      <ol class="auth-steps">
-        <li><span>01</span><div><strong data-i18n="auth.step.choose">가입 방법 선택</strong><small data-i18n="auth.step.choose.detail">이메일, Google 또는 Kakao</small></div></li>
-        <li><span>02</span><div><strong data-i18n="auth.step.verify">계정 확인</strong><small data-i18n="auth.step.verify.detail">이메일 또는 외부 계정 인증</small></div></li>
-        <li><span>03</span><div><strong data-i18n="auth.step.done">가입 완료</strong><small data-i18n="auth.step.done.detail">PageRivet Account 사용 시작</small></div></li>
-      </ol>
     </aside>
 
     <div class="auth-card" data-auth-card data-auth-mode="register">
@@ -84,14 +77,14 @@
       </div>
 
       <div class="auth-providers" aria-label="소셜 회원가입">
-        <a class="auth-provider" href="https://auth.pagerivet.app/auth/google?returnTo=https%3A%2F%2Fpagerivet.app%2Faccount.html" data-auth-provider data-provider="google">
+        <button class="auth-provider" type="button" data-auth-provider data-provider="google" data-auth-oauth-mode="register">
           <span class="provider-mark google" aria-hidden="true">G</span>
           <span data-i18n="auth.signup.google">Google 계정으로 회원가입</span>
-        </a>
-        <a class="auth-provider kakao" href="https://auth.pagerivet.app/auth/kakao?returnTo=https%3A%2F%2Fpagerivet.app%2Faccount.html" data-auth-provider data-provider="kakao">
+        </button>
+        <button class="auth-provider kakao" type="button" data-auth-provider data-provider="kakao" data-auth-oauth-mode="register">
           <span class="provider-mark" aria-hidden="true">K</span>
           <span data-i18n="auth.signup.kakao">Kakao 계정으로 회원가입</span>
-        </a>
+        </button>
       </div>
 
       <div class="auth-divider"><span data-i18n="auth.or_email">또는 이메일로 계속</span></div>
@@ -122,7 +115,7 @@
         </label>
         <label class="auth-check auth-terms">
           <input type="checkbox" name="terms" required>
-          <span data-i18n="auth.terms">이용약관과 개인정보처리방침에 동의합니다.</span>
+          <span class="auth-terms-copy"><span data-i18n="auth.terms.prefix"></span><a href="/terms.html" data-legal-document data-title-ko="이용약관" data-title-en="Terms of Service" data-i18n="auth.terms.link">이용약관</a><span data-i18n="auth.terms.between">에 동의하고 </span><a href="/privacy.html" data-legal-document data-title-ko="개인정보처리방침" data-title-en="Privacy Policy" data-i18n="auth.privacy.link">개인정보처리방침</a><span data-i18n="auth.terms.suffix">을 확인했습니다.</span></span>
         </label>
         <button class="btn primary auth-submit" type="submit" data-i18n="auth.signup.submit">계정 만들기</button>
       </form>
@@ -132,6 +125,17 @@
     </div>
   </div>
 </section>
+
+<div class="legal-modal" data-legal-modal hidden>
+  <button class="legal-modal-backdrop" type="button" data-legal-close tabindex="-1" aria-label="문서 닫기"></button>
+  <section class="legal-modal-panel" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title" tabindex="-1">
+    <header class="legal-modal-header">
+      <h2 id="legal-modal-title" data-legal-modal-title>법적 고지</h2>
+      <button class="legal-modal-close" type="button" data-legal-close aria-label="문서 닫기">닫기</button>
+    </header>
+    <div class="legal-modal-body legal-document" data-legal-modal-body aria-live="polite"></div>
+  </section>
+</div>
 </main>
   
 
@@ -143,10 +147,10 @@
         <p data-i18n="footer.tagline">정적 웹 프로젝트의 개발과 AI 협업을 하나로.</p>
       </div>
       <div><h4 data-i18n="footer.links">사이트맵</h4><div><a href="/news.html" data-i18n="navigation.news">소식</a></div><div><a href="/about.html" data-i18n="navigation.about">소개</a></div><div><a href="/guide.html" data-i18n="navigation.guide">가이드</a></div><div><a href="/contact.html" data-i18n="footer.contact">문의하기</a></div></div>
-      <div><h4 data-i18n="footer.support">지원</h4><div><a href="https://github.com/raneree/PageRivet" target="_blank" rel="noopener noreferrer">GitHub</a></div><div><a href="https://discord.gg/CFx4Emrxgf" target="_blank" rel="noopener noreferrer">Discord</a></div></div>
+      <div><h4 data-i18n="footer.support">지원</h4><div><a href="https://github.com/raneree/PageRivet" target="_blank" rel="noopener noreferrer">GitHub</a></div><div><a href="https://discord.gg/CFx4Emrxgf" target="_blank" rel="noopener noreferrer">Discord</a></div><div><a href="/terms.html" data-i18n="footer.terms">이용약관</a></div><div><a href="/privacy.html" data-i18n="footer.privacy">개인정보처리방침</a></div></div>
       <div><h4 data-i18n="footer.thanks">고마운 플랫폼</h4><div><a href="https://cozit.app/" target="_blank" rel="noopener noreferrer">Cozit</a></div><div><a href="https://disquiet.io/" target="_blank" rel="noopener noreferrer">Disquiet</a></div><div><a href="https://sidedock.io/" target="_blank" rel="noopener noreferrer">Sidedock</a></div></div>
     </div>
-    <div class="copy">© 2026 PageRivet · <span data-i18n="footer.contact_label">문의:</span> <a href="/contact.html">pagerivet.support@gmail.com</a></div>
+    <div class="copy">© 2026 PageRivet · <span data-i18n="footer.contact_label">문의:</span> <a href="mailto:support@pagerivet.app">support@pagerivet.app</a></div>
   </div>
 </footer>
 <button class="back-to-top" type="button" data-back-to-top aria-label="맨 위로 이동">↑</button>
@@ -167,6 +171,6 @@
   </section>
 </div>
 
-  <script type="module" src="/assets/js/main.mjs?rev=2026-09-10-download-metadata-admin-1"></script>
+  <script type="module" src="/assets/js/main.mjs?rev=2026-09-18-legal-modal-1"></script>
 </body>
 </html>

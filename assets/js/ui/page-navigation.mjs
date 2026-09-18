@@ -1,8 +1,8 @@
 const PAGE_CACHE = new Map();
 const PAGE_ORDER = ["home", "news", "about", "guide"];
-const EXIT_DURATION = 450;
-const TRANSITION_GAP = 120;
-const ENTER_DURATION = 520;
+const EXIT_DURATION = 220;
+const TRANSITION_GAP = 20;
+const ENTER_DURATION = 360;
 let initialized = false;
 let isNavigating = false;
 

@@ -1,6 +1,6 @@
-const EXIT_DURATION = 450;
-const TRANSITION_GAP = 120;
-const ENTER_DURATION = 520;
+const EXIT_DURATION = 220;
+const TRANSITION_GAP = 20;
+const ENTER_DURATION = 360;
 const activeStages = new WeakSet();
 
 function prefersReducedMotion() {
