@@ -17,6 +17,8 @@ const COPY = {
     deleted: "회원탈퇴가 완료되었습니다.",
     verified: "이메일 확인이 완료되었습니다. 계정을 이용할 수 있습니다.",
     oauthUnavailable: "이 로그인 방식은 아직 설정되지 않았습니다.",
+    accountNotFound: "가입되지 않은 Google 계정입니다. 회원가입 페이지에서 먼저 가입해 주세요.",
+    accountSuspended: "이용이 정지된 계정입니다. 자세한 내용은 support@pagerivet.app으로 문의해 주세요.",
     show: "보기",
     hide: "숨기기",
     showLabel: "비밀번호 표시",
@@ -38,6 +40,8 @@ const COPY = {
     deleted: "Your account has been deleted.",
     verified: "Your email has been verified. Your account is ready.",
     oauthUnavailable: "This sign-in provider has not been configured yet.",
+    accountNotFound: "This Google account is not registered with PageRivet. Please sign up first.",
+    accountSuspended: "This account has been suspended. Contact support@pagerivet.app for assistance.",
     show: "Show",
     hide: "Hide",
     showLabel: "Show password",
@@ -476,12 +480,14 @@ function initCard(card) {
 
   const query = new URLSearchParams(window.location.search);
   const queryError = query.get("error");
-  if (queryError) setStatus(card, query.get("message") || message("failed"), "error");
-  else if (query.get("verified") === "1") setStatus(card, message("verified"), "success");
-  else if (query.get("reset") === "1") setStatus(card, message("resetComplete"), "success");
-  else if (query.get("deleted") === "1") setStatus(card, message("deleted"), "success");
-
-  readServiceState(card);
+  readServiceState(card).then(function () {
+    if (queryError === "account_not_found") setStatus(card, message("accountNotFound"), "error");
+    else if (queryError === "account_suspended") setStatus(card, message("accountSuspended"), "error");
+    else if (queryError) setStatus(card, query.get("message") || message("failed"), "error");
+    else if (query.get("verified") === "1") setStatus(card, message("verified"), "success");
+    else if (query.get("reset") === "1") setStatus(card, message("resetComplete"), "success");
+    else if (query.get("deleted") === "1") setStatus(card, message("deleted"), "success");
+  });
 }
 
 function formatAccountDate(value) {
