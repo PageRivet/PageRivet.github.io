@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>소식 · PageRivet</title>
-  <meta name="description" content="PageRivet 공지사항과 업데이트 소식을 한곳에서 확인합니다.">
+  <title>로그인 · PageRivet</title>
+  <meta name="description" content="PageRivet Account에 로그인합니다.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="소식 · PageRivet">
-  <meta property="og:description" content="PageRivet 공지사항과 업데이트 소식을 한곳에서 확인합니다.">
+  <meta property="og:title" content="로그인 · PageRivet">
+  <meta property="og:description" content="PageRivet Account에 로그인합니다.">
   <meta property="og:image" content="https://pagerivet.app/assets/images/PageRivet_Logo%20copy.png">
-  <meta property="og:url" content="https://pagerivet.app/news.html">
+  <meta property="og:url" content="https://pagerivet.app/login.html">
   <meta name="theme-color" content="#0b0f18">
   <link rel="icon" type="image/png" href="/assets/images/PageRivet_Logo%20copy.png">
   <script>
@@ -23,7 +23,7 @@
   </script>
   <link rel="stylesheet" href="/assets/css/style.css?rev=2026-09-10-download-metadata-admin-1">
 </head>
-<body class="news-theme">
+<body class="auth-theme">
   <a class="skip-link" href="#main-content">본문으로 바로가기</a>
   <header class="site-header" data-site-header>
   <div class="wrap">
@@ -61,36 +61,63 @@
   </div>
 </header>
 
-  <main id="main-content"><section class="page-hero notice-hero">
-  <div class="wrap">
-    <p class="eyebrow" data-i18n="news.eyebrow">PAGERIVET NEWS</p>
-    <h1 data-i18n="news.title">소식</h1>
-    <p data-i18n="news.description">공지사항과 업데이트 내역을 한곳에서 확인하세요.</p>
-  </div>
-</section>
+  <main id="main-content"><section class="auth-page">
+  <div class="wrap auth-layout">
+    <aside class="auth-intro" aria-labelledby="login-title">
+      <div class="eyebrow">PageRivet Account</div>
+      <h1 id="login-title" data-i18n="auth.login.title">다시 만나서 반가워요.</h1>
+      <p data-i18n="auth.login.description">하나의 PageRivet Account로 웹과 앞으로의 데스크톱 기능을 안전하게 연결하세요.</p>
+      <ul class="auth-benefits">
+        <li data-i18n="auth.benefit.secure">서버에서 관리되는 안전한 로그인 세션</li>
+        <li data-i18n="auth.benefit.providers">이메일·Google·Kakao 로그인 지원</li>
+        <li data-i18n="auth.benefit.future">향후 라이선스와 협업 기능까지 하나의 계정으로</li>
+      </ul>
+    </aside>
 
-<section class="content-section notice-content" aria-labelledby="news-list-title">
-  <div class="wrap" data-news-board="" data-api-base="https://api.pagerivet.app">
-    <header class="notice-list-heading">
-      <div>
-        <p class="section-kicker" data-i18n="news.section_kicker">NEWS BOARD</p>
-        <h2 id="news-list-title" data-i18n="news.section_title">PageRivet의 최신 소식</h2>
-        <p data-i18n="news.section_description">카테고리를 선택해 공지사항과 버전별 업데이트를 확인할 수 있습니다.</p>
+    <div class="auth-card" data-auth-card data-auth-mode="login">
+      <div class="auth-card-heading">
+        <span class="auth-mark" aria-hidden="true">P</span>
+        <div>
+          <p class="auth-kicker">PageRivet Account</p>
+          <h2 data-i18n="auth.login.heading">로그인</h2>
+        </div>
       </div>
-      <div class="notice-summary" aria-live="polite">
-        <span class="notice-summary-dot" aria-hidden="true"></span>
-        <strong data-news-count="">0</strong>
-        <span data-news-count-label="">개의 글</span>
-      </div>
-    </header>
 
-    <div class="news-category-tabs" role="tablist" aria-label="소식 카테고리">
-      <button class="news-category-tab is-active" type="button" role="tab" aria-selected="true" data-news-category="notice" data-i18n="news.category_notice">공지사항</button>
-      <button class="news-category-tab" type="button" role="tab" aria-selected="false" data-news-category="update" data-i18n="news.category_update">업데이트</button>
+      <div class="auth-providers" aria-label="소셜 로그인">
+        <a class="auth-provider" href="https://auth.pagerivet.app/auth/google?returnTo=https%3A%2F%2Fpagerivet.app%2Faccount.html" data-auth-provider data-provider="google">
+          <span class="provider-mark google" aria-hidden="true">G</span>
+          <span data-i18n="auth.login.google">Google로 로그인</span>
+        </a>
+        <a class="auth-provider kakao" href="https://auth.pagerivet.app/auth/kakao?returnTo=https%3A%2F%2Fpagerivet.app%2Faccount.html" data-auth-provider data-provider="kakao">
+          <span class="provider-mark" aria-hidden="true">K</span>
+          <span data-i18n="auth.login.kakao">Kakao로 로그인</span>
+        </a>
+      </div>
+
+      <div class="auth-divider"><span data-i18n="auth.or_email">또는 이메일로 계속</span></div>
+
+      <form class="auth-form" data-auth-form novalidate>
+        <label class="auth-field">
+          <span data-i18n="auth.email">이메일</span>
+          <input type="email" name="email" autocomplete="email" inputmode="email" required data-placeholder-ko="name@example.com" data-placeholder-en="name@example.com" placeholder="name@example.com">
+        </label>
+        <label class="auth-field">
+          <span data-i18n="auth.password">비밀번호</span>
+          <span class="auth-password-control">
+            <input type="password" name="password" autocomplete="current-password" required data-placeholder-ko="비밀번호 입력" data-placeholder-en="Enter your password" placeholder="비밀번호 입력">
+            <button type="button" data-password-toggle aria-label="비밀번호 표시">보기</button>
+          </span>
+        </label>
+        <div class="auth-form-row">
+          <label class="auth-check"><input type="checkbox" name="remember"><span data-i18n="auth.remember">로그인 상태 유지</span></label>
+          <button class="auth-text-button" type="button" data-auth-future data-i18n="auth.forgot">비밀번호를 잊으셨나요?</button>
+        </div>
+        <button class="btn primary auth-submit" type="submit" data-i18n="auth.login.submit">로그인</button>
+      </form>
+
+      <p class="auth-status" data-auth-status role="status" aria-live="polite" hidden></p>
+      <p class="auth-switch"><span data-i18n="auth.login.no_account">아직 계정이 없으신가요?</span> <a href="/signup.html" data-i18n="auth.signup.link">회원가입</a></p>
     </div>
-
-    <p class="news-board-status" data-news-status="" role="status" data-i18n="news.loading">소식을 불러오는 중입니다.</p>
-    <div class="notice-list" data-news-list="" aria-live="polite"></div>
   </div>
 </section>
 </main>

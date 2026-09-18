@@ -11,6 +11,7 @@ import { initSectionNavigation } from "./features/section-navigation.mjs";
 import { initDownloadGuard, initLatestDownloadRelease } from "./features/download-guard.mjs";
 import { initReleaseToast } from "./features/release-toast.mjs";
 import { initContactForms } from "./features/contact-form.mjs";
+import { initAuthForms } from "./features/auth.mjs";
 
 let initialized = false;
 
@@ -88,6 +89,7 @@ export function initPageFeatures() {
   initSectionNavigation();
   initLatestDownloadRelease();
   initContactForms();
+  initAuthForms();
 }
 
 export function refreshPageFeatures() {

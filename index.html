@@ -47,6 +47,11 @@
           <a href="/contact.html" data-nav-id="contact" data-i18n="navigation.contact">문의</a>
         </div>
         <div class="tools">
+          <div class="account-actions" aria-label="PageRivet Account">
+            <a class="account-link account-signup" href="/signup.html" data-nav-id="signup" data-i18n="navigation.signup">회원가입</a>
+            <span aria-hidden="true"></span>
+            <a class="account-link" href="/login.html" data-nav-id="login" data-i18n="navigation.login">로그인</a>
+          </div>
           <button class="chip theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span aria-hidden="true">◐</span><span class="sr-only">테마 전환</span></button>
           <button class="chip is-active" type="button" data-language="ko" aria-pressed="true">한국어</button>
           <button class="chip" type="button" data-language="en" aria-pressed="false">ENG</button>
@@ -74,40 +79,46 @@
       </div>
     </div>
     <div class="mock-column">
-      <div class="mock" data-demo-editor>
-      <div class="titlebar"><span>PageRivet — My Web Project</span><span>— □ ×</span></div>
-      <div class="menubar"><span data-i18n="mock.file">파일</span><span data-i18n="mock.edit">편집</span><span data-i18n="mock.view">보기</span><span data-i18n="mock.project">프로젝트</span><span data-i18n="mock.help">도움말</span></div>
-      <div class="workspace">
-        <aside class="files">
-          <div><b data-i18n="mock.project">프로젝트</b></div>
-          <div class="file">▾ My Web Project</div>
-          <button class="file on is-active" type="button" data-demo-file="index.html" aria-pressed="true">▧ index.html</button>
-          <button class="file" type="button" data-demo-file="about.html" aria-pressed="false">▧ about.html</button>
-          <button class="file" type="button" data-demo-file="style.css" aria-pressed="false">▧ style.css</button>
-          <button class="file" type="button" data-demo-file="main.js" aria-pressed="false">▧ main.js</button>
-          <div class="file">▸ images</div>
-        </aside>
-        <div class="editor">
-          <div class="tabs" data-demo-tab>index.html</div>
-          <pre class="code-view" data-demo-code aria-live="polite">&lt;!doctype html&gt;
-&lt;html lang="ko"&gt;
-  &lt;head&gt;
-    &lt;link rel="stylesheet" href="style.css"&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;PageRivet&lt;/h1&gt;
-    &lt;p&gt;AI와 함께 만드는 웹 프로젝트&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</pre>
+      <div class="app-mock" role="img" aria-label="실제 PageRivet 프로그램의 미리보기, 코드 편집기, 기록 패널로 구성된 작업 화면">
+        <div class="app-windowbar">
+          <span class="app-brand-mini"><img src="/assets/images/PageRivet_Logo.svg" alt="">PageRivet</span>
+          <span aria-hidden="true">—　□　×</span>
         </div>
-        <aside class="preview">
-          <div class="url">preview.pagerivet.local</div>
-          <div class="mini"><small>PageRivet</small><h3 data-i18n="mock.preview.title">웹 제작과 AI 협업을 하나로</h3><p data-i18n="mock.preview.description">정적 웹 프로젝트를 더 빠르고 안전하게 구성하세요.</p><span class="btn primary mini-button" data-i18n="mock.preview.start">시작하기</span></div>
-        </aside>
+        <div class="app-workspace">
+          <section class="app-pane app-preview-pane">
+            <header><strong>미리 보기</strong><span>↗　최대화　　☼　◐</span></header>
+            <div class="app-preview-site">
+              <div class="app-preview-brand"><span class="app-preview-logo">P</span><b>PageRivet</b><small>1.1.1</small></div>
+              <span class="app-preview-kicker">LOCAL-FIRST WEB WORKSPACE</span>
+              <h3>아이디어를<br><em>웹으로 연결하다.</em></h3>
+              <p>여러 HTML·CSS·JavaScript 파일을 한 프로젝트에서 편집하고,<br>검증된 결과를 즉시 미리보며 AI와 안전하게 협업합니다.</p>
+              <div><button type="button" tabindex="-1">가이드 보기　→</button><button type="button" tabindex="-1">핵심 기능 살펴보기</button></div>
+              <small class="app-preview-note">●　이 소개 화면 자체가 다중 파일로 만든 샘플입니다.</small>
+            </div>
+          </section>
+          <section class="app-pane app-code-pane">
+            <header><strong>코드</strong></header>
+            <div class="app-code-tabs"><span>HTML: index.html</span><span>CSS: style.css</span><span>JavaScript: script.js</span><span>파일 추가⌄</span></div>
+            <pre><code><i>1</i> <span>&lt;!DOCTYPE html&gt;</span>
+<i>2</i> <b>&lt;html</b> <em>lang</em>=<q>"ko"</q><b>&gt;</b>
+<i>3</i>   <b>&lt;head&gt;</b>
+<i>4</i>     <b>&lt;meta</b> <em>charset</em>=<q>"UTF-8"</q> <b>/&gt;</b>
+<i>5</i>     <b>&lt;meta</b> <em>name</em>=<q>"viewport"</q>
+<i>6</i>       <em>content</em>=<q>"width=device-width"</q> <b>/&gt;</b>
+<i>7</i>     <b>&lt;title&gt;</b>PageRivet<b>&lt;/title&gt;</b>
+<i>8</i>   <b>&lt;/head&gt;</b>
+<i>9</i>   <b>&lt;body&gt;</b>
+<i>10</i>    <b>&lt;header</b> <em>class</em>=<q>"hero"</q><b>&gt;</b>
+<i>11</i>      <b>&lt;h1&gt;</b>아이디어를 웹으로 연결하다.<b>&lt;/h1&gt;</b></code></pre>
+          </section>
+          <section class="app-details">
+            <div class="app-detail-tabs"><b>☷　기록</b><span>▣　MCP 로그</span><span>ⓧ　오류</span><span>↶　콘솔</span><button type="button" tabindex="-1">↶　선택 시점으로 복원</button></div>
+            <div class="app-empty-state"><strong>☷</strong><b>프로젝트 기록이 여기에 표시됩니다</b><span>프로젝트 저장, 실행, 검증 등의 활동 내역이 여기에 표시됩니다.</span></div>
+          </section>
+        </div>
+        <div class="app-statusbar"><span></span></div>
       </div>
-      <div class="bottom"><span data-i18n="mock.history">기록</span><span data-i18n="mock.errors">오류</span><span data-i18n="mock.mcp_log">MCP 로그</span><span data-i18n="mock.console">콘솔</span></div>
-      </div>
-      <div class="mock-example-card" role="note"><span class="status-pulse" aria-hidden="true"></span><strong data-i18n="mock.example.label">화면 예시:</strong><span data-i18n="mock.example.description">제품을 설명하기 위한 예시 입니다. 화면의 코드, 시작하기 버튼 등은 실제로 작동하지 않습니다.</span></div>
+      <div class="mock-example-card" role="note"><span class="status-pulse" aria-hidden="true"></span><span data-i18n="mock.actual.description">PageRivet 프로그램의 이해를 돕기 위한 예시 입니다.</span></div>
     </div>
   </div>
 </section>
