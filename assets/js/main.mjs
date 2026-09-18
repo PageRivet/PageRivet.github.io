@@ -12,6 +12,7 @@ import { initDownloadGuard, initLatestDownloadRelease } from "./features/downloa
 import { initReleaseToast } from "./features/release-toast.mjs";
 import { initContactForms } from "./features/contact-form.mjs";
 import { initAuthForms } from "./features/auth.mjs";
+import { initAdminPage } from "./features/admin.mjs";
 
 let initialized = false;
 
@@ -90,6 +91,7 @@ export function initPageFeatures() {
   initLatestDownloadRelease();
   initContactForms();
   initAuthForms();
+  initAdminPage();
 }
 
 export function refreshPageFeatures() {

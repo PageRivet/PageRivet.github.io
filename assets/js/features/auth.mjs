@@ -14,6 +14,7 @@ const COPY = {
     failed: "요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.",
     sent: "요청을 확인했습니다. 이메일이 등록되어 있다면 안내 메일을 보내드립니다.",
     resetComplete: "비밀번호가 변경되었습니다. 로그인 화면으로 이동합니다.",
+    deleted: "회원탈퇴가 완료되었습니다.",
     verified: "이메일 확인이 완료되었습니다. 계정을 이용할 수 있습니다.",
     oauthUnavailable: "이 로그인 방식은 아직 설정되지 않았습니다.",
     show: "보기",
@@ -34,6 +35,7 @@ const COPY = {
     failed: "We could not complete the request. Please try again later.",
     sent: "Request received. If the email is registered, instructions will be sent.",
     resetComplete: "Your password has been changed. Redirecting to sign in.",
+    deleted: "Your account has been deleted.",
     verified: "Your email has been verified. Your account is ready.",
     oauthUnavailable: "This sign-in provider has not been configured yet.",
     show: "Show",
@@ -252,6 +254,11 @@ async function submit(card, form) {
 
     if (!response.ok) {
       if (result.error === "csrf_invalid") csrfToken = "";
+      if (mode === "login" && result.error === "email_verification_required") {
+        try { sessionStorage.setItem("pagerivet.verificationEmail", payload.email); } catch {}
+        window.location.assign("/verify-email.html");
+        return;
+      }
       setStatus(card, result.message || message("failed"), "error");
       return;
     }
@@ -472,6 +479,7 @@ function initCard(card) {
   if (queryError) setStatus(card, query.get("message") || message("failed"), "error");
   else if (query.get("verified") === "1") setStatus(card, message("verified"), "success");
   else if (query.get("reset") === "1") setStatus(card, message("resetComplete"), "success");
+  else if (query.get("deleted") === "1") setStatus(card, message("deleted"), "success");
 
   readServiceState(card);
 }
@@ -543,6 +551,93 @@ async function initAccountPage() {
       language() === "en" ? "Active" : "활성";
     accountCard.querySelector("[data-account-status]").hidden = true;
     profile.hidden = false;
+
+    const adminLink = accountCard.querySelector("[data-account-admin]");
+    if (adminLink) adminLink.hidden = !user.adminRole;
+
+    const deleteOpen = accountCard.querySelector("[data-account-delete-open]");
+    const deleteForm = accountCard.querySelector("[data-account-delete-form]");
+    const deleteCancel = accountCard.querySelector("[data-account-delete-cancel]");
+    const deleteRequest = accountCard.querySelector("[data-account-delete-request]");
+    const deleteCode = accountCard.querySelector("[data-account-delete-code]");
+    const deleteConfirm = accountCard.querySelector("[data-account-delete-confirm]");
+    deleteOpen?.addEventListener("click", function () {
+      deleteOpen.hidden = true;
+      deleteForm.hidden = false;
+      deleteRequest?.focus();
+    });
+    deleteCancel?.addEventListener("click", function () {
+      deleteForm.reset();
+      deleteForm.hidden = true;
+      deleteCode.hidden = true;
+      deleteConfirm.hidden = true;
+      deleteOpen.hidden = false;
+      accountCard.querySelector("[data-account-status]").hidden = true;
+    });
+    deleteRequest?.addEventListener("click", async function () {
+      deleteRequest.disabled = true;
+      accountStatus(accountCard, language() === "en" ? "Sending a verification code." : "인증번호를 보내고 있습니다.");
+      try {
+        const token = await refreshCsrfToken();
+        const response = await fetch(AUTH_ORIGIN + "/account/delete/request", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRF-Token": token
+          },
+          body: "{}"
+        });
+        const result = await response.json().catch(function () { return {}; });
+        if (!response.ok) {
+          accountStatus(accountCard, result.message || message("failed"), "error");
+          return;
+        }
+        deleteCode.hidden = false;
+        deleteConfirm.hidden = false;
+        accountStatus(accountCard, result.message || (language() === "en" ? "Verification code sent." : "인증번호를 보냈습니다."), "success");
+        deleteForm.elements.code.focus();
+      } catch {
+        accountStatus(accountCard, message("unreachable"), "error");
+      } finally {
+        deleteRequest.disabled = false;
+      }
+    });
+    deleteForm?.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const submitButton = deleteConfirm;
+      submitButton.disabled = true;
+      accountStatus(accountCard, language() === "en" ? "Verifying the code and deleting your account." : "인증번호를 확인하고 계정을 삭제하고 있습니다.");
+      try {
+        const token = await refreshCsrfToken();
+        const deleteResponse = await fetch(AUTH_ORIGIN + "/account/delete/confirm", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRF-Token": token
+          },
+          body: JSON.stringify({ code: deleteForm.elements.code.value.trim() })
+        });
+        const deleteResult = await deleteResponse.json().catch(function () { return {}; });
+        if (!deleteResponse.ok) {
+          accountStatus(accountCard, deleteResult.message || message("failed"), "error");
+          submitButton.disabled = false;
+          return;
+        }
+        try {
+          localStorage.removeItem("pagerivet.authenticated");
+        } catch {
+          // Ignore unavailable storage.
+        }
+        window.location.replace("/login.html?deleted=1");
+      } catch {
+        accountStatus(accountCard, message("unreachable"), "error");
+        submitButton.disabled = false;
+      }
+    });
 
     accountCard.querySelector("[data-account-logout]")?.addEventListener("click", async function (event) {
       const button = event.currentTarget;

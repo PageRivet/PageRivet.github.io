@@ -76,19 +76,6 @@
         </div>
       </div>
 
-      <div class="auth-providers" aria-label="소셜 회원가입">
-        <button class="auth-provider" type="button" data-auth-provider data-provider="google" data-auth-oauth-mode="register">
-          <span class="provider-mark google" aria-hidden="true">G</span>
-          <span data-i18n="auth.signup.google">Google 계정으로 회원가입</span>
-        </button>
-        <button class="auth-provider kakao" type="button" data-auth-provider data-provider="kakao" data-auth-oauth-mode="register">
-          <span class="provider-mark" aria-hidden="true">K</span>
-          <span data-i18n="auth.signup.kakao">Kakao 계정으로 회원가입</span>
-        </button>
-      </div>
-
-      <div class="auth-divider"><span data-i18n="auth.or_email">또는 이메일로 계속</span></div>
-
       <form class="auth-form" data-auth-form novalidate>
         <label class="auth-field">
           <span data-i18n="auth.display_name">표시 이름</span>
@@ -119,6 +106,15 @@
         </label>
         <button class="btn primary auth-submit" type="submit" data-i18n="auth.signup.submit">계정 만들기</button>
       </form>
+
+      <div class="auth-divider"><span data-i18n="auth.or_google">또는 Google 계정으로 계속</span></div>
+
+      <div class="auth-providers" aria-label="소셜 회원가입">
+        <button class="auth-provider" type="button" data-auth-provider data-provider="google" data-auth-oauth-mode="register">
+          <span class="provider-mark google" aria-hidden="true">G</span>
+          <span data-i18n="auth.signup.google">Google 계정으로 회원가입</span>
+        </button>
+      </div>
 
       <p class="auth-status" data-auth-status role="status" aria-live="polite" hidden></p>
       <p class="auth-switch"><span data-i18n="auth.signup.has_account">이미 계정이 있으신가요?</span> <a href="/login.html" data-i18n="auth.login.link">로그인</a></p>
